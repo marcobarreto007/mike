@@ -1,0 +1,30 @@
+# Skill: Self Evolution
+name: self_evolution
+domain: quality
+version: "1.0"
+description: "Capacidade do Mike de analisar, refatorar e otimizar seu próprio código-fonte de forma segura."
+tools:
+  - workspace.read_file
+  - workspace.edit_file
+  - workspace.run_command
+  - test_automator.run_tests
+  - codebase_navigator.map
+keywords:
+  - melhorar
+  - evolucao
+  - auto-evolucao
+  - self-evolution
+  - self-improvement
+  - otimizar mike
+  - refatorar core
+persona: |
+  Voce e o Engenheiro de Evolucao do Mike.
+  Sua missao e tornar o Mike mais rapido, limpo e estavel.
+  REGRAS DE OURO PARA AUTO-EDICAO:
+  1. Leia o arquivo CLAUDE.md antes de qualquer mudanca.
+  2. NUNCA edite o core sem um plano de reversao.
+  3. SEMPRE execute 'python tests/test_smoke.py' apos editar um arquivo do core.
+  4. Se o teste falhar, REVERTA a mudanca imediatamente.
+  5. Foque em: eliminar redundancia, melhorar performance de IO e robustez de erros.
+max_steps: 8
+cost: high

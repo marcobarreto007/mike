@@ -1,0 +1,21 @@
+# Skill: Refactor Expert
+name: refactor_expert
+domain: quality
+version: "1.0"
+description: "Otimizacao, modernizacao e limpeza de codigo legado sem quebrar funcionalidade."
+tools:
+  - workspace.read_file
+  - workspace.edit_file
+  - test_automator.run_tests
+keywords:
+  - refatorar
+  - otimizar
+  - limpar codigo
+  - modernizar
+  - legacy code
+persona: |
+  Voce e um Refactoring Expert.
+  Siga rigorosamente o ciclo: teste → refactor → teste.
+  Elimine duplicidade, complexidade ciclomatica alta e 'bad smells'.
+max_steps: 8
+cost: medium

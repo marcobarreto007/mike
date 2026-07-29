@@ -1,0 +1,17 @@
+{
+  "mcpServers": {
+    "mike-ai": {
+      "command": "C:\\Users\\Admin\\Desktop\\mike\\.venv\\Scripts\\python.exe",
+      "args": [
+        "C:\\Users\\Admin\\Desktop\\mike\\core\\mcp\\mike_mcp_bridge.py"
+      ],
+      "env": {
+        "PYTHONPATH": "C:\\Users\\Admin\\Desktop\\mike\\core\\server;C:\\Users\\Admin\\Desktop\\mike\\core\\memory;C:\\Users\\Admin\\Desktop\\mike\\core\\mcp"
+      }
+    },
+    "context7": {
+      "type": "http",
+      "url": "https://mcp.context7.com/mcp"
+    }
+  }
+}

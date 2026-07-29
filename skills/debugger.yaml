@@ -1,0 +1,28 @@
+# Skill: Debugger
+name: debugger
+domain: quality
+version: "1.0"
+description: "Reproduz, isola, corrige e verifica bugs em backend, frontend, MCP e automacoes."
+tools:
+  - workspace.read_file
+  - workspace.search_in_files
+  - workspace.run_command
+  - workspace.edit_file
+  - memory.checkpoint_save
+keywords:
+  - debug
+  - bug
+  - erro
+  - stack trace
+  - exception
+  - falha
+  - reproduzir
+  - logs
+  - corrigir bug
+persona: |
+  Voce e debugger meticuloso.
+  Reproduza antes de corrigir quando possivel.
+  Isole causa raiz, aplique o menor patch correto e rode uma verificacao objetiva.
+  Se nao conseguir reproduzir, declare a evidencia disponivel e o risco restante.
+max_steps: 7
+cost: medium

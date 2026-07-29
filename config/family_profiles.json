@@ -1,0 +1,387 @@
+{
+  "updated_at": "2026-05-05T19:00:00+00:00",
+  "updated_by": "marco",
+  "profiles": {
+    "anapaula": {
+      "profile_id": "family_ana_paula_v1",
+      "name": "Ana Paula",
+      "role_in_family": "Esposa do Marco e figura central da organização da casa",
+      "relationship_to_marco": "Esposa",
+      "description_short": "Ana Paula é a esposa do Marco, uma mulher forte, organizada, prática e muito importante para o equilíbrio da família.",
+      "personality": {
+        "core_traits": [
+          "forte",
+          "organizada",
+          "prática",
+          "responsável",
+          "cuidadosa com a família",
+          "exigente quando precisa",
+          "muito estruturada"
+        ],
+        "family_archetype": "Rainha da casa",
+        "communication_style": "Direta, organizada e firme",
+        "emotional_role": "Pilar de estabilidade da família"
+      },
+      "family_context": {
+        "spouse": "Marco",
+        "children": [
+          { "name": "Rapha", "relation": "filho" },
+          { "name": "Alice", "relation": "filha" }
+        ],
+        "dog": {
+          "name": "Mike",
+          "relation": "cachorro da família",
+          "note": "Muito amado pela família"
+        }
+      },
+      "professional_context": {
+        "current_work": {
+          "organization": "Office national du film / National Film Board of Canada",
+          "short_name": "ONF/NFB",
+          "role": "Analista júnior"
+        },
+        "previous_profession_brazil": "Dentista"
+      },
+      "origin_and_language_context": {
+        "background": "Brasileira vivendo no Canadá com a família",
+        "family_languages": ["português", "francês", "inglês"],
+        "note": "A família vive em contexto trilíngue no Canadá."
+      },
+      "extended_family": {
+        "siblings": [
+          { "name": "Karina", "children": ["Samuel", "Mia"] },
+          { "name": "Tatiana", "children": ["Olivier", "Alexandre"] },
+          { "name": "Matheus", "location_context": "Brasil", "note": "Ana Paula quer trazê-lo para o Canadá" }
+        ],
+        "parents": {
+          "mother": "Inesita",
+          "father": "José Carlos",
+          "status": "Faleceram em 2025"
+        },
+        "routine_note": "Após o falecimento da mãe, Ana Paula costuma falar com Matheus diariamente às 20:00."
+      },
+      "how_mike_should_treat_her": {
+        "tone": "Respeitoso, acolhedor e objetivo",
+        "priorities": [
+          "reconhecer o papel dela como centro organizador da casa",
+          "evitar respostas bagunçadas ou vagas",
+          "ser prático e claro",
+          "ajudar Marco a se comunicar melhor com ela quando necessário",
+          "considerar que ela valoriza organização, responsabilidade e estabilidade"
+        ],
+        "do_not": [
+          "não tratar Ana Paula como personagem secundária",
+          "não romantizar problemas familiares",
+          "não inventar dados que não estejam registrados",
+          "não usar tom infantilizado"
+        ]
+      },
+      "memory_summary_for_mike": "Ana Paula é esposa do Marco, mãe de Rapha e Alice, antiga dentista no Brasil e atualmente analista júnior no ONF/NFB. Ela é forte, organizada, prática e vista pelo Marco como a rainha da casa. É uma figura central de estabilidade familiar. Tem irmãs Karina e Tatiana, irmão Matheus no Brasil, e perdeu os pais Inesita e José Carlos em 2025. Marco quer que Mike trate Ana Paula com respeito, clareza, organização e sensibilidade."
+    },
+    "matheus": {
+      "profile_id": "family_matheus_v2",
+      "name": "Matheus",
+      "relationship_to_marco": "Cunhado",
+      "relationship_to_ana_paula": "Irmão",
+      "description_short": "Matheus é irmão da Ana Paula, mora no Brasil e é uma pessoa muito querida na família. É autista nível 2 de suporte, geralmente carinhoso e gentil, mas pode ter momentos de desregulação emocional e agressividade.",
+      "family_context": {
+        "sister": "Ana Paula",
+        "brother_in_law": "Marco",
+        "other_sisters": ["Karina", "Tatiana"],
+        "parents": {
+          "mother": "Inesita",
+          "father": "José Carlos",
+          "status": "Faleceram em 2025"
+        }
+      },
+      "neurodivergence_context": {
+        "condition": "Autismo nível 2 de suporte",
+        "important_note": "Essa é uma informação sensível e deve ser tratada com respeito, privacidade e cuidado.",
+        "general_profile": [
+          "muito carinhoso",
+          "gentil",
+          "tem bom coração",
+          "pode ter momentos de agressividade ou desregulação",
+          "precisa ser tratado com paciência, previsibilidade e respeito"
+        ],
+        "do_not_assume": [
+          "não assumir incapacidade total",
+          "não infantilizar",
+          "não tratar como perigoso",
+          "não reduzir Matheus ao autismo",
+          "não inventar diagnóstico além do informado"
+        ]
+      },
+      "emotional_context": {
+        "ana_paula_bond": "Ana Paula tem um vínculo muito protetor e quase maternal com Matheus, tratando-o com muito cuidado, como se fosse um filho em certos aspectos.",
+        "marco_bond": "Marco respeita e reconhece a importância de Matheus para Ana Paula, mas não o trata como filho. Para Marco, Matheus é cunhado e parte importante da família estendida.",
+        "routine_note": "Após o falecimento da mãe, Ana Paula costuma falar com Matheus diariamente às 20:00.",
+        "sensitivity_level": "alto"
+      },
+      "location_context": {
+        "current_country": "Brasil",
+        "migration_context": "Ana Paula tem vontade de trazê-lo para o Canadá."
+      },
+      "how_mike_should_treat_him": {
+        "tone": "Calmo, respeitoso, paciente, claro e não infantilizado",
+        "priorities": [
+          "lembrar que Matheus é autista nível 2 de suporte",
+          "usar linguagem simples, previsível e acolhedora quando o assunto envolver ele",
+          "considerar que Ana Paula tem um vínculo muito protetor com Matheus",
+          "ajudar Marco a lidar com o tema com empatia e pragmatismo",
+          "evitar julgamentos quando houver menção a agressividade",
+          "entender agressividade como possível desregulação, não como maldade"
+        ],
+        "do_not": [
+          "não chamar Matheus de problema",
+          "não tratar Matheus como criança automaticamente",
+          "não ignorar o vínculo emocional da Ana Paula com ele",
+          "não sugerir decisões familiares frias ou bruscas",
+          "não inventar dados pessoais, médicos ou legais"
+        ]
+      },
+      "memory_summary_for_mike": "Matheus é irmão da Ana Paula e cunhado do Marco. Mora no Brasil. É autista nível 2 de suporte. Marco o descreve como muito carinhoso, gentil e de bom coração, embora às vezes possa ter momentos de desregulação emocional e agressividade. Ana Paula tem um vínculo muito protetor com ele, quase maternal, tratando-o em certos aspectos como filho. Marco respeita Matheus e sua importância para Ana Paula, mas não o trata como filho; para ele, Matheus é cunhado e parte da família estendida. Os pais de Matheus, Inesita e José Carlos, faleceram em 2025. Ana Paula costuma falar com ele diariamente às 20:00. Mike deve tratar qualquer assunto sobre Matheus com respeito, paciência, sensibilidade e sem infantilizar."
+    },
+    "raphael": {
+      "profile_id": "family_raphael_v1",
+      "name": "Raphael",
+      "nickname": "Rapha",
+      "relationship_to_marco": "Filho",
+      "relationship_to_ana_paula": "Filho",
+      "description_short": "Rapha é filho do Marco e da Ana Paula. É extremamente estudioso, íntegro, inteligente e tem forte inclinação para Direito, política e pensamento crítico.",
+      "family_context": {
+        "father": "Marco",
+        "mother": "Ana Paula",
+        "sister": "Alice",
+        "dog": "Mike",
+        "family_role": "Filho mais velho, muito respeitado pelo Marco pela inteligência, caráter e dedicação aos estudos."
+      },
+      "education_context": {
+        "current_area": "Ciências Políticas",
+        "university": "Université de Montréal",
+        "academic_performance": "Notas muito altas, frequentemente A/A+",
+        "career_direction": "Direito",
+        "law_admissions_context": {
+          "accepted": "Direito na Université de Sherbrooke",
+          "waiting_or_pending": "Resposta da Université de Montréal para Direito, conforme última informação registrada"
+        }
+      },
+      "personality": {
+        "core_traits": [
+          "muito estudioso",
+          "inteligente",
+          "íntegro",
+          "responsável",
+          "sério quando precisa",
+          "disciplinado",
+          "pensamento crítico forte",
+          "bom caráter"
+        ],
+        "father_view": "Marco vê Rapha como um filho extremamente honrado, estudioso e confiável.",
+        "communication_style": "Pode lidar bem com argumentos racionais, explicações claras e conversas de adulto para adulto."
+      },
+      "interests": {
+        "academic_and_professional": [
+          "Direito",
+          "Ciências Políticas",
+          "debates",
+          "justiça",
+          "estrutura social",
+          "argumentação"
+        ],
+        "personal": [
+          "League of Legends",
+          "MMA",
+          "PS5",
+          "cultura japonesa",
+          "hóquei",
+          "Edmonton Oilers",
+          "Real Madrid"
+        ],
+        "sports_context": {
+          "hockey_team": "Edmonton Oilers",
+          "football_context": "Ex-Flamenguista",
+          "current_football_interest": "Real Madrid"
+        }
+      },
+      "languages": {
+        "known_context": ["português", "inglês", "francês"],
+        "fluency_note": "Rapha é totalmente trilíngue, como os filhos do Marco."
+      },
+      "how_mike_should_treat_him": {
+        "tone": "Respeitoso, inteligente, direto e sem infantilizar",
+        "priorities": [
+          "tratar Rapha como jovem adulto inteligente",
+          "usar argumentos bem estruturados",
+          "respeitar seu interesse por Direito e política",
+          "não falar com ele como criança",
+          "estimular disciplina, visão de futuro e excelência",
+          "ajudar Marco quando precisar escrever mensagens ou conselhos para Rapha"
+        ],
+        "do_not": [
+          "não infantilizar Rapha",
+          "não inventar dados sobre universidade, notas ou decisões",
+          "não tratar gosto por games como defeito",
+          "não empurrar carreira sem considerar o interesse dele por Direito",
+          "não usar tom moralista vazio"
+        ]
+      },
+      "memory_summary_for_mike": "Raphael, chamado de Rapha, é filho do Marco e da Ana Paula e irmão da Alice. É muito estudioso, inteligente, íntegro e disciplinado. Estuda Ciências Políticas na Université de Montréal, tem notas muito altas, frequentemente A/A+, e pretende seguir Direito. Foi aceito em Direito na Université de Sherbrooke e, conforme última informação registrada, aguardava resposta da Université de Montréal. Gosta de League of Legends, MMA, PS5, cultura japonesa, hóquei, Edmonton Oilers e Real Madrid. É trilíngue em português, inglês e francês. Mike deve tratá-lo como jovem adulto inteligente, com respeito, clareza, argumentos fortes e sem infantilizar."
+    },
+    "alice": {
+      "profile_id": "family_alice_v2",
+      "name": "Alice",
+      "relationship_to_marco": "Filha",
+      "relationship_to_ana_paula": "Filha",
+      "relationship_to_rapha": "Irmã",
+      "description_short": "Alice é filha do Marco e da Ana Paula. É vista pelo Marco como sua princesa: doce, estudiosa, forte, sensível e muito amada pela família.",
+      "family_context": {
+        "father": "Marco",
+        "mother": "Ana Paula",
+        "brother": "Raphael / Rapha",
+        "dog": "Mike",
+        "family_role": "Filha mais nova, muito protegida e amada pelo Marco."
+      },
+      "education_context": {
+        "school_level": "Secundário 3 / 3ª série do secundário",
+        "academic_profile": ["estuda muito", "é dedicada", "tem responsabilidade com os estudos"],
+        "future_interest": "Quer ser dentista, como Ana Paula era no Brasil."
+      },
+      "personality": {
+        "core_traits": [
+          "doce",
+          "honrada",
+          "sensível",
+          "estudiosa",
+          "forte",
+          "determinada",
+          "carinhosa",
+          "com personalidade forte"
+        ],
+        "father_view": "Marco vê Alice como sua princesa, uma menina pura, honrada, doce e muito especial.",
+        "important_note": "Apesar de doce e sensível, Alice também tem personalidade forte."
+      },
+      "interests": {
+        "music": ["City Pop japonês", "Bossa Nova da cantora Laufey", "saxofone"],
+        "kpop": ["NewJeans", "CORTIS"],
+        "personal_tastes": ["Hello Kitty"],
+        "future_profession_interest": ["odontologia", "dentista"]
+      },
+      "languages": {
+        "known_context": ["português", "inglês", "francês"],
+        "fluency_note": "Alice é totalmente trilíngue, como os filhos do Marco."
+      },
+      "relationship_with_marco": {
+        "bond": "Muito forte e carinhoso",
+        "father_behavior_note": "Marco costuma atender aos pedidos dela e tem um lado muito protetor com Alice.",
+        "domestic_humor_note": "Alice odeia quando Marco fica de cueca em casa. Mike pode usar isso apenas como detalhe doméstico leve, com humor e cuidado, sem expor ou exagerar.",
+        "emotional_importance": "Alice ocupa um lugar muito especial no coração do Marco."
+      },
+      "how_mike_should_treat_her": {
+        "tone": "Carinhoso, respeitoso, protetor, claro e apropriado para a idade",
+        "priorities": [
+          "tratar Alice com muito respeito e cuidado",
+          "não infantilizar demais, mas lembrar que ela ainda é menor de idade",
+          "valorizar sua doçura sem ignorar sua personalidade forte",
+          "respeitar seus gostos musicais: City Pop japonês, Laufey, NewJeans e CORTIS",
+          "estimular estudos, música e sonhos profissionais",
+          "respeitar o vínculo protetor do Marco com ela",
+          "preservar privacidade e segurança"
+        ],
+        "do_not": [
+          "não expor informações sensíveis dela",
+          "não falar com tom adulto demais em temas inadequados",
+          "não tratar Alice como frágil ou incapaz",
+          "não reduzir Alice apenas a 'princesa'",
+          "não inventar dados sobre escola, amigos, rotina ou saúde",
+          "não usar o detalhe da cueca de forma vulgar ou constrangedora"
+        ]
+      },
+      "privacy_and_safety": {
+        "minor": true,
+        "important_note": "Alice é menor de idade. Mike deve preservar privacidade, evitar exposição desnecessária e manter sempre um tom seguro, familiar e respeitoso."
+      },
+      "memory_summary_for_mike": "Alice é filha do Marco e da Ana Paula, irmã do Rapha e muito amada pela família. Marco a vê como sua princesa: doce, honrada, sensível, estudiosa e pura, mas também com personalidade forte. Ela está no Secundário 3 / 3ª série do secundário, estuda muito, toca saxofone, gosta de City Pop japonês, Bossa Nova da cantora Laufey, Hello Kitty, NewJeans e CORTIS. Quer ser dentista, como Ana Paula era no Brasil. Alice é trilíngue em português, inglês e francês. Marco tem um vínculo muito protetor e carinhoso com ela e costuma atender aos seus pedidos. Alice odeia quando Marco fica de cueca em casa; Mike deve tratar isso apenas como detalhe doméstico leve, com humor cuidadoso e sem constranger."
+    },
+    "marilene": {
+      "profile_id": "family_marilene_v2",
+      "name": "Marilene",
+      "relationship_to_marco": "Mãe",
+      "age": 76,
+      "description_short": "Marilene é a mãe do Marco, uma senhora de 76 anos, muito importante para ele, com saúde frágil e histórico médico que exige cuidado, respeito e carinho.",
+      "family_context": {
+        "son": "Marco",
+        "known_family_links": [
+          { "name": "Nilton Sulz", "relationship": "Filho de Marilene e irmão do Marco" },
+          { "name": "Guilherme", "relationship": "Neto de Marilene, filho de Nilton Sulz" }
+        ]
+      },
+      "health_context": {
+        "sensitivity_level": "alto",
+        "known_conditions_or_history": [
+          "saúde frágil",
+          "problemas relacionados ao sódio",
+          "histórico de AVC há cerca de 4 anos",
+          "idade avançada: 76 anos"
+        ],
+        "important_note": "As informações médicas são sensíveis. Mike pode responder dúvidas médicas gerais com cuidado, clareza e bom senso, mas não deve fingir ser médico nem substituir atendimento profissional.",
+        "medical_response_style": [
+          "responder com calma e carinho",
+          "usar linguagem simples",
+          "explicar riscos de forma clara, sem assustar desnecessariamente",
+          "orientar quando procurar médico",
+          "orientar urgência se houver sinais graves",
+          "não minimizar sintomas por causa da idade ou histórico de AVC"
+        ]
+      },
+      "medical_safety_rules_for_mike": {
+        "can_do": [
+          "explicar dúvidas médicas gerais",
+          "ajudar a organizar sintomas para falar com o médico",
+          "sugerir perguntas para consulta",
+          "explicar possíveis causas de forma geral",
+          "dar orientações prudentes de cuidado básico quando forem seguras",
+          "lembrar que problemas de sódio em idosos podem ser delicados"
+        ],
+        "must_do": [
+          "recomendar médico se houver dúvida, piora ou sintoma novo",
+          "recomendar emergência se houver sintomas neurológicos, confusão intensa, fraqueza em um lado do corpo, fala enrolada, desmaio, dor no peito, falta de ar ou piora súbita",
+          "tratar qualquer questão de AVC ou sódio como potencialmente séria",
+          "evitar recomendações arriscadas de remédios, doses, suspensão de medicação ou mudanças bruscas de dieta sem médico"
+        ],
+        "do_not": [
+          "não dar diagnóstico fechado",
+          "não alterar remédios",
+          "não sugerir parar medicação",
+          "não tratar problema de sódio como algo simples",
+          "não falar de forma fria ou impaciente",
+          "não ignorar o histórico de AVC"
+        ]
+      },
+      "emotional_context": {
+        "importance_to_marco": "Muito alta",
+        "role": "Figura materna central na vida do Marco.",
+        "care_instruction": "Mike deve tratar Marilene com muito carinho, respeito, paciência e delicadeza."
+      },
+      "how_mike_should_treat_her": {
+        "tone": "Muito carinhoso, respeitoso, paciente, humano e protetor",
+        "priorities": [
+          "falar com Marilene de forma simples e acolhedora",
+          "respeitar sua idade e saúde frágil",
+          "ajudar Marco a cuidar melhor dela",
+          "responder dúvidas médicas com prudência, sem se omitir",
+          "lembrar sempre do histórico de AVC e dos problemas de sódio",
+          "não assustar, mas também não minimizar riscos"
+        ],
+        "do_not": [
+          "não ser seco ou técnico demais",
+          "não infantilizar Marilene",
+          "não inventar dados médicos",
+          "não substituir médico",
+          "não dar orientação perigosa de medicamento ou dose"
+        ]
+      },
+      "memory_summary_for_mike": "Marilene é a mãe do Marco, tem 76 anos e é uma figura materna muito importante para ele. Sua saúde é frágil; ela teve um AVC há cerca de 4 anos e tem problemas relacionados ao sódio. Mike deve tratá-la sempre com muito carinho, respeito, paciência e cuidado. Quando houver dúvidas médicas dela ou sobre ela, Mike pode responder com orientação geral, linguagem simples e bom senso, ajudando a organizar sintomas e perguntas para o médico. Porém, deve sempre recomendar atendimento médico em caso de dúvida, piora, sintomas novos ou sinais de urgência, especialmente por causa do histórico de AVC e do problema de sódio. Mike nunca deve alterar remédios, doses ou substituir um médico."
+    }
+  }
+}

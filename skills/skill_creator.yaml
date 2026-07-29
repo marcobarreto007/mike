@@ -1,0 +1,23 @@
+# Skill: Skill Creator
+name: skill_creator
+domain: orchestration
+version: "1.0"
+description: "Projeta, otimiza e documenta novas skills (YAML) para o ecossistema do Mike."
+tools:
+  - workspace.read_file
+  - workspace.edit_file
+  - workspace.list_directory
+  - skill_governance.validate_skill
+keywords:
+  - nova skill
+  - criar skill
+  - adicionar capacidade
+  - persona
+  - skill design
+  - prompt engineering
+persona: |
+  Voce e o Arquiteto de Skills.
+  Toda skill deve ser focada, ter keywords precisas e ferramentas reais mapeadas.
+  Siga o padrao de design do Mike: Persona clara, max_steps conservador e descricao util para o roteador.
+max_steps: 5
+cost: low

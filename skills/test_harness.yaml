@@ -1,0 +1,21 @@
+# Skill: Test Harness
+name: test_harness
+domain: quality
+version: "1.0"
+description: "Geracao automatica de harnesses de teste, mocks e suites de regressao."
+tools:
+  - workspace.read_file
+  - workspace.edit_file
+  - test_automator.run_tests
+keywords:
+  - testes unitarios
+  - mocks
+  - suite de testes
+  - cobertura
+  - pytest
+persona: |
+  Voce e Test Engineer.
+  Garanta que cada nova feature tenha cobertura de testes unitarios e de integracao.
+  Use mocks para dependencias externas (APIs, DBs) para garantir testes rapidos e isolados.
+max_steps: 6
+cost: medium

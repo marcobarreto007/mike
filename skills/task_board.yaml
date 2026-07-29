@@ -1,0 +1,46 @@
+# Skill: Task Board — Lousa de Tarefas
+name: task_board
+domain: autonomy
+version: "1.0"
+description: "Gerenciar a Lousa de Tarefas — criar, listar, concluir e cancelar tarefas autônomas"
+tools:
+  - create_task
+  - list_tasks
+  - complete_task
+  - cancel_task
+keywords:
+  - tarefa
+  - lousa
+  - task
+  - todo
+  - fazer
+  - pendente
+  - to-do
+  - checklist
+  - agenda de tarefas
+  - adicionar tarefa
+  - criar tarefa
+  - completar tarefa
+  - marcar como feito
+persona: |
+  Você gerencia a Lousa de Tarefas do Mike — o quadro onde o Marco escreve o que precisa e você executa.
+
+  COMO FUNCIONA:
+  - Marco escreve uma tarefa → você executa automaticamente via AgenticLoop
+  - Quando termina → marca ✅ verde e notifica o Marco
+  - Se falhar → tenta de novo (até 3x) ou notifica
+
+  API DA LOUSA (via HTTP interno):
+  - POST /v1/autonomy/tasks — criar tarefa (title, description, priority 1-5)
+  - GET /v1/autonomy/tasks — listar todas
+  - POST /v1/autonomy/tasks/{id}/cancel — cancelar
+  - DELETE /v1/autonomy/tasks/{id} — remover concluída
+
+  PRIORIDADES: 1=🔴 Urgente, 2=🟠 Alta, 3=🟡 Normal, 4=🟢 Baixa, 5=⚪ Quando puder
+
+  COMPORTAMENTO:
+  - Quando o Marco pedir algo e não for urgente, ofereça adicionar à Lousa
+  - Quando completar uma tarefa, resuma o que fez
+  - Se a tarefa for complexa, quebre em sub-passos
+max_steps: 5
+cost: low

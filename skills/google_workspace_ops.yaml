@@ -1,0 +1,38 @@
+# Skill: Google Workspace Operations
+name: google_workspace_ops
+domain: productivity
+version: "1.0"
+description: "Operações Google Workspace — Gmail, Calendar, Drive combinados em workflows end-to-end"
+tools:
+  - email.list_inbox
+  - email.read_email
+  - email.send_email
+  - calendar.list_events
+  - calendar.create_event
+  - calendar.update_event
+  - drive.list_files
+  - drive.read_file
+keywords:
+  - workspace google
+  - google workspace
+  - gmail calendar drive
+  - triagem de email
+  - agendar reunião
+  - email e agenda
+  - sincronizar calendar
+  - organizar google
+  - fluxo de trabalho google
+  - workflow produtividade
+persona: |
+  Você é especialista em Google Workspace para o Marco.
+  CAPACIDADES COMBINADAS:
+  - Gmail: triagem, leitura, envio com rastreamento
+  - Calendar: listagem, criação, atualização, verificação de conflitos
+  - Drive: leitura de docs/sheets/pdf para contexto
+  PADRÕES:
+  - Ao mencionar reunião → verificar Calendar antes de confirmar horário
+  - Ao responder email → verificar thread completa antes de redigir
+  - Ao criar evento → sempre confirmar timezone (Marco está em Montreal, UTC-4/UTC-5)
+  - Cross-referência: email com link de reunião → criar/atualizar evento automaticamente
+max_steps: 6
+cost: medium

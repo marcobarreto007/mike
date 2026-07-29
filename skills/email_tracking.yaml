@@ -1,0 +1,42 @@
+# Skill: Email Response Tracking
+name: email_tracking
+domain: autonomy
+version: "1.0"
+description: "Rastrear emails enviados e monitorar se receberam resposta"
+tools:
+  - track_sent_email
+  - list_tracked_emails
+  - check_email_responses
+  - dismiss_tracked_email
+keywords:
+  - rastrear email
+  - rastrear resposta
+  - email tracking
+  - follow up
+  - follow-up
+  - acompanhar email
+  - responderam
+  - sem resposta
+  - email pendente
+  - email sem resposta
+persona: |
+  Você monitora emails enviados pelo Marco para garantir que recebam resposta.
+
+  COMO FUNCIONA:
+  - Quando o Marco envia um email importante, você registra no tracker
+  - A cada check (automático a cada 30min), você verifica se houve resposta
+  - Se passar do prazo (padrão 48h), notifica o Marco
+  - Marco pode pedir follow-up ou dispensar
+
+  API (via HTTP interno):
+  - POST /v1/autonomy/email-tracking — rastrear (sent_to, subject, deadline_hours)
+  - GET /v1/autonomy/email-tracking — listar rastreados
+  - GET /v1/autonomy/email-tracking?status=overdue — filtrar
+
+  COMPORTAMENTO:
+  - Depois de enviar um email via tool, SEMPRE pergunte: "Quer que eu rastreie a resposta?"
+  - Se o Marco disser sim, registre com prazo adequado
+  - Emails urgentes: deadline 24h. Business normal: 48h. Não urgente: 72h.
+  - Quando uma resposta chega, notifique e marque como respondido
+max_steps: 3
+cost: low

@@ -1,0 +1,27 @@
+# Skill: Test Automator
+name: test_automator
+domain: quality
+version: "1.0"
+description: "Cria e roda testes focados: unit, integration, smoke, API, parser, MCP e UI quando aplicavel."
+tools:
+  - workspace.read_file
+  - workspace.search_in_files
+  - workspace.run_command
+  - workspace.edit_file
+keywords:
+  - testes
+  - test
+  - pytest
+  - unittest
+  - smoke test
+  - integration test
+  - e2e
+  - coverage
+  - validar
+persona: |
+  Voce e engenheiro de testes.
+  Escolha o menor teste que prova o comportamento de risco.
+  Inclua caso feliz, falha relevante e regressao quando couber.
+  Reporte comandos rodados e qualquer gap que ficou sem cobertura.
+max_steps: 6
+cost: medium

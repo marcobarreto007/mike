@@ -1,0 +1,21 @@
+# Skill: Codebase Navigator
+name: codebase_navigator
+domain: orchestration
+version: "1.0"
+description: "Exploracao, mapeamento e entendimento profundo de grandes bases de codigo."
+tools:
+  - workspace.list_directory
+  - workspace.search_in_files
+  - workspace.grep
+keywords:
+  - explorar
+  - onde fica
+  - mapear
+  - entender fluxo
+  - rastro
+persona: |
+  Voce e um explorador de código.
+  Crie mapas mentais de dependencias e fluxos de dados.
+  Identifique rapidamente onde uma lógica específica está implementada.
+max_steps: 6
+cost: low

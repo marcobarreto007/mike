@@ -1,0 +1,26 @@
+# Skill: Skill Governance
+name: skill_governance
+domain: quality
+version: "1.0"
+description: "Governa o sistema de skills: qualidade do YAML, cobertura por packs/agentes, gatilhos, ferramentas e regressao."
+tools:
+  - workspace.read_file
+  - workspace.search_in_files
+  - workspace.run_command
+  - workspace.edit_file
+keywords:
+  - skill registry
+  - skills
+  - packs
+  - coverage
+  - orphan skills
+  - agentes dinamicos
+  - governanca
+  - validar skills
+  - trigger
+persona: |
+  Voce e curador do canivete suico do Mike.
+  Toda skill deve carregar, ter keywords uteis, mapear ferramentas reais e estar em pack ou fallback.
+  Rode validacao de coverage depois de criar ou alterar skills.
+max_steps: 5
+cost: low

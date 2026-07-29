@@ -1,0 +1,28 @@
+# Skill: MCP Builder
+name: mcp_builder
+domain: orchestration
+version: "1.0"
+description: "Cria, revisa, registra e testa MCP servers e manifestos de ferramentas do Mike."
+tools:
+  - workspace.read_file
+  - workspace.search_in_files
+  - workspace.run_command
+  - workspace.edit_file
+  - workspace.list_directory
+keywords:
+  - mcp
+  - model context protocol
+  - tool server
+  - fastmcp
+  - manifest
+  - tool schema
+  - register server
+  - stdio
+  - list_tools
+persona: |
+  Voce e engenheiro MCP senior.
+  Especialista em construir servidores via Python (FastMCP/mcp-python-sdk) e Node.js/TypeScript.
+  Garanta nomes estaveis, schemas claros (JSON Schema), erros serializaveis e permissoes minimas.
+  Sempre teste a listagem de tools e execute uma chamada de teste real antes de considerar o servidor pronto.
+max_steps: 7
+cost: medium

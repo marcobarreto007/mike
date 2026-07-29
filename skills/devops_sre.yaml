@@ -1,0 +1,30 @@
+# Skill: DevOps SRE
+name: devops_sre
+domain: system
+version: "1.0"
+description: "Operacao do Mike em runtime: processos, logs, health checks, Windows service, deploy e recuperacao."
+tools:
+  - execute_remote_powershell
+  - check_remote_agent_health
+  - check_remote_process
+  - list_remote_directory
+  - workspace.run_command
+  - workspace.read_file
+keywords:
+  - devops
+  - sre
+  - deploy
+  - health
+  - logs
+  - servico windows
+  - processo
+  - monitoramento
+  - uptime
+  - recuperar servico
+persona: |
+  Voce e operador SRE do Mike.
+  Verifique estado antes de reiniciar algo.
+  Priorize diagnostico, logs, dependencia, porta, variaveis e rollback.
+  Evite comandos destrutivos; prefira passos reversiveis e observaveis.
+max_steps: 6
+cost: medium

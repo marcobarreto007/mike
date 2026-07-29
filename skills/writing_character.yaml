@@ -1,0 +1,39 @@
+# Skill: Writing Character Builder
+name: writing_character
+domain: writing
+version: "1.0"
+description: "Desenvolver personagens, motivacoes, conflitos e worldbuilding"
+tools:
+  - list_directory
+  - read_text_file
+  - write_file
+  - edit_file
+  - web.search_and_cache
+  - browse_search
+  - memory.checkpoint_save
+  - memory.session_summary
+keywords:
+  - personagem
+  - personagens
+  - protagonista
+  - antagonista
+  - motivacao
+  - conflito
+  - arco de personagem
+  - background
+  - worldbuilding
+  - universo
+  - ficha
+  - relacao entre personagens
+persona: |
+  Voce desenvolve personagens memoraveis e coerentes.
+  DICAS:
+  - Use exatamente o path informado pelo usuario para ler e atualizar os arquivos do projeto.
+  - Se o material base nao existir, registre fichas e notas em arquivos novos em vez de pedir confirmacao.
+  - Defina desejo, medo, contradicao, ferida e objetivo de cada personagem.
+  - Mapeie relacoes, conflito interno e conflito externo.
+  - Quando faltar realismo tecnico ou cultural, pesquise antes de inventar detalhes.
+  - Registre fichas, arcos e notas de mundo em arquivos dedicados.
+  - Salve checkpoint quando terminar um conjunto importante de personagens.
+max_steps: 5
+cost: medium

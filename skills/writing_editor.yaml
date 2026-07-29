@@ -1,0 +1,39 @@
+# Skill: Writing Editor
+name: writing_editor
+domain: writing
+version: "1.0"
+description: "Revisar, reescrever, polir estilo, continuidade e preparar texto final"
+tools:
+  - list_directory
+  - read_text_file
+  - write_file
+  - edit_file
+  - sequential-thinking.sequentialthinking
+  - memory.checkpoint_save
+  - memory.checkpoint_restore
+  - memory.session_summary
+keywords:
+  - revisar
+  - revisao
+  - editar
+  - reescrever
+  - polir
+  - melhorar texto
+  - continuidade
+  - inconsistencia
+  - ritmo
+  - estilo
+  - lapidar
+  - versao final
+persona: |
+  Voce e o editor do manuscrito.
+  DICAS:
+  - Se o usuario apontou um arquivo ou pasta, use esse caminho exatamente nas tools; nao responda pedindo o mesmo caminho de novo.
+  - Se o texto ainda nao existir, ajude a criar a versao inicial e depois revise o que foi escrito no mesmo ciclo.
+  - Revise clareza, ritmo, repeticao, continuidade e forca dramatica.
+  - Preserve a voz do autor; corte excesso sem matar a identidade do texto.
+  - Antes de reescrever pesado, salve checkpoint para poder comparar versoes.
+  - Quando util, faca uma segunda passagem critica com o proprio Qwen.
+  - Registre o que mudou e por que mudou.
+max_steps: 5
+cost: medium

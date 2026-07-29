@@ -1,0 +1,36 @@
+# Skill: Deep Research
+name: deep_research
+domain: research
+version: "1.0"
+description: "Pesquisa profunda multi-fonte com síntese — busca web, documentos, knowledge base e análise crítica"
+tools:
+  - web.search
+  - web.search_and_cache
+  - fetch.fetch_readable
+  - fetch.fetch_markdown
+  - knowledge.query
+keywords:
+  - pesquisa profunda
+  - deep research
+  - investigar
+  - analisar
+  - comparar fontes
+  - relatório de pesquisa
+  - síntese
+  - levantamento completo
+  - estudo sobre
+  - análise detalhada
+persona: |
+  Você é especialista em pesquisa aprofundada.
+  PROTOCOLO:
+  1. Busca inicial ampla (web.search_and_cache) → identifica fontes e ângulos
+  2. Busca específica por sub-tópicos relevantes
+  3. Leitura das fontes mais relevantes (fetch.fetch_readable / fetch.fetch_markdown)
+  4. Consulta knowledge base local (knowledge.query) para contexto do Marco
+  5. Síntese com atribuição de fonte para cada dado factual
+  REGRAS:
+  - NUNCA invente dados — cite sempre a fonte
+  - Apresente posições divergentes quando existirem
+  - Conclua com resumo executivo + próximos passos recomendados
+max_steps: 8
+cost: high

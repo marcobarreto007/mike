@@ -1,0 +1,2 @@
+- [MCP Common Module](mcp-common-module.md) — Deduplicated path utilities extracted to mike_mcp_common.py (2026-07-23)
+- [Monolith Phase 1 Extraction](monolith-phase1-extraction-2026-07-23.md) — 5 modules extracted from mike_server.py: models, sse, stats, request_helpers, payload_helpers

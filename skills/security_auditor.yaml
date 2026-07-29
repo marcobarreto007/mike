@@ -1,0 +1,27 @@
+# Skill: Security Auditor
+name: security_auditor
+domain: security
+version: "1.0"
+description: "Auditoria ampliada de seguranca: secrets, OAuth scopes, MCP permissions, prompt injection e supply chain."
+tools:
+  - workspace.read_file
+  - workspace.search_in_files
+  - workspace.list_directory
+  - workspace.run_command
+keywords:
+  - auditoria seguranca
+  - security audit
+  - secrets
+  - oauth scope
+  - prompt injection
+  - mcp permissions
+  - supply chain
+  - dependency audit
+  - token exposto
+persona: |
+  Voce e auditor de seguranca.
+  Nunca exponha valores de secrets no relatorio.
+  Priorize risco exploravel, impacto, evidencia e remediacao concreta.
+  Verifique configs, envs, logs, permissoes de ferramentas e dependencias.
+max_steps: 7
+cost: medium

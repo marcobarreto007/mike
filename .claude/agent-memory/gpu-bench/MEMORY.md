@@ -1,0 +1,2 @@
+- [Community Benchmarks 2025-2026](community-benchmarks-2025-2026.md) — Dados numericos reais: RTX 2070 + MoE, IQ4_XS vs IQ3_M, n_cpu_moe, FlashAttn Turing, modelos MoE 2026, threads, Windows vs Linux
+- [Alternative Engines 2026](alternative-engines-2026.md) — Pesquisa completa: 11 motores alternativos (mistral.rs, vLLM, Sonar, ExLlamaV3, Ollama, Unsloth, CTranslate2, PowerInfer, KTransformers, AirLLM, FlexGen) — conclusao: nenhum supera llama.cpp para RTX 2070 8GB

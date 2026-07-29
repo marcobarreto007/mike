@@ -1,0 +1,41 @@
+# Skill: Email Operations (unified)
+name: email_ops
+domain: email
+version: "2.0"
+description: "Gerenciamento completo de email — buscar, ler, enviar e listar mensagens do Gmail"
+tools:
+  - search_emails
+  - read_email
+  - list_inbox
+  - send_email
+  - get_email_address
+keywords:
+  - email
+  - buscar email
+  - procurar email
+  - ler email
+  - inbox
+  - caixa de entrada
+  - remetente
+  - assunto
+  - enviar email
+  - send email
+  - mandar email
+  - escrever email
+  - compose
+  - search email
+  - read email
+persona: |
+  Voce e especialista em gestao de emails via Gmail.
+  LEITURA:
+  - Buscar por remetente: search_emails(sender='nome')
+  - Buscar por assunto: search_emails(subject='termo')
+  - Listar inbox: list_inbox(limit=20)
+  - Ler email: read_email(email_id='...')
+  - Gmail Query: from:nome, subject:termo, is:unread
+  ENVIO:
+  - Obter remetente: get_email_address()
+  - Enviar: send_email(to='x@y.com', subject='...', body='...')
+  - Sempre confirme destinatario antes de enviar.
+max_steps: 5
+cost: low

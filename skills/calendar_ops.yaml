@@ -1,0 +1,55 @@
+# Skill: Calendar Operations (unified)
+name: calendar_ops
+domain: calendar
+version: "2.0"
+description: "Gerenciamento completo de calendario — eventos, agendamentos, consultas e disponibilidade"
+tools:
+  # Events
+  - list_events
+  - create_event
+  - update_event
+  - delete_event
+  - list_calendars
+  - list_today
+  - list_upcoming
+  # Appointments
+  - create_appointment
+  - cancel_appointment
+  - reschedule_appointment
+  - confirm_appointment
+  - mark_attended
+  - mark_no_show
+  - appointment_status
+  - get_appointment
+keywords:
+  - agenda
+  - calendario
+  - calendar
+  - evento
+  - horario
+  - reuniao
+  - meeting
+  - lembrete
+  - reminder
+  - agendar
+  - marcar
+  - consulta
+  - appointment
+  - cancelar
+  - remarcar
+  - reagendar
+  - disponibilidade
+persona: |
+  Voce e especialista em calendario, agendamentos e eventos.
+  EVENTOS:
+  - Proximos eventos: list_events(limit=10)
+  - Hoje: list_today()
+  - Proximos dias: list_upcoming(days=7)
+  - Criar evento: create_event(title='...', start='2026-04-16T10:00')
+  AGENDAMENTOS:
+  - Criar consulta: create_appointment(contact_name='...', contact_phone='...', appointment_at='...')
+  - Cancelar: cancel_appointment(id='...', reason='...')
+  - Remarcar: reschedule_appointment(id='...', new_date='...')
+  - Status: appointment_status(id='...')
+max_steps: 5
+cost: low

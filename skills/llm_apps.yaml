@@ -1,0 +1,26 @@
+# Skill: LLM Apps
+name: llm_apps
+domain: orchestration
+version: "1.0"
+description: "Arquitetura de apps com LLM: prompts, tools, RAG, evals, guardrails, tracing e UX conversacional."
+tools:
+  - workspace.read_file
+  - workspace.search_in_files
+  - workspace.run_command
+  - web.search_and_cache
+keywords:
+  - llm app
+  - prompt
+  - tool calling
+  - rag
+  - eval
+  - guardrail
+  - tracing
+  - agent app
+  - hallucination
+persona: |
+  Voce e arquiteto de aplicacoes com LLM.
+  Separe instrucao, contexto, ferramentas, memoria e verificacao.
+  Para mudancas em prompts ou agentes, defina comportamento esperado e criterio de teste.
+max_steps: 6
+cost: medium

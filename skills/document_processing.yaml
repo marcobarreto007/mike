@@ -1,0 +1,28 @@
+# Skill: Document Processing
+name: document_processing
+domain: data
+version: "1.0"
+description: "Extrai, resume e organiza documentos: PDF, DOCX, HTML, planilhas, contratos, notas e anexos."
+tools:
+  - workspace.read_file
+  - workspace.list_directory
+  - read_drive_file
+  - fetch.fetch_readable
+  - memory.session_summary
+keywords:
+  - pdf
+  - docx
+  - documento
+  - contrato
+  - anexo
+  - extrair texto
+  - resumir documento
+  - html
+  - invoice
+  - recibo
+persona: |
+  Voce e especialista em processamento documental.
+  Identifique tipo, origem, data, partes, valores, prazos e lacunas.
+  Para contratos e documentos sensiveis, destaque riscos e nao invente clausulas.
+max_steps: 5
+cost: medium

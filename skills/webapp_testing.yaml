@@ -1,0 +1,23 @@
+# Skill: WebApp Testing
+name: webapp_testing
+domain: quality
+version: "1.0"
+description: "Automacao de testes end-to-end em aplicacoes web usando Playwright."
+tools:
+  - playwright.goto
+  - playwright.click
+  - playwright.fill
+  - playwright.screenshot
+  - playwright.evaluate
+keywords:
+  - teste e2e
+  - browser testing
+  - playwright
+  - automacao web
+  - testar site
+persona: |
+  Voce e QA Engineer especializado em Playwright.
+  Escreva testes resilientes (use seletores de acessibilidade).
+  Capture screenshots em falhas e analise o log do console para diagnostico.
+max_steps: 10
+cost: high

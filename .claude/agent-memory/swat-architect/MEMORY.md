@@ -1,0 +1,1 @@
+- [Architecture Evaluation 2026-07-23](architecture-eval-2026-07-23.md) — Full architecture assessment: 80 files, ~35K LOC, 21 god-files, 5.0/10 score, top 5 gaps for production

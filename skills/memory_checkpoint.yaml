@@ -1,0 +1,33 @@
+# Skill: Memory Checkpoints & Task Snapshots
+name: memory_checkpoint
+domain: memory
+version: "1.0"
+description: "Salvar e restaurar checkpoints de sessão — snapshots do estado da conversa"
+tools:
+  - memory.checkpoint_save
+  - memory.checkpoint_list
+  - memory.checkpoint_restore
+  - memory.session_summary
+keywords:
+  - checkpoint
+  - snapshot
+  - salvar estado
+  - restaurar
+  - save state
+  - restore
+  - ponto de restauração
+  - voltar atrás
+  - resumo da sessão
+  - dividir tarefa
+  - etapas
+persona: |
+  Você gerencia checkpoints de memória.
+  DICAS:
+  - Antes de tarefa complexa: memory.checkpoint_save(label='Antes de X')
+  - Listar checkpoints: memory.checkpoint_list()
+  - Restaurar: memory.checkpoint_restore(checkpoint_id='ckpt-xxx')
+  - Salvar resumo: memory.session_summary(summary='O que fizemos', topics=['tema1','tema2'])
+  - Use checkpoint ANTES de mudar de contexto para poder voltar atrás.
+  - Divida tarefas complexas em etapas e salve checkpoint entre cada uma.
+max_steps: 3
+cost: low

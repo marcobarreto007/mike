@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Mike — Instalar App</title>
+<meta name="description" content="Mike, o assistente da família Barreto. Instale no celular em 1 toque.">
+<meta name="theme-color" content="#0a0806">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Mike">
+<link rel="icon" type="image/png" sizes="64x64" href="/static/icons/mike-icon-64.png">
+<link rel="icon" href="/static/icons/favicon.ico">
+<link rel="apple-touch-icon" href="/static/icons/apple-touch-icon.png">
+<link rel="manifest" href="/static/manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,400&family=Caveat:wght@400;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0806;
+  --text: #f4ead8;
+  --text2: #c4b89e;
+  --text3: #8a7e6a;
+  --dim: #5c5245;
+  --accent: #e8a04c;
+  --accent-deep: #b9742a;
+  --green: #5fcc7a;
+  --r: 20px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --hand: 'Caveat', cursive;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { height: 100%; }
+body {
+  margin: 0; min-height: 100%; font-family: var(--font);
+  background: var(--bg);
+  background-image:
+    radial-gradient(ellipse at 30% 0%, rgba(232, 160, 76, 0.08), transparent 55%),
+    radial-gradient(ellipse at 70% 100%, rgba(185, 116, 42, 0.06), transparent 55%);
+  color: var(--text); font-size: 16px; line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  display: flex; flex-direction: column; align-items: center;
+  padding: 0 20px;
+  overflow-y: auto;
+}
+
+/* Hero */
+.hero {
+  display: flex; flex-direction: column; align-items: center;
+  padding: 60px 0 32px; max-width: 480px; width: 100%;
+  animation: fadeUp .8s cubic-bezier(.16,1,.3,1) both;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: none; }
+}
+.hero-icon {
+  width: 120px; height: 120px; border-radius: 28px;
+  overflow: hidden;
+  border: 2px solid rgba(232, 160, 76, 0.2);
+  box-shadow: 0 12px 48px rgba(232, 160, 76, 0.15), 0 0 0 1px rgba(232, 160, 76, 0.06);
+  animation: fadeUp .8s cubic-bezier(.16,1,.3,1) .1s both;
+}
+.hero-icon img { width: 100%; height: 100%; object-fit: cover; }
+.hero h1 {
+  margin: 24px 0 0; font-family: var(--serif);
+  font-size: 2.8rem; font-weight: 300; letter-spacing: .08em;
+  color: var(--text);
+  animation: fadeUp .8s cubic-bezier(.16,1,.3,1) .15s both;
+}
+.hero .tagline {
+  margin: 4px 0 0; font-family: var(--hand); font-size: 1.2rem;
+  color: var(--accent); animation: fadeUp .8s cubic-bezier(.16,1,.3,1) .2s both;
+}
+.hero .sub {
+  margin: 16px 0 0; font-size: .92rem; color: var(--text2); text-align: center;
+  max-width: 340px; animation: fadeUp .8s cubic-bezier(.16,1,.3,1) .25s both;
+}
+.status-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin-top: 16px; padding: 6px 14px;
+  background: rgba(95, 204, 122, 0.1); border: 1px solid rgba(95, 204, 122, 0.25);
+  border-radius: 999px; font-size: .78rem; color: var(--green);
+  animation: fadeUp .8s cubic-bezier(.16,1,.3,1) .3s both;
+}
+.status-dot {
+  width: 7px; height: 7px; border-radius: 50%; background: var(--green);
+  box-shadow: 0 0 8px var(--green);
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+/* Install CTA */
+.cta-section {
+  width: 100%; max-width: 480px;
+  animation: fadeUp .8s cubic-bezier(.16,1,.3,1) .35s both;
+}
+.install-btn {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  width: 100%; padding: 18px 24px;
+  background: linear-gradient(135deg, #e8a04c 0%, #b9742a 100%);
+  border: none; border-radius: 16px;
+  color: #0a0806; font-size: 1.1rem; font-weight: 600;
+  cursor: pointer; transition: all .25s cubic-bezier(.4,0,.2,1);
+  box-shadow: 0 8px 32px rgba(232, 160, 76, 0.3);
+}
+.install-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(232, 160, 76, 0.4); }
+.install-btn:active { transform: translateY(0); }
+.install-btn svg { width: 22px; height: 22px; }
+.install-btn.installed {
+  background: linear-gradient(135deg, #5fcc7a 0%, #3ba55d 100%);
+  box-shadow: 0 8px 32px rgba(95, 204, 122, 0.2);
+}
+
+.open-btn {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  width: 100%; padding: 16px 24px; margin-top: 12px;
+  background: transparent;
+  border: 1px solid rgba(232, 160, 76, 0.25); border-radius: 16px;
+  color: var(--accent); font-size: 1rem; font-weight: 500;
+  cursor: pointer; transition: all .25s;
+}
+.open-btn:hover { background: rgba(232, 160, 76, 0.08); border-color: var(--accent); }
+
+.cta-hint {
+  text-align: center; margin-top: 14px; font-size: .82rem; color: var(--dim);
+}
+
+/* Features */
+.features {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+  width: 100%; max-width: 480px; margin-top: 32px;
+  animation: fadeUp .8s cubic-bezier(.16,1,.3,1) .4s both;
+}
+.feat {
+  padding: 18px 16px; border-radius: 16px;
+  background: rgba(18, 15, 12, 0.72);
+  border: 1px solid rgba(232, 160, 76, 0.08);
+}
+.feat-icon { font-size: 1.5rem; margin-bottom: 6px; }
+.feat-title { font-size: .88rem; font-weight: 600; color: var(--text); }
+.feat-desc { font-size: .78rem; color: var(--text3); margin-top: 2px; }
+
+/* Instructions */
+.instructions {
+  width: 100%; max-width: 480px; margin-top: 32px; padding-bottom: 48px;
+  animation: fadeUp .8s cubic-bezier(.16,1,.3,1) .45s both;
+}
+.instructions h3 {
+  font-family: var(--serif); font-size: 1.1rem; font-weight: 400;
+  color: var(--text2); margin: 0 0 16px; text-align: center;
+}
+.step {
+  display: flex; gap: 14px; align-items: flex-start;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(232, 160, 76, 0.06);
+}
+.step:last-child { border-bottom: none; }
+.step-num {
+  width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(232, 160, 76, 0.12); color: var(--accent);
+  font-size: .82rem; font-weight: 600;
+}
+.step-text { font-size: .88rem; color: var(--text2); }
+.step-text strong { color: var(--text); }
+
+/* iOS hint */
+.ios-hint {
+  display: none; width: 100%; max-width: 480px; margin-top: 20px;
+  padding: 16px 18px; border-radius: 16px;
+  background: rgba(91, 141, 239, 0.08);
+  border: 1px solid rgba(91, 141, 239, 0.2);
+  text-align: center;
+}
+.ios-hint.show { display: block; }
+.ios-hint p { margin: 0; font-size: .88rem; color: #8ab4f8; }
+.ios-hint .share-icon { font-size: 1.2rem; vertical-align: middle; }
+
+/* Already installed */
+.installed-msg {
+  display: none; text-align: center; margin-top: 12px;
+  padding: 14px 18px; border-radius: 16px;
+  background: rgba(95, 204, 122, 0.08);
+  border: 1px solid rgba(95, 204, 122, 0.15);
+  font-size: .9rem; color: var(--green);
+}
+.installed-msg.show { display: block; }
+
+/* Scroll */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-thumb { background: rgba(232, 160, 76, 0.2); border-radius: 4px; }
+
+@media (max-width: 380px) {
+  .hero h1 { font-size: 2.2rem; }
+  .hero-icon { width: 96px; height: 96px; border-radius: 22px; }
+  .features { gap: 8px; }
+  .feat { padding: 14px 12px; }
+}
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-icon">
+    <img src="/static/icons/mike-icon-512.png" alt="Mike">
+  </div>
+  <h1>MIKE</h1>
+  <p class="tagline">O Yorkshire da família ✨</p>
+  <p class="sub">Assistente inteligente da família Barreto. Chat, pesquisa, organização — tudo num app leve no seu celular.</p>
+  <div class="status-badge" id="status">
+    <span class="status-dot"></span>
+    <span id="status-text">Verificando...</span>
+  </div>
+</section>
+
+<section class="cta-section">
+  <button class="install-btn" id="install-btn" style="display:none">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+      <polyline points="7 10 12 15 17 10"/>
+      <line x1="12" y1="15" x2="12" y2="3"/>
+    </svg>
+    Instalar Mike no Celular
+  </button>
+  <button class="open-btn" id="open-btn" onclick="window.location.href='/'">
+    💬 Abrir Mike no Navegador
+  </button>
+  <div class="installed-msg" id="installed-msg">
+    ✅ Mike já está instalado! Procure o ícone na tela inicial.
+  </div>
+  <div class="ios-hint" id="ios-hint">
+    <p>No iPhone, toque em <span class="share-icon">⬆️</span> (Compartilhar) e depois <strong>"Adicionar à Tela de Início"</strong></p>
+  </div>
+  <p class="cta-hint" id="cta-hint">Funciona offline · Sem app store · 100% gratuito</p>
+</section>
+
+<section class="features">
+  <div class="feat">
+    <div class="feat-icon">💬</div>
+    <div class="feat-title">Chat Inteligente</div>
+    <div class="feat-desc">Conversa natural com IA local</div>
+  </div>
+  <div class="feat">
+    <div class="feat-icon">🏠</div>
+    <div class="feat-title">Casa do Mike</div>
+    <div class="feat-desc">Explore os cômodos interativos</div>
+  </div>
+  <div class="feat">
+    <div class="feat-icon">🔒</div>
+    <div class="feat-title">Privado</div>
+    <div class="feat-desc">Dados ficam na nossa rede</div>
+  </div>
+  <div class="feat">
+    <div class="feat-icon">👨‍👩‍👧‍👦</div>
+    <div class="feat-title">Toda Família</div>
+    <div class="feat-desc">Perfil individual pra cada um</div>
+  </div>
+</section>
+
+<section class="instructions">
+  <h3>Como instalar</h3>
+  <div class="step">
+    <div class="step-num">1</div>
+    <div class="step-text">Toque em <strong>"Instalar Mike no Celular"</strong> acima</div>
+  </div>
+  <div class="step">
+    <div class="step-num">2</div>
+    <div class="step-text">Confirme a instalação no popup do navegador</div>
+  </div>
+  <div class="step">
+    <div class="step-num">3</div>
+    <div class="step-text">O <strong>ícone do Mike</strong> aparece na tela inicial do celular</div>
+  </div>
+  <div class="step">
+    <div class="step-num">4</div>
+    <div class="step-text">Abra e diga seu nome — o Mike já te reconhece! 🐾</div>
+  </div>
+</section>
+
+<!-- Register Service Worker -->
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js', { scope: '/' }).catch(function(){});
+}
+
+// Check Mike status
+(function checkHealth() {
+  var statusText = document.getElementById('status-text');
+  var statusBadge = document.getElementById('status');
+  fetch('/health', { signal: AbortSignal.timeout(5000) })
+    .then(function(r) { return r.json(); })
+    .then(function(d) {
+      statusText.textContent = 'Online — ' + (d.model || 'Mike pronto');
+      statusBadge.style.borderColor = 'rgba(95, 204, 122, 0.25)';
+    })
+    .catch(function() {
+      statusText.textContent = 'Conectando...';
+      statusBadge.style.borderColor = 'rgba(232, 160, 76, 0.2)';
+      statusBadge.querySelector('.status-dot').style.background = '#e8a04c';
+    });
+})();
+
+// PWA Install prompt
+var deferredPrompt = null;
+var installBtn = document.getElementById('install-btn');
+var openBtn = document.getElementById('open-btn');
+var iosHint = document.getElementById('ios-hint');
+var installedMsg = document.getElementById('installed-msg');
+
+window.addEventListener('beforeinstallprompt', function(e) {
+  e.preventDefault();
+  deferredPrompt = e;
+  installBtn.style.display = 'flex';
+});
+
+installBtn.addEventListener('click', function() {
+  if (!deferredPrompt) return;
+  deferredPrompt.prompt();
+  deferredPrompt.userChoice.then(function(choice) {
+    if (choice.outcome === 'accepted') {
+      installBtn.textContent = '✅ Instalado!';
+      installBtn.classList.add('installed');
+      installBtn.disabled = true;
+      installedMsg.classList.add('show');
+    }
+    deferredPrompt = null;
+  });
+});
+
+// Detect iOS (no beforeinstallprompt)
+var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+var isStandalone = window.matchMedia('(display-mode: standalone)').matches
+                 || window.navigator.standalone === true;
+
+if (isStandalone) {
+  // Already installed — redirect to app
+  window.location.href = '/';
+} else if (isIOS) {
+  iosHint.classList.add('show');
+  installBtn.style.display = 'none';
+}
+
+// Detect already installed
+window.addEventListener('appinstalled', function() {
+  installBtn.style.display = 'none';
+  installedMsg.classList.add('show');
+});
+
+// If opened from PWA, go straight to app
+if (isStandalone) {
+  window.location.href = '/';
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+# Skill: RAG Memory Engineer
+name: rag_memory_engineer
+domain: backend
+version: "1.0"
+description: "Memoria, ingestao, embeddings, BM25, reranking, LightRAG, Mem0, recuperacao e avaliacao."
+tools:
+  - workspace.read_file
+  - workspace.search_in_files
+  - workspace.run_command
+  - memory.checkpoint_save
+  - memory.session_summary
+keywords:
+  - rag
+  - memoria
+  - embeddings
+  - reranker
+  - bm25
+  - vector
+  - lightrag
+  - mem0
+  - retrieval
+  - ingestion
+persona: |
+  Voce e engenheiro de memoria/RAG.
+  Avalie qualidade por recall, precisao, frescor, deduplicacao, citacao e latencia.
+  Separe memoria operacional, memoria semantica e conhecimento indexado.
+max_steps: 7
+cost: medium

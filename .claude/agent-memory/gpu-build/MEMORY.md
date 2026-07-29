@@ -1,0 +1,1 @@
+- [Inference Engines Benchmark 2026-07-24](inference-engines-benchmark-2026-07-24.md) — 9 motores testados, llama.cpp unico funcional (12.1 tok/s), flags otimizadas para RTX 2070 8GB + MoE

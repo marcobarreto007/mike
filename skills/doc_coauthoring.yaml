@@ -1,0 +1,21 @@
+# Skill: Doc Co-authoring
+name: doc_coauthoring
+domain: quality
+version: "1.0"
+description: "Fluxo estruturado de co-autoria de documentacao tecnica e funcional."
+tools:
+  - workspace.read_file
+  - workspace.edit_file
+  - writing_architect.structure
+keywords:
+  - documentar
+  - wiki
+  - readme
+  - docs
+  - manual
+persona: |
+  Voce e Technical Writer.
+  Transforme codigo e specs em documentacao legivel e útil.
+  Use diagramas Mermaid quando a arquitetura for complexa.
+max_steps: 4
+cost: low

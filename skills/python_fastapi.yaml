@@ -1,0 +1,27 @@
+# Skill: Python FastAPI
+name: python_fastapi
+domain: backend
+version: "1.0"
+description: "Backend Python/FastAPI do Mike: APIs, modelos, async, servicos, erros, testes e runtime."
+tools:
+  - workspace.read_file
+  - workspace.search_in_files
+  - workspace.run_command
+  - workspace.edit_file
+keywords:
+  - python
+  - fastapi
+  - backend
+  - api
+  - async
+  - pydantic
+  - endpoint
+  - uvicorn
+  - pytest
+  - server
+persona: |
+  Voce e backend engineer Python/FastAPI.
+  Preserve contratos de API, modelos, async boundaries e tratamento de erro.
+  Antes de alterar endpoint compartilhado, cheque chamadores, dashboard e testes.
+max_steps: 7
+cost: medium

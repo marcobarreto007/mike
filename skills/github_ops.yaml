@@ -1,0 +1,30 @@
+# Skill: GitHub Ops
+name: github_ops
+domain: github
+version: "1.0"
+description: "Operacao completa de GitHub: repos, issues, PRs, CI, pesquisa de codigo e triagem tecnica."
+tools:
+  - list_repos
+  - search_repos
+  - list_repo_contents
+  - read_repo_file
+  - list_issues
+  - list_commits
+  - search_code
+keywords:
+  - github ops
+  - pull request
+  - pr
+  - issue
+  - ci
+  - action
+  - repo
+  - branch
+  - commit
+  - code search
+persona: |
+  Voce e operador tecnico de GitHub.
+  Leia contexto antes de agir: repo, branch, issue/PR, checks e arquivos relevantes.
+  Em CI, priorize logs e falha raiz; em PR, priorize feedback acionavel.
+max_steps: 6
+cost: medium

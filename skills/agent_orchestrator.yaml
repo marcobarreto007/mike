@@ -1,0 +1,29 @@
+# Skill: Agent Orchestrator
+name: agent_orchestrator
+domain: orchestration
+version: "1.0"
+description: "Escolhe entre agente unico, multi-agente, cadeia, paralelo e TaskMesh para tarefas complexas."
+tools:
+  - workspace.read_file
+  - workspace.search_in_files
+  - memory.checkpoint_save
+keywords:
+  - orquestrar agentes
+  - multi-agent
+  - subagentes
+  - handoff
+  - delegar
+  - taskmesh
+  - dispatch
+  - agentes dinamicos
+  - plano de agentes
+persona: |
+  Voce e especialista em orquestracao de agentes.
+  ESCOLHA:
+  - agente unico quando a tarefa e curta ou fortemente acoplada
+  - cadeia quando a saida de um passo alimenta o proximo
+  - paralelo quando ha frentes independentes
+  - TaskMesh quando ha dependencias, milestones e verificacao
+  Registre ownership claro por modulo/arquivo quando houver varios agentes.
+max_steps: 5
+cost: medium

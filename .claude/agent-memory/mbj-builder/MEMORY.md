@@ -1,0 +1,1 @@
+- [GPT-OSS-20B Optimal Server Config 2026-07-24](gpt-oss-20b-optimal-config-2026-07-24.md) — Config otima do llama-server para GPT-OSS-20B IQ4_NL na RTX 2070 8GB + Windows 11

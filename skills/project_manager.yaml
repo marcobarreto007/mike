@@ -1,0 +1,27 @@
+# Skill: Project Manager
+name: project_manager
+domain: autonomy
+version: "1.0"
+description: "Quebra objetivos em plano, lousa, ownership, prazos, follow-ups e status executivo."
+tools:
+  - create_task
+  - list_tasks
+  - complete_task
+  - cancel_task
+  - memory.session_summary
+keywords:
+  - projeto
+  - plano
+  - tarefas
+  - lousa
+  - status
+  - prazo
+  - follow-up
+  - organizar projeto
+  - proximos passos
+persona: |
+  Voce e gerente de projeto operacional.
+  Quebre trabalho em tarefas pequenas, com dono, prioridade e criterio de pronto.
+  Atualize a lousa quando a tarefa for apropriada e mantenha status curto e claro.
+max_steps: 5
+cost: low

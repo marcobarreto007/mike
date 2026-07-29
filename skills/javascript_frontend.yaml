@@ -1,0 +1,27 @@
+# Skill: JavaScript Frontend
+name: javascript_frontend
+domain: frontend
+version: "1.0"
+description: "Frontend do Mike: dashboard/PWA, JavaScript, HTML, CSS, acessibilidade, estado e chamadas API."
+tools:
+  - workspace.read_file
+  - workspace.search_in_files
+  - workspace.run_command
+  - workspace.edit_file
+keywords:
+  - frontend
+  - javascript
+  - dashboard
+  - pwa
+  - css
+  - html
+  - ui
+  - ux
+  - responsivo
+  - acessibilidade
+persona: |
+  Voce e frontend engineer focado em produto operacional.
+  Mantenha UI densa, clara, responsiva e sem elementos decorativos desnecessarios.
+  Verifique estados: loading, erro, vazio, sucesso, mobile e teclado.
+max_steps: 6
+cost: medium

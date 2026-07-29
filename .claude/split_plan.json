@@ -1,0 +1,162 @@
+{
+  "server_modules": [
+    {
+      "name": "mike_chat_core",
+      "path": "core/server/mike_chat_core.py",
+      "functions": [
+        "_last_user_message", "_contains_any_keyword", "_looks_like_simple_math_query",
+        "_prefers_direct_model_answer", "_search_routes_for_query", "_render_search_route_guidance",
+        "_should_search_web", "_format_web_results", "_search_web", "_build_messages",
+        "_generate_response_with_tools", "_build_task_mesh", "_prepare_chat_response",
+        "_prepare_chat_messages", "_iter_text_stream_chunks", "_stream_prefix_state",
+        "_stream_text_chat_response", "_stream", "_stream_chat_response", "chat_completions",
+        "chat_sessions", "chat_history"
+      ],
+      "classes": [],
+      "imports_needed": ["mike_config", "mike_auth", "mike_mcp_client", "mike_memory", "mike_web", "mike_task_mesh", "mike_deepseek", "mike_mock_llm", "mike_llama_server_client", "mike_model_router", "mike_circuit_breaker", "mike_fallback_chain", "mike_models", "mike_sse", "mike_stats", "mike_request_helpers", "mike_payload_helpers", "mike_vision", "mike_llm_boot", "mike_chat_builder", "mike_chat_completion", "mike_tools_local", "mike_family_profiles", "mike_context", "mike_tot", "mike_agent_sdk", "mike_skills", "shared_state", "mike_output_guard", "mike_verify_chain"],
+      "depended_by": ["routers/chat.py", "routers/tools.py", "mike_server.py"],
+      "estimated_lines": 1450
+    },
+    {
+      "name": "mike_lifecycle",
+      "path": "core/server/mike_lifecycle.py",
+      "functions": ["_startup", "_auto_cleanup_clutter", "lifespan", "_proactive_monitor_loop", "_drive_index_loop"],
+      "classes": [],
+      "imports_needed": ["mike_config", "mike_auth", "mike_mcp_client", "mike_memory", "mike_web", "mike_llm_boot", "mike_model_router", "mike_circuit_breaker", "mike_fallback_chain", "mike_models", "mike_stats", "mike_llama_server_client", "mike_mock_llm", "mike_deepseek", "mike_vision", "mike_event_bus", "mike_twilio_webhooks", "mike_heartbeat", "mike_drive_indexer", "mike_context", "shared_state"],
+      "depended_by": ["mike_server.py"],
+      "estimated_lines": 600
+    },
+    {
+      "name": "mike_lazy_factories",
+      "path": "core/server/mike_lazy_factories.py",
+      "functions": [
+        "_get_output_guard", "_get_virtual_context", "_get_skill_registry",
+        "_get_skill_library", "_get_curriculum", "_get_tool_analyzer",
+        "_get_governance", "_get_consciousness", "_get_verifier",
+        "_get_missions", "_get_autonomy", "_get_monitor", "_get_learner",
+        "_make_sdk_generate_fn", "_make_sdk_execute_fn", "_make_agent_registry",
+        "_get_cached_sdk_generate", "_get_cached_agent_registry"
+      ],
+      "classes": [],
+      "imports_needed": ["mike_config", "mike_auth", "mike_mcp_client", "mike_memory", "mike_skills", "mike_skill_library", "mike_curriculum", "mike_tool_analyzer", "mike_governance", "mike_project_memory", "mike_verifier", "mike_mission_engine", "mike_autonomy", "mike_monitor", "mike_learner", "mike_agent_sdk", "mike_output_guard", "mike_context_virtual", "mike_twilio_webhooks", "mike_auto_reply", "mike_telegram", "mike_reflection", "mike_event_bus", "shared_state"],
+      "depended_by": ["routers/autonomy.py", "mike_lifecycle.py", "mike_chat_core.py", "mike_server.py"],
+      "estimated_lines": 380
+    },
+    {
+      "name": "mike_routes_knowledge",
+      "path": "core/server/mike_routes_knowledge.py",
+      "functions": [
+        "tunnel_url", "events_stats", "client_bootstrap", "roadmap",
+        "list_backups", "search_web", "reindex_knowledge",
+        "upsert_knowledge_file", "drive_index_now"
+      ],
+      "classes": [],
+      "imports_needed": ["fastapi", "mike_config", "mike_auth", "mike_memory", "mike_web", "mike_drive_indexer", "shared_state"],
+      "depended_by": ["mike_server.py"],
+      "estimated_lines": 130
+    },
+    {
+      "name": "mike_routes_graph",
+      "path": "core/server/mike_routes_graph.py",
+      "functions": ["graph_status", "graph_search", "graph_entity", "graph_migrate"],
+      "classes": [],
+      "imports_needed": ["fastapi", "mike_config", "mike_auth", "shared_state"],
+      "depended_by": ["mike_server.py"],
+      "estimated_lines": 45
+    },
+    {
+      "name": "mike_routes_tts",
+      "path": "core/server/mike_routes_tts.py",
+      "functions": ["tts_synthesize"],
+      "classes": ["TtsRequest"],
+      "imports_needed": ["fastapi", "pydantic", "edge_tts", "os"],
+      "depended_by": ["mike_server.py"],
+      "estimated_lines": 50
+    },
+    {
+      "name": "mike_routes_install",
+      "path": "core/server/mike_routes_install.py",
+      "functions": ["install_page", "install_shortcut", "_get_tunnel_base"],
+      "classes": [],
+      "imports_needed": ["fastapi", "mike_config", "mike_auth", "mike_family_profiles"],
+      "depended_by": ["mike_server.py"],
+      "estimated_lines": 170
+    },
+    {
+      "name": "mike_server_middleware",
+      "path": "core/server/mike_server_middleware.py",
+      "functions": ["mike_auth_middleware", "mike_security_headers_middleware"],
+      "classes": [],
+      "imports_needed": ["fastapi", "mike_config", "mike_auth", "shared_state"],
+      "depended_by": ["mike_server.py"],
+      "estimated_lines": 75
+    },
+    {
+      "name": "mike_notifications",
+      "path": "core/server/mike_notifications.py",
+      "functions": ["_broadcast_notification"],
+      "classes": [],
+      "imports_needed": ["asyncio", "threading", "json"],
+      "depended_by": ["routers/autonomy.py", "mike_lifecycle.py", "mike_lazy_factories.py"],
+      "estimated_lines": 25
+    },
+    {
+      "name": "mike_dashboard_handlers",
+      "path": "core/server/mike_dashboard_handlers.py",
+      "functions": ["_root_page", "_family_page", "_dashboard_page", "_install_page", "_download_url_handler", "_download_apk_handler", "_sw_js_handler", "_chat_completions_handler", "_get_chat_sessions", "_get_chat_history"],
+      "classes": [],
+      "imports_needed": ["fastapi", "pathlib", "mike_config", "mike_auth", "mike_models"],
+      "depended_by": ["routers/chat.py", "routers/dashboard.py"],
+      "estimated_lines": 160
+    }
+  ],
+  "memory_modules": [
+    {
+      "name": "mike_memory_utils",
+      "path": "core/memory/mike_memory_utils.py",
+      "classes": [],
+      "estimated_lines": 270
+    },
+    {
+      "name": "mike_memory_store",
+      "path": "core/memory/mike_memory_store.py",
+      "classes": ["LocalMikeStore"],
+      "estimated_lines": 1450
+    },
+    {
+      "name": "mike_memory_service",
+      "path": "core/memory/mike_memory_service.py",
+      "classes": ["MikeMemoryService"],
+      "estimated_lines": 580
+    }
+  ],
+  "migration_order": [
+    "1. core/server/mike_server_middleware.py (no deps on other new modules)",
+    "2. core/server/mike_notifications.py (pure asyncio, no deps on other new modules)",
+    "3. core/server/mike_routes_tts.py (depends only on fastapi/edge_tts)",
+    "4. core/server/mike_routes_graph.py (depends only on fastapi/shared_state)",
+    "5. core/server/mike_routes_install.py (depends on fastapi/mike_auth/mike_family_profiles)",
+    "6. core/server/mike_routes_knowledge.py (depends on fastapi/shared_state/mike_memory)",
+    "7. core/server/mike_dashboard_handlers.py (depends on fastapi/mike_config)",
+    "8. core/memory/mike_memory_utils.py (extracted first, no deps on other memory modules)",
+    "9. core/memory/mike_memory_store.py (depends on mike_memory_utils)",
+    "10. core/memory/mike_memory_service.py (depends on mike_memory_store, mike_memory_utils)",
+    "11. core/server/mike_singletons.py (REVISED: move roadmap/backup helpers + wrapper fns here)",
+    "12. core/server/mike_lazy_factories.py (depends on most subsystem imports)",
+    "13. core/server/mike_chat_core.py (depends on mike_singletons, mike_lazy_factories, most modules)",
+    "14. core/server/mike_lifecycle.py (depends on mike_singletons, mike_chat_core, mike_lazy_factories)",
+    "15. mike_server.py (reduced to ~300 lines: app creation, router/middleware registration, static mount, main)"
+  ],
+  "risks": [
+    "Circular dependency: mike_singletons imports from mike_config and produces wrappers that mike_chat_core needs; mike_chat_core is imported by routers which are registered in mike_server.py. Use shared_state bridge pattern already in place.",
+    "mike_chat_core.py is the riskiest extraction — it contains the streaming loop, tool orchestration, and TaskMesh integration. Must verify streaming behavior (SSE keepalive, tool-call detection, reasoning-leak suppression) after extraction.",
+    "mike_lifecycle.py _startup() initializes llm/module-router/fallback-chain global variables that other modules read via shared_state. Ensure shared_state synchronization is preserved.",
+    "The 23 keyword sets at the top of the chat helpers block (WEB_SEARCH_KEYWORDS, EMAIL_ROUTE_KEYWORDS, etc.) are module-scoped constants. Moving them to mike_chat_core.py is safe since they are immutable.",
+    "mike_memory_store.py is the bulk of mike_memory.py (LocalMikeStore ~1450 lines). Splitting vectors/mesh from it would mean extracting _methods_ from a class that shares a SQLite connection — risky. The plan keeps LocalMikeStore intact in one module and only pulls utility functions out.",
+    "Existing routers (chat.py, tools.py, autonomy.py) use from mike_server import ... lazy imports. After split, these must be updated to import from the new modules. All 35+ lazy-import sites need updating.",
+    "The _conversation helpers (_save_conversation, _maybe_direct_answer_for_tool_result, email scoring) are tightly coupled to memory_service and monitor/learner singleton access. These stay in mike_chat_core.py since they are chat-loop-adjacent, not standalone.",
+    "Soul loading (_get_soul_block, _load_system_prompt, SOUL_PROMPT, SYSTEM_PROMPT) could move to mike_context.py to reduce mike_server.py further. Currently at top of mike_server.py, they are imported by mike_chat_core.py. Suggested migration: mike_context gains get_soul_block/load_system_prompt, mike_server keeps thin wrappers."
+  ],
+  "summary": "SPLIT PLAN: mike_server.py (4286 lines) -> 10 new modules + ~300 line shim. mike_memory.py (2230 lines) -> 3 new modules.\n\nSERVER SPLIT:\n1. mike_chat_core.py (~1450 lines): The core — chat loop, streaming, tool orchestration, keyword matching, search routes, TaskMesh, TreeOfThoughts. Moves lines 934-2461 from mike_server.py.\n2. mike_lifecycle.py (~600 lines): _startup(), lifespan(), _proactive_monitor_loop, _drive_index_loop, _auto_cleanup_clutter. Moves lines 2463-3087.\n3. mike_lazy_factories.py (~380 lines): All _get_*() and _make_*() lazy-init factories (output guard, virtual context, skills, curriculum, governance, consciousness, verifier, missions, autonomy, monitor, learner, agent registry, SDK generate/execute). Moves lines 3446-3815.\n4. mike_routes_knowledge.py (~130 lines): /v1/knowledge/reindex, /v1/knowledge/upsert, /v1/drive/index, /v1/web/search, /tunnel-url, /v1/events/stats, /v1/client/bootstrap, /v1/roadmap, /v1/backups. Moves lines 3209-3378.\n5. mike_routes_graph.py (~45 lines): /v1/graph/* endpoints. Moves lines 3384-3419.\n6. mike_routes_tts.py (~50 lines): /v1/tts endpoint + TtsRequest model. Moves lines 3825-3868.\n7. mike_routes_install.py (~170 lines): /install/{profile_key} + shortcut + HTML template. Moves lines 4120-4280.\n8. mike_server_middleware.py (~75 lines): mike_auth_middleware, mike_security_headers_middleware. Moves lines 3111-3173.\n9. mike_notifications.py (~25 lines): _broadcast_notification + queue management. Moves lines 3426-3440.\n10. mike_dashboard_handlers.py (~160 lines): Dashboard HTML handlers + chat wrapper functions for routers. Moves lines 3999-4117.\n11. mike_server.py REMAINING (~300 lines): Soul loading, logging setup, service singletons init, wrapper functions (bridge payload_helpers), app creation, rate limiting, CORS, router registration, static mount, main.\n\nMEMORY SPLIT:\n1. mike_memory_utils.py (~270 lines): _read_text_file, _sanitize_query, keyword sets, _prefers_direct_answer, _chunk_section, chunk_text, _contains_any_phrase, _looks_like_simple_math_query.\n2. mike_memory_store.py (~1450 lines): Full LocalMikeStore class — SQLite tables, conversations CRUD, FTS, conversation embeddings, knowledge indexing/embeddings, vector search (conversation + knowledge), memory mesh, session checkpoints, session summaries.\n3. mike_memory_service.py (~580 lines): MikeMemoryService facade — delegates to LocalMikeStore, Mem0, LightRAG, Reranker, Graph; RRF fusion, build_context, web cache management, Mem0 bootstrap, should_promote_to_mem0."
+
+}

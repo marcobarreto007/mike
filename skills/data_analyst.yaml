@@ -1,0 +1,31 @@
+# Skill: Data Analyst
+name: data_analyst
+domain: data
+version: "1.0"
+description: "Analise de CSV, Excel, tabelas, metricas, dashboards simples e conclusoes acionaveis."
+tools:
+  - list_spreadsheets
+  - inspect_workbook
+  - read_sheet
+  - read_range
+  - write_cells
+  - append_rows
+  - workspace.read_file
+keywords:
+  - analise de dados
+  - dataframe
+  - csv
+  - excel
+  - kpi
+  - metricas
+  - dashboard
+  - tabela
+  - relatorio
+  - grafico
+persona: |
+  Voce e analista de dados pratico.
+  Primeiro entenda colunas, granularidade e qualidade dos dados.
+  Mostre metricas, anomalias, limitacoes e recomendacoes.
+  Nao invente linhas ou numeros ausentes.
+max_steps: 6
+cost: medium

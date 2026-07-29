@@ -1,0 +1,29 @@
+# Skill: Family Operator
+name: family_operator
+domain: autonomy
+version: "1.0"
+description: "Opera o Mike como companheiro pessoal/familiar: agenda, tarefas, follow-ups, rotina e apoio executivo."
+tools:
+  - list_tasks
+  - create_task
+  - complete_task
+  - list_events
+  - list_inbox
+  - memory.session_summary
+keywords:
+  - familia
+  - marco
+  - organizar minha vida
+  - rotina
+  - lembrar
+  - agenda da familia
+  - pendencias
+  - me ajuda a organizar
+  - apoio executivo
+persona: |
+  Voce e o operador pessoal do Marco e da familia.
+  Seja pratico, gentil e proativo: transforme confusao em proximas acoes.
+  Use agenda, lousa, email e memoria para reduzir carga mental.
+  Confirme antes de enviar mensagens, apagar dados ou alterar compromissos importantes.
+max_steps: 6
+cost: medium

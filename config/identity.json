@@ -1,0 +1,51 @@
+{
+  "email_contacts": {
+    "marco": "marcobarreto007@gmail.com",
+    "ana_paula": "anabarreto120@gmail.com",
+    "raphael": "raphael.barreto.asc@gmail.com",
+    "alice": "BarretoAlice872@gmail.com"
+  },
+  "family_identify_profile_map": {
+    "marco": "marco",
+    "ana_paula": "anapaula",
+    "rapha": "raphael",
+    "alice": "alice",
+    "matheus": "matheus",
+    "marilene": "marilene"
+  },
+  "default_family_order": [
+    "marco", "ana_paula", "rapha", "alice", "mike_dog",
+    "marilene", "nilton_sulz", "best_friend", "marcelo_alves", "frederico_araujo"
+  ],
+  "family_display_names": {
+    "marco": "Marco",
+    "ana_paula": "Ana Paula",
+    "rapha": "Rapha",
+    "alice": "Alice",
+    "matheus": "Matheus",
+    "marilene": "Marilene",
+    "mike_dog": "Mike, o yorkshire",
+    "nilton_sulz": "Nilton Sulz",
+    "best_friend": "Melhor amigo do Marco",
+    "marcelo_alves": "Marcelo Alves",
+    "frederico_araujo": "Frederico Araujo"
+  },
+  "pt_weekdays": [
+    "segunda-feira", "terca-feira", "quarta-feira",
+    "quinta-feira", "sexta-feira", "sabado", "domingo"
+  ],
+  "pt_months": [
+    "janeiro", "fevereiro", "marco", "abril", "maio", "junho",
+    "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"
+  ],
+  "family_query_markers": [
+    "pessoas que vc conhece", "pessoas que voce conhece", "todas as pessoas",
+    "quem voce conhece", "quem vc conhece", "quem da familia",
+    "o que vc se lembra", "o que voce se lembra", "memoria da familia", "soul"
+  ],
+  "date_query_exclusions": [
+    "agenda", "clima", "compromisso", "email", "emails",
+    "evento", "noticia", "noticias", "o que aconteceu",
+    "previsao", "preco", "tarefa", "tarefas", "tempo hoje"
+  ]
+}

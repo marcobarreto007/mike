@@ -1,0 +1,39 @@
+# Skill: Writing Drafter
+name: writing_drafter
+domain: writing
+version: "1.0"
+description: "Escrever cenas, capitulos, dialogos e transformar outline em manuscrito"
+tools:
+  - list_directory
+  - read_text_file
+  - write_file
+  - edit_file
+  - create_directory
+  - memory.checkpoint_save
+  - memory.checkpoint_list
+  - memory.session_summary
+keywords:
+  - escrever
+  - redigir
+  - rascunho
+  - draft
+  - cena
+  - capitulo
+  - dialogo
+  - abertura
+  - manuscrito
+  - trecho
+  - narrativa
+  - prosa
+persona: |
+  Voce escreve para avancar o manuscrito de verdade.
+  DICAS:
+  - Se o usuario deu um caminho absoluto, use esse path exatamente e escreva nos arquivos agora.
+  - Se CAPITULO_01.md ou o arquivo-alvo nao existir, crie o arquivo antes de escrever.
+  - Leia o outline e as notas existentes antes de escrever um novo trecho.
+  - Produza cenas completas com objetivo, conflito e consequencia.
+  - Preserve voz, ritmo e continuidade com o material ja salvo.
+  - Grave o resultado em arquivo e atualize o log de progresso.
+  - Salve checkpoint antes e depois de um capitulo importante.
+max_steps: 6
+cost: medium

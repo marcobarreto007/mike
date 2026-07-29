@@ -1,0 +1,149 @@
+[
+  {
+    "name": "memory-persistent",
+    "command": "npx",
+    "args": ["-y", "@modelcontextprotocol/server-memory@2026.7.4"],
+    "capabilities": ["persistent_memory", "cross_session_recall"],
+    "access": "any",
+    "description": "Memória persistente entre sessões — complementa mike_memory.py para contexto cross-session"
+  },
+  {
+    "name": "sequential-thinking",
+    "command": "npx",
+    "args": ["-y", "@modelcontextprotocol/server-sequential-thinking@2026.7.4"],
+    "capabilities": ["reasoning", "step_by_step", "thought_chains"],
+    "access": "any",
+    "description": "Raciocínio passo a passo forçado — útil para debug complexo e análise de bugs"
+  },
+  {
+    "name": "gmail",
+    "command": "${MIKE_HOME}\\.venv\\Scripts\\python.exe",
+    "args": ["core/mcp/mike_email_mcp.py"],
+    "tool_prefix": "gmail",
+    "capabilities": ["email", "gmail", "google_workspace"],
+    "access": "owner",
+    "description": "Gmail OAuth — envio, inbox, leitura e busca. Requer token Google Workspace"
+  },
+  {
+    "name": "calendar",
+    "command": "${MIKE_HOME}\\.venv\\Scripts\\python.exe",
+    "args": ["core/mcp/mike_calendar_mcp.py"],
+    "tool_prefix": "calendar",
+    "capabilities": ["calendar", "agenda", "google_workspace"],
+    "access": "owner",
+    "description": "Google Calendar OAuth — calendarios, eventos e disponibilidade"
+  },
+  {
+    "name": "drive",
+    "command": "${MIKE_HOME}\\.venv\\Scripts\\python.exe",
+    "args": ["core/mcp/mike_drive_mcp.py"],
+    "tool_prefix": "drive",
+    "capabilities": ["drive", "documents", "google_workspace"],
+    "access": "owner",
+    "description": "Google Drive OAuth somente leitura, busca e extracao de documentos"
+  },
+  {
+    "name": "appointments",
+    "command": "${MIKE_HOME}\\.venv\\Scripts\\python.exe",
+    "args": ["core/mcp/mike_appointments_mcp.py"],
+    "tool_prefix": "appointments",
+    "capabilities": ["appointments", "agenda", "family_operations"],
+    "access": "owner",
+    "description": "Agendamentos persistentes locais, confirmacao, reagendamento e presenca"
+  },
+  {
+    "name": "excel",
+    "command": "${MIKE_HOME}\\.venv\\Scripts\\python.exe",
+    "args": ["core/mcp/mike_excel_mcp.py", "${MIKE_HOME}"],
+    "tool_prefix": "excel",
+    "capabilities": ["spreadsheet", "excel", "workbook"],
+    "access": "owner",
+    "description": "Excel local seguro — leitura, inspecao, criacao e edicao de workbooks"
+  },
+  {
+    "name": "huggingface",
+    "command": "${MIKE_HOME}\\.venv\\Scripts\\python.exe",
+    "args": ["core/mcp/mike_huggingface_mcp.py"],
+    "tool_prefix": "hf",
+    "capabilities": ["huggingface", "models", "datasets", "model_cards"],
+    "access": "any",
+    "description": "Hugging Face Hub publico; token opcional para repos privados"
+  },
+  {
+    "name": "remote-agent",
+    "command": "${MIKE_HOME}\\.venv\\Scripts\\python.exe",
+    "args": ["core/mcp/mike_remote_agent_mcp.py"],
+    "tool_prefix": "remote",
+    "capabilities": ["remote_windows", "powershell", "operations"],
+    "access": "owner",
+    "description": "Cliente do agente Windows remoto; requer URL, chave e agente online"
+  },
+  {
+    "name": "filesystem",
+    "command": "npx",
+    "args": ["-y", "@modelcontextprotocol/server-filesystem@2026.7.10", "C:\\Users\\Admin\\Desktop\\mike", "C:\\Users\\Admin\\Desktop\\mike\\runtime", "C:\\Users\\Admin\\Desktop\\mike\\config"],
+    "capabilities": ["file_read", "file_write", "directory_listing"],
+    "access": "owner",
+    "description": "Acesso seguro a arquivos do projeto via MCP — complementa o acesso direto do Claude"
+  },
+  {
+    "name": "github",
+    "command": "npx",
+    "args": ["-y", "@modelcontextprotocol/server-github@2025.4.8"],
+    "env": {
+      "GITHUB_PERSONAL_ACCESS_TOKEN": ""
+    },
+    "capabilities": ["github_api", "repo_management", "pr_issues", "code_search"],
+    "access": "owner",
+    "description": "API completa do GitHub — PRs, issues, code search, CI/CD. Configure GITHUB_PERSONAL_ACCESS_TOKEN"
+  },
+  {
+    "name": "sqlite",
+    "command": "npx",
+    "args": ["-y", "mcp-server-sqlite@0.0.2", "--db", "C:\\Users\\Admin\\Desktop\\mike\\runtime\\memory\\mike_local.db"],
+    "capabilities": ["sqlite", "sql_query", "database", "local_db"],
+    "access": "owner",
+    "description": "Banco de dados SQLite local — Mike pode criar tabelas, salvar dados estruturados, fazer queries SQL"
+  },
+  {
+    "name": "fetch",
+    "command": "npx",
+    "args": ["-y", "mcp-fetch-server@1.1.2"],
+    "enabled": false,
+    "capabilities": ["http_fetch", "web_scrape", "api_call", "url_content"],
+    "access": "owner",
+    "description": "Busca HTTP/HTTPS — desativado por padrão; habilite apos validar pacote mcp-fetch-server"
+  },
+  {
+    "name": "puppeteer",
+    "command": "npx",
+    "args": ["-y", "@modelcontextprotocol/server-puppeteer@2025.5.12"],
+    "env": {
+      "PUPPETEER_EXECUTABLE_PATH": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+      "PUPPETEER_PRODUCT": "chrome"
+    },
+    "capabilities": ["browser_control", "screenshot", "form_fill", "web_automation"],
+    "access": "ops",
+    "description": "Controle de navegador headless — screenshots, preencher formularios, automatizar web"
+  },
+  {
+    "name": "crawlconsole",
+    "url": "https://crawlconsole.com/mcp",
+    "transport": "streamable-http",
+    "capabilities": ["web_crawl", "scraper", "browser_automation"],
+    "access": "owner",
+    "description": "Web crawling and scraping via CrawlConsole — extrai dados de sites, crawls automatizados"
+  },
+  {
+    "name": "brave-search",
+    "command": "npx",
+    "args": ["-y", "@modelcontextprotocol/server-brave-search@0.6.2"],
+    "enabled": false,
+    "env": {
+      "BRAVE_API_KEY": ""
+    },
+    "capabilities": ["web_search", "brave_search", "real_time_search"],
+    "access": "any",
+    "description": "Busca web via Brave Search API — desativado ate configurar BRAVE_API_KEY"
+  }
+]

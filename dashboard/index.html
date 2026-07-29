@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Mike Operator Console</title>
+<meta name="description" content="Mike, o ajudante da familia Barreto, pronto para abrir como app na area de trabalho.">
+<meta name="theme-color" content="#0a0806">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Mike">
+<link rel="icon" type="image/png" sizes="64x64" href="/static/icons/mike-icon-64.png">
+<link rel="icon" href="/static/icons/favicon.ico">
+<link rel="apple-touch-icon" href="/static/icons/apple-touch-icon.png">
+<link rel="manifest" href="/static/manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Caveat:wght@400;600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/style.css?v=20260424a">
+</head>
+<body>
+
+<!-- ===== SERVER CONNECT (Capacitor / Mobile mode) ===== -->
+<div id="connect-screen" class="screen" hidden>
+  <div class="login-card" style="max-width:380px;">
+    <div class="login-brand">
+      <div style="font-size:64px;margin-bottom:8px;">🐕</div>
+      <h1 style="font-size:1.5rem;margin:0 0 4px;">Mike</h1>
+      <p style="font-size:.85rem;color:var(--text-3);margin:0 0 16px;">Conectar ao servidor</p>
+    </div>
+    <form id="connect-form" autocomplete="off" style="display:flex;flex-direction:column;gap:12px;">
+      <label style="font-size:.85rem;font-weight:500;color:var(--text-2);">Endereço do servidor</label>
+      <input id="connect-url" type="url" placeholder="https://mike.supereziorealtime.com"
+             style="padding:12px 14px;border-radius:var(--r);border:1px solid var(--border);background:var(--bg-input);color:var(--text);font-size:1rem;"
+             required>
+      <p id="connect-error" style="color:var(--danger);font-size:.8rem;min-height:1.2em;margin:0;"></p>
+      <button type="submit" class="btn-primary full">Conectar</button>
+      <p style="font-size:.75rem;color:var(--dim);text-align:center;margin:8px 0 0;">O endereço fica salvo no app.</p>
+    </form>
+  </div>
+</div>
+
+<!-- ===== LOGIN ===== -->
+<div id="login-screen" class="screen" hidden>
+  <div class="login-card">
+    <div class="login-brand">
+      <div id="login-yorkie" style="width:120px;height:120px;border-radius:50%;overflow:hidden;border:2px solid rgba(232,160,76,0.25);box-shadow:0 8px 32px rgba(232,160,76,0.15);">
+        <img src="/static/icons/mike-icon-512.png" alt="Mike" style="width:100%;height:100%;object-fit:cover;object-position:center;">
+      </div>
+      <h1>MIKE</h1>
+      <p id="login-subtitle" class="sub">Yorkshire Operator Console</p>
+    </div>
+    <form id="login-form" autocomplete="on">
+      <label id="login-profile-label"><span id="login-profile-label-text">Perfil</span>
+        <select id="login-profile" name="profile" autocomplete="username">
+          <option value="" disabled selected>Selecione...</option>
+          <option value="marco">Marco</option>
+          <option value="anapaula">Ana Paula</option>
+          <option value="raphael">Raphael</option>
+          <option value="alice">Alice</option>
+          <option value="matheus">Matheus</option>
+          <option value="visitante">Visitante</option>
+        </select>
+      </label>
+      <label id="login-password-label"><span>Senha</span>
+        <input type="password" id="login-password" name="current-password"
+               placeholder="Senha do perfil" autocomplete="current-password">
+      </label>
+      <button type="submit" id="login-btn" class="btn-primary full">Entrar</button>
+      <p id="login-error" class="err"></p>
+    </form>
+  </div>
+</div>
+
+<!-- ===== APP ===== -->
+<div id="app-screen" class="screen" hidden>
+  <!-- Mobile top bar -->
+  <div class="sb-brand-row" id="mobile-topbar" style="display:none;">
+    <button id="menu-btn" aria-label="Menu">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+    <span class="sb-title">MIKE</span>
+  </div>
+  <!-- Sidebar overlay (mobile) -->
+  <div id="sidebar-overlay"></div>
+  <aside class="sidebar" id="sidebar">
+    <div class="sb-top">
+      <div class="sb-brand">
+        <div class="mike-av sm">M</div>
+        <span class="sb-title">MIKE</span>
+      </div>
+      <button id="new-chat-btn" class="btn-outline full">+ Nova conversa</button>
+    </div>
+    <nav class="sb-nav">
+      <button class="nav-btn active" data-page="chat">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none"
+             stroke="currentColor" stroke-width="2">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+        </svg>Chat
+      </button>
+
+      <button class="nav-btn" data-page="status">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none"
+             stroke="currentColor" stroke-width="2">
+          <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+          <line x1="8" y1="21" x2="16" y2="21"/>
+          <line x1="12" y1="17" x2="12" y2="21"/>
+        </svg>Status
+      </button>
+      <button class="nav-btn" data-page="lousa">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none"
+             stroke="currentColor" stroke-width="2">
+          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+          <line x1="8" y1="9" x2="16" y2="9"/>
+          <line x1="8" y1="13" x2="13" y2="13"/>
+          <line x1="8" y1="17" x2="11" y2="17"/>
+        </svg>Lousa
+        <span id="task-badge" class="nav-badge" style="display:none;">0</span>
+      </button>
+    </nav>
+    <div class="sb-sessions">
+      <div class="sb-label">Recentes</div>
+      <div id="session-list"></div>
+    </div>
+    <div class="sb-foot">
+      <div class="sb-user">
+        <span id="user-name">-</span>
+        <span class="dim" id="user-session">-</span>
+      </div>
+      <button id="chpw-btn" class="btn-outline btn-xs" title="Trocar senha">&#128274;</button>
+      <button id="logout-btn" class="btn-outline btn-xs">Sair</button>
+    </div>
+  </aside>
+
+  <!-- Password change modal -->
+  <div id="pw-modal" class="modal-bg" hidden>
+    <div class="modal-card">
+      <h3>Trocar senha</h3>
+      <form id="pw-form">
+        <label><span>Senha atual</span>
+          <input type="password" id="pw-old" placeholder="Senha atual" autocomplete="current-password">
+        </label>
+        <label><span>Nova senha</span>
+          <input type="password" id="pw-new" placeholder="Nova senha (min 4)" autocomplete="new-password">
+        </label>
+        <label><span>Confirmar</span>
+          <input type="password" id="pw-confirm" placeholder="Confirmar nova senha" autocomplete="new-password">
+        </label>
+        <div class="modal-btns">
+          <button type="button" id="pw-cancel" class="btn-outline">Cancelar</button>
+          <button type="submit" class="btn-primary">Salvar</button>
+        </div>
+        <p id="pw-error" class="err"></p>
+        <p id="pw-ok" class="pw-ok"></p>
+      </form>
+    </div>
+  </div>
+
+  <main class="main">
+    <!-- ===== CHAT PAGE ===== -->
+    <div id="page-chat" class="page active">
+      <div class="chat-scroll" id="chat-scroll">
+        <div id="chat-welcome" class="welcome">
+          <div id="welcome-yorkie" style="width:100px;height:100px;border-radius:50%;overflow:hidden;border:2px solid rgba(232,160,76,0.18);box-shadow:0 6px 24px rgba(232,160,76,0.12);">
+            <img src="/static/icons/mike-icon-512.png" alt="Mike" style="width:100%;height:100%;object-fit:cover;object-position:center;">
+          </div>
+          <h2>Olá, Família! 🐾</h2>
+          <p class="dim" style="font-family:var(--hand);font-size:1.1rem;">Sou o <span style="color:var(--accent);">Mike</span>. Como posso ajudar, <span id="welcome-name">Família</span>?</p>
+          <div class="chips" id="suggestions"></div>
+        </div>
+        <div id="chat-msgs" class="msgs"></div>
+      </div>
+      <div class="composer">
+        <div id="img-preview" class="img-preview" hidden></div>
+        <div id="composer-note" class="composer-note" hidden></div>
+        <div class="cmp-box">
+          <!-- Galeria de fotos (desktop e mobile) -->
+          <button type="button" id="attach-btn" class="cmp-icon" title="Anexar foto da galeria">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none"
+                 stroke="currentColor" stroke-width="2">
+              <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4
+                       4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/>
+            </svg>
+          </button>
+          <input type="file" id="file-input" accept="image/*" multiple hidden>
+          <!-- Câmera direta (especialmente útil no celular) -->
+          <button type="button" id="camera-btn" class="cmp-icon" title="Tirar foto com a câmera">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none"
+                 stroke="currentColor" stroke-width="2">
+              <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+              <circle cx="12" cy="13" r="4"/>
+            </svg>
+          </button>
+          <input type="file" id="camera-input" accept="image/*" capture="environment" hidden>
+          <!-- Microfone (voz para texto via Chrome Speech Recognition) -->
+          <button type="button" id="mic-btn" class="cmp-icon" title="Falar com o Mike">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none"
+                 stroke="currentColor" stroke-width="2">
+              <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+              <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+              <line x1="12" y1="19" x2="12" y2="23"/>
+              <line x1="8" y1="23" x2="16" y2="23"/>
+            </svg>
+          </button>
+          <textarea id="chat-input" rows="1"
+                    placeholder="Mensagem para o Mike..." autocomplete="off"></textarea>
+          <button type="button" id="send-btn" class="cmp-send" title="Enviar">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none"
+                 stroke="currentColor" stroke-width="2">
+              <line x1="22" y1="2" x2="11" y2="13"/>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+            </svg>
+          </button>
+          <button type="button" id="stop-btn" class="cmp-stop" hidden title="Parar">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+              <rect x="6" y="6" width="12" height="12" rx="2"/>
+            </svg>
+          </button>
+          <!-- Ouvir ultima resposta do Mike (TTS) -->
+          <button type="button" id="speak-btn" class="cmp-icon cmp-speak" title="Ouvir resposta do Mike">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none"
+                 stroke="currentColor" stroke-width="2">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+              <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+              <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+            </svg>
+          </button>
+        </div>
+        <div class="cmp-foot">
+          <label class="toggle">
+            <input type="checkbox" id="privacy-toggle">
+            <span id="privacy-label">Salvar conversa no Mike</span>
+          </label>
+          <span class="hint">Enter envia &middot; Shift+Enter nova linha</span>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- ===== LOUSA / TASK BOARD ===== -->
+    <div id="page-lousa" class="page" hidden>
+      <div class="lousa-layout-container">
+        <!-- Coluna Esquerda: Lista de Tarefas -->
+        <div class="lousa-wrap">
+          <div class="lousa-header">
+            <h2>📋 Lousa de Tarefas</h2>
+            <div class="lousa-stats">
+              <span id="lousa-pending" class="lousa-badge pending">0 pendentes</span>
+              <span id="lousa-done" class="lousa-badge done">0 concluídas</span>
+              <span id="lousa-total" class="lousa-badge total">0 total</span>
+            </div>
+          </div>
+  
+          <!-- Filtros -->
+          <div class="lousa-filters">
+            <button class="lousa-filter active" data-filter="all">Todas</button>
+            <button class="lousa-filter" data-filter="pending">Pendentes</button>
+            <button class="lousa-filter" data-filter="done">Concluídas</button>
+          </div>
+  
+          <!-- Task input -->
+          <form id="lousa-form" class="lousa-form">
+            <div class="lousa-input-row">
+              <input type="text" id="lousa-title" placeholder="Nova tarefa..." autocomplete="off" required>
+              <select id="lousa-priority" title="Prioridade">
+                <option value="1">🔴 Urgente</option>
+                <option value="2">🟠 Alta</option>
+                <option value="3" selected>🟡 Normal</option>
+                <option value="4">🟢 Baixa</option>
+                <option value="5">⚪ Quando puder</option>
+              </select>
+              <button type="submit" class="btn-primary lousa-add-btn">+ Adicionar</button>
+            </div>
+            <input type="text" id="lousa-desc" placeholder="Detalhes (opcional)" autocomplete="off" class="lousa-desc-input">
+            <input type="text" id="lousa-checklist-input" placeholder="Itens do checklist separados por vírgula (opcional)" autocomplete="off" class="lousa-desc-input">
+          </form>
+  
+          <!-- Task cards -->
+          <div id="lousa-tasks" class="lousa-tasks"></div>
+  
+          <!-- Ações em lote -->
+          <div class="lousa-bulk-actions">
+            <button type="button" id="lousa-clear-done" class="btn-outline btn-xs">🗑️ Limpar concluídas</button>
+          </div>
+        </div>
+
+        <!-- Coluna Direita: Canvas (Mike Artifacts) -->
+        <div class="canvas-viewport" id="canvas-viewport">
+          <div class="canvas-header">
+            <div class="canvas-title">
+              <span class="canvas-icon">✨</span>
+              <h3 id="canvas-active-title">Canvas do Mike</h3>
+            </div>
+            <div class="canvas-actions">
+              <button id="canvas-close-btn" class="btn-icon" title="Recolher Canvas">✕</button>
+            </div>
+          </div>
+          <div class="canvas-content" id="canvas-content">
+            <div class="canvas-empty-state">
+              <div class="canvas-empty-icon">🎨</div>
+              <p>O Mike ainda não gerou artefatos para esta tarefa.</p>
+              <p class="dim">Quando ele pesquisar ou criar documentos, eles aparecerão aqui!</p>
+            </div>
+          </div>
+          <div class="canvas-footer">
+            <span id="canvas-status">Pronto</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== STATUS PAGE ===== -->
+    <div id="page-status" class="page" hidden>
+      <div class="status-layout">
+        <div class="status-header">
+          <h2>&#128200; Status do Mike</h2>
+          <button id="refresh-status-btn" class="btn-outline btn-xs">&#8635; Atualizar</button>
+          <span id="status-last-update" class="dim" style="font-size:.75rem;"></span>
+        </div>
+
+        <!-- Linha 1: Servidor + LLM -->
+        <div class="status-row">
+          <div class="status-card">
+            <div class="status-card-title">&#9889; Servidor</div>
+            <div class="status-kv" id="sv-status"><span class="dim">Carregando...</span></div>
+          </div>
+          <div class="status-card">
+            <div class="status-card-title">&#129302; LLM / Modelo</div>
+            <div class="status-kv" id="sv-model"><span class="dim">Carregando...</span></div>
+          </div>
+        </div>
+
+        <!-- Linha 2: GPU + Recursos -->
+        <div class="status-row">
+          <div class="status-card">
+            <div class="status-card-title">&#128290; GPU &amp; Hardware</div>
+            <div class="status-kv" id="sv-gpu"><span class="dim">Carregando...</span></div>
+          </div>
+          <div class="status-card">
+            <div class="status-card-title">&#128218; Conhecimento &amp; Mem&oacute;ria</div>
+            <div class="status-kv" id="sv-memory"><span class="dim">Carregando...</span></div>
+          </div>
+        </div>
+
+        <!-- Linha 3: Tools + Autonomia -->
+        <div class="status-row">
+          <div class="status-card">
+            <div class="status-card-title">&#128295; Tools &amp; MCP</div>
+            <div class="status-kv" id="sv-tools"><span class="dim">Carregando...</span></div>
+          </div>
+          <div class="status-card">
+            <div class="status-card-title">&#128336; Autonomia</div>
+            <div class="status-kv" id="sv-autonomy"><span class="dim">Carregando...</span></div>
+          </div>
+        </div>
+
+        <!-- Linha 4: Email rápido -->
+        <div class="status-row">
+          <div class="status-card" style="flex:1;">
+            <div class="status-card-title">&#9993; Enviar Email Rápido</div>
+            <form id="status-email-form" style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
+              <input id="status-email-to" placeholder="Para (email)" autocomplete="off"
+                style="padding:8px;border-radius:6px;border:1px solid var(--border);background:var(--bg-input);color:var(--text);font-size:.9rem;">
+              <input id="status-email-subject" placeholder="Assunto" autocomplete="off"
+                style="padding:8px;border-radius:6px;border:1px solid var(--border);background:var(--bg-input);color:var(--text);font-size:.9rem;">
+              <textarea id="status-email-body" rows="3" placeholder="Mensagem..."
+                style="padding:8px;border-radius:6px;border:1px solid var(--border);background:var(--bg-input);color:var(--text);font-size:.9rem;resize:vertical;"></textarea>
+              <button type="submit" class="btn-primary">Enviar via Mike</button>
+            </form>
+            <div id="status-email-result" style="margin-top:8px;font-size:.85rem;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<!-- ===== STATUS PAGE (inline) ===== -->
+<!-- already rendered inside page-status below -->
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dompurify/dist/purify.min.js"></script>
+<script src="/static/js/utils.js?v=20260723a"></script>
+<script src="/static/js/auth.js?v=20260723a"></script>
+<script src="/static/js/chat.js?v=20260723a"></script>
+<script src="/static/js/tasks.js?v=20260723a"></script>
+<script src="/static/js/voice.js?v=20260723a"></script>
+<script src="/static/js/files.js?v=20260723a"></script>
+<script src="/static/js/tools.js?v=20260723a"></script>
+<script src="/static/js/status.js?v=20260723a"></script>
+<script src="/static/js/email.js?v=20260723a"></script>
+<script src="/static/js/pwa.js?v=20260723a"></script>
+<script src="/static/app.js?v=20260723a"></script>
+<script>
+// Register Mike Service Worker (PWA + push)
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js?v=20260416a', { scope: '/', updateViaCache: 'none' })
+    .then(function(reg) { console.debug('Mike SW registered, scope:', reg.scope); })
+    .catch(function(err) { console.warn('Mike SW registration failed:', err); });
+}
+</script>
+<script type="application/json" id="legacy-lousa-disabled">
+  // --- Task Board ---
+  let _activeTaskId = null;
+
+  async function loadTasks() {
+    try {
+      const r = await fetch(API + '/v1/autonomy/tasks', { headers: authHeaders() });
+      if (!r.ok) return;
+      const d = await r.json();
+      const tasks = d.tasks || [];
+      renderTasks(tasks);
+      
+      // Se tivermos uma tarefa ativa, atualiza o canvas dela
+      if (_activeTaskId) {
+        const active = tasks.find(t => t.id === _activeTaskId);
+        if (active) updateCanvas(active);
+      }
+    } catch(e) { console.debug('lousa tasks fetch error', e); }
+  }
+
+  function renderTasks(tasks) {
+    const container = document.getElementById('lousa-tasks');
+    if (!container) return;
+    if (!tasks.length) {
+      container.innerHTML = '<div class="lousa-empty">Nenhuma tarefa ainda. Escreva algo acima e o Mike cuida! 🐾</div>';
+      updateBadges(tasks);
+      return;
+    }
+    let html = '';
+    for (const t of tasks) {
+      const pri = ['🔴','🟠','🟡','🟢','⚪'][Math.max(0,Math.min(4,(t.priority||3)-1))];
+      const statusClass = t.status || 'pending';
+      const activeClass = t.id === _activeTaskId ? ' active' : '';
+      const statusIcon = {
+        pending: '⏳', running: '🔄', done: '✅', failed: '❌', cancelled: '🚫'
+      }[t.status] || '⏳';
+      const time = t.created_at ? new Date(t.created_at).toLocaleString('pt-BR',{hour:'2-digit',minute:'2-digit',day:'2-digit',month:'2-digit'}) : '';
+      const resultHtml = t.result ? '<div class="lousa-task-result-hint">📄 Ver artefato no Canvas</div>' : '';
+      const actionBtn = t.status === 'pending' || t.status === 'running'
+        ? '<button class="lousa-cancel-btn" data-id="'+t.id+'" title="Cancelar">✕</button>'
+        : t.status === 'done' || t.status === 'failed' || t.status === 'cancelled'
+        ? '<button class="lousa-delete-btn" data-id="'+t.id+'" title="Remover">🗑</button>'
+        : '';
+      html += '<div class="lousa-card ' + statusClass + activeClass + '" data-task-id="'+t.id+'">'
+        + '<div class="lousa-card-top">'
+        + '<span class="lousa-card-pri">' + pri + '</span>'
+        + '<span class="lousa-card-title">' + _esc(t.title) + '</span>'
+        + '<span class="lousa-card-status">' + statusIcon + '</span>'
+        + actionBtn
+        + '</div>'
+        + (t.description ? '<div class="lousa-card-desc">' + _esc(t.description) + '</div>' : '')
+        + resultHtml
+        + '<div class="lousa-card-meta">' + time + (t.created_by ? ' • ' + t.created_by : '') + '</div>'
+        + '</div>';
+    }
+    container.innerHTML = html;
+    updateBadges(tasks);
+    
+    // Bind click events for cards
+    container.querySelectorAll('.lousa-card').forEach(card => {
+      card.onclick = (e) => {
+        if (e.target.tagName === 'BUTTON') return;
+        selectTask(card.dataset.taskId, tasks);
+      };
+    });
+
+    // Bind cancel/delete buttons
+    container.querySelectorAll('.lousa-cancel-btn').forEach(btn => {
+      btn.onclick = (e) => { e.stopPropagation(); cancelTask(btn.dataset.id); };
+    });
+    container.querySelectorAll('.lousa-delete-btn').forEach(btn => {
+      btn.onclick = (e) => { e.stopPropagation(); deleteTask(btn.dataset.id); };
+    });
+  }
+
+  function selectTask(id, tasks) {
+    _activeTaskId = id;
+    const task = tasks.find(t => t.id === id);
+    if (!task) return;
+    
+    // UI update
+    document.querySelectorAll('.lousa-card').forEach(c => c.classList.remove('active'));
+    const card = document.querySelector(`.lousa-card[data-task-id="${id}"]`);
+    if (card) card.classList.add('active');
+    
+    // Show Canvas
+    const viewport = document.getElementById('canvas-viewport');
+    if (viewport) {
+      viewport.classList.add('open');
+      document.querySelector('.lousa-layout-container').classList.add('canvas-open');
+    }
+    
+    updateCanvas(task);
+  }
+
+  function updateCanvas(task) {
+    const titleEl = document.getElementById('canvas-active-title');
+    const contentEl = document.getElementById('canvas-content');
+    const statusEl = document.getElementById('canvas-status');
+    
+    if (titleEl) titleEl.textContent = task.title;
+    if (statusEl) statusEl.textContent = `Status: ${task.status} • Prioridade: ${task.priority}`;
+    
+    if (contentEl) {
+      if (task.result) {
+        // Se o resultado for Markdown, usa a função global de renderização do Mike
+        if (window.renderMd) {
+          contentEl.innerHTML = window.renderMd(task.result);
+        } else {
+          contentEl.innerHTML = `<pre>${_esc(task.result)}</pre>`;
+        }
+      } else if (task.status === 'running') {
+        contentEl.innerHTML = `
+          <div class="canvas-empty-state">
+            <div class="typing-dots"><span></span><span></span><span></span></div>
+            <p>O Mike está trabalhando nisso agora...</p>
+            <p class="dim">${task.description || ''}</p>
+          </div>`;
+      } else {
+        contentEl.innerHTML = `
+          <div class="canvas-empty-state">
+            <div class="canvas-empty-icon">🎨</div>
+            <p>Nenhum artefato gerado ainda para esta tarefa.</p>
+          </div>`;
+      }
+    }
+  }
+
+  function updateBadges(tasks) {
+    const p = tasks.filter(t=>t.status==='pending').length;
+    const r = tasks.filter(t=>t.status==='running').length;
+    const d = tasks.filter(t=>t.status==='done').length;
+    const el = id => document.getElementById(id);
+    if(el('lousa-pending')) el('lousa-pending').textContent = p + ' pendente' + (p!==1?'s':'');
+    if(el('lousa-running')) el('lousa-running').textContent = r + ' executando';
+    if(el('lousa-done')) el('lousa-done').textContent = d + ' concluída' + (d!==1?'s':'');
+  }
+
+  async function createTask(title, desc, priority) {
+    try {
+      const r = await fetch(API + '/v1/autonomy/tasks', {
+        method: 'POST',
+        headers: authHeaders(),
+        body: JSON.stringify({ title, description: desc, priority: parseInt(priority) }),
+      });
+      if (r.ok) {
+        const d = await r.json();
+        _activeTaskId = d.id; // Seleciona automaticamente a nova tarefa
+        loadTasks();
+        return true;
+      }
+    } catch(e) { console.error('task create error', e); }
+    return false;
+  }
+
+  async function cancelTask(id) {
+    try {
+      await fetch(API + '/v1/autonomy/tasks/' + id + '/cancel', {
+        method: 'POST', headers: authHeaders(),
+      });
+      loadTasks();
+    } catch(e) {}
+  }
+
+  async function deleteTask(id) {
+    try {
+      if (_activeTaskId === id) _activeTaskId = null;
+      await fetch(API + '/v1/autonomy/tasks/' + id, {
+        method: 'DELETE', headers: authHeaders(),
+      });
+      loadTasks();
+    } catch(e) {}
+  }
+
+  // --- Routines ---
+  async function loadRoutines() {
+    try {
+      const r = await fetch(API + '/v1/autonomy/routines', { headers: authHeaders() });
+      if (!r.ok) return;
+      const d = await r.json();
+      renderRoutines(d.routines || []);
+    } catch(e) {}
+  }
+
+  function renderRoutines(routines) {
+    const container = document.getElementById('lousa-routines');
+    if (!container) return;
+    if (!routines.length) {
+      container.innerHTML = '<div class="dim">Nenhuma rotina configurada.</div>';
+      return;
+    }
+    let html = '';
+    for (const r of routines) {
+      const sched = r.schedule || {};
+      let schedStr = sched.interval_minutes
+        ? 'a cada ' + sched.interval_minutes + 'min'
+        : (sched.hour != null ? String(sched.hour).padStart(2,'0')+':'+String(sched.minute||0).padStart(2,'0') : '—');
+      const lastRun = r.last_run_at ? new Date(r.last_run_at).toLocaleString('pt-BR', {hour:'2-digit',minute:'2-digit',day:'2-digit',month:'2-digit'}) : 'nunca';
+      html += '<div class="lousa-routine-card' + (r.enabled ? '' : ' disabled') + '">'
+        + '<div class="lousa-routine-top">'
+        + '<span class="lousa-routine-name">' + _esc(r.name) + '</span>'
+        + '<label class="lousa-toggle"><input type="checkbox" ' + (r.enabled ? 'checked' : '') + ' data-rid="'+r.id+'"><span class="lousa-toggle-slider"></span></label>'
+        + '</div>'
+        + '<div class="lousa-routine-info">🕐 ' + schedStr + ' • Último: ' + lastRun + ' • Runs: ' + (r.run_count||0) + '</div>'
+        + (r.last_result ? '<div class="lousa-routine-result">' + _esc(r.last_result.substring(0,120)) + '</div>' : '')
+        + '</div>';
+    }
+    container.innerHTML = html;
+    container.querySelectorAll('input[data-rid]').forEach(inp => {
+      inp.onchange = () => toggleRoutine(inp.dataset.rid, inp.checked);
+    });
+  }
+
+  async function toggleRoutine(id, enabled) {
+    try {
+      await fetch(API + '/v1/autonomy/routines/' + id + '/toggle', {
+        method: 'POST', headers: authHeaders(),
+        body: JSON.stringify({ enabled }),
+      });
+      loadRoutines();
+    } catch(e) {}
+  }
+
+  // --- Email Tracking ---
+  async function loadEmails() {
+    try {
+      const r = await fetch(API + '/v1/autonomy/email-tracking', { headers: authHeaders() });
+      if (!r.ok) return;
+      const d = await r.json();
+      renderEmails(d.tracked || []);
+    } catch(e) {}
+  }
+
+  function renderEmails(emails) {
+    const container = document.getElementById('lousa-emails');
+    if (!container) return;
+    if (!emails.length) {
+      container.innerHTML = '<div class="dim">Nenhum email sendo rastreado.</div>';
+      return;
+    }
+    let html = '';
+    for (const e of emails) {
+      const icon = { waiting:'⏳', replied:'✅', overdue:'⚠️', followup_sent:'🔄', dismissed:'🚫' }[e.status] || '📧';
+      const sent = e.sent_at ? new Date(e.sent_at).toLocaleString('pt-BR',{hour:'2-digit',minute:'2-digit',day:'2-digit',month:'2-digit'}) : '';
+      html += '<div class="lousa-email-card ' + e.status + '">'
+        + '<span class="lousa-email-icon">' + icon + '</span>'
+        + '<div class="lousa-email-info">'
+        + '<div class="lousa-email-to">Para: ' + _esc(e.sent_to) + '</div>'
+        + '<div class="lousa-email-subj">' + _esc(e.subject) + '</div>'
+        + '<div class="lousa-email-meta">Enviado: ' + sent + ' • Checks: ' + (e.check_count||0) + '</div>'
+        + '</div>'
+        + '</div>';
+    }
+    container.innerHTML = html;
+  }
+
+  // --- Log ---
+  async function loadLog() {
+    try {
+      const r = await fetch(API + '/v1/autonomy/log?limit=15', { headers: authHeaders() });
+      if (!r.ok) return;
+      const d = await r.json();
+      renderLog(d.entries || []);
+    } catch(e) {}
+  }
+
+  function renderLog(entries) {
+    const container = document.getElementById('lousa-log');
+    if (!container) return;
+    if (!entries.length) {
+      container.innerHTML = '<div class="dim">Sem atividade recente.</div>';
+      return;
+    }
+    let html = '';
+    for (const e of entries) {
+      const t = e.timestamp ? new Date(e.timestamp).toLocaleString('pt-BR',{hour:'2-digit',minute:'2-digit',day:'2-digit',month:'2-digit'}) : '';
+      const icon = {
+        task_created:'📝', task_start:'🔄', task_completed:'✅', task_failed:'❌',
+        routine_start:'⚡', routine_done:'✅', routine_failed:'❌',
+        email_tracked:'📧', email_replied:'📬', email_overdue:'⚠️',
+      }[e.type] || '📋';
+      html += '<div class="lousa-log-entry"><span class="lousa-log-time">' + t + '</span> ' + icon + ' ' + _esc(e.message||'') + '</div>';
+    }
+    container.innerHTML = html;
+  }
+
+  function _esc(s) { return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+  // --- Form ---
+  document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('lousa-form');
+    if (form) {
+      form.addEventListener('submit', async function(ev) {
+        ev.preventDefault();
+        const title = document.getElementById('lousa-title').value.trim();
+        const desc = document.getElementById('lousa-desc').value.trim();
+        const pri = document.getElementById('lousa-priority').value;
+        if (!title) return;
+        const ok = await createTask(title, desc, pri);
+        if (ok) {
+          document.getElementById('lousa-title').value = '';
+          document.getElementById('lousa-desc').value = '';
+        }
+      });
+    }
+    
+    // Close canvas button
+    const closeBtn = document.getElementById('canvas-close-btn');
+    if (closeBtn) {
+      closeBtn.onclick = () => {
+        document.getElementById('canvas-viewport').classList.remove('open');
+        document.querySelector('.lousa-layout-container').classList.remove('canvas-open');
+        _activeTaskId = null;
+        document.querySelectorAll('.lousa-card').forEach(c => c.classList.remove('active'));
+      };
+    }
+  });
+
+  // --- Page visibility for polling ---
+  function startLousaPolling() {
+    if (_lousaInterval) return;
+    loadTasks(); loadRoutines(); loadEmails(); loadLog();
+    _lousaInterval = setInterval(function() {
+      loadTasks(); loadRoutines(); loadEmails(); loadLog();
+    }, 15000);
+  }
+  function stopLousaPolling() {
+    if (_lousaInterval) { clearInterval(_lousaInterval); _lousaInterval = null; }
+  }
+
+  // Hook into page navigation
+  const origNav = document.querySelectorAll('[data-page]');
+  origNav.forEach(btn => {
+    btn.addEventListener('click', function() {
+      if (this.dataset.page === 'lousa') {
+        startLousaPolling();
+      } else {
+        stopLousaPolling();
+      }
+    });
+  });
+
+  // Also start polling if lousa is already active
+  if (document.querySelector('#page-lousa.active')) startLousaPolling();
+})();
+
+</script>
+</body>
+</html>

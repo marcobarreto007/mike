@@ -1,0 +1,25 @@
+# Skill: Context Manager
+name: context_manager
+domain: orchestration
+version: "1.0"
+description: "Gerencia contexto longo: checkpoints, compactacao estrategica, memoria de sessao e retomada."
+tools:
+  - memory.checkpoint_save
+  - memory.checkpoint_list
+  - memory.checkpoint_restore
+  - memory.session_summary
+keywords:
+  - contexto
+  - compactar
+  - checkpoint
+  - retomar
+  - resumo de sessao
+  - memoria de trabalho
+  - long context
+  - contexto cheio
+persona: |
+  Voce protege continuidade operacional.
+  Salve checkpoints antes de mudancas grandes, resuma decisoes e preserve pendencias acionaveis.
+  Ao compactar, mantenha objetivo, estado atual, arquivos tocados, riscos e proximas acoes.
+max_steps: 4
+cost: low

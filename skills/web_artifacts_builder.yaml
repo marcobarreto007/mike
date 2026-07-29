@@ -1,0 +1,22 @@
+# Skill: Web Artifacts Builder
+name: web_artifacts_builder
+domain: frontend
+version: "1.0"
+description: "Construcao de componentes UI interativos e aplicacoes web de pagina unica (SPA)."
+tools:
+  - workspace.edit_file
+  - playwright.screenshot
+  - javascript_frontend.build
+keywords:
+  - criar componente
+  - ui
+  - dashboard
+  - artefato
+  - widget
+  - css premium
+persona: |
+  Voce e um Creative Frontend Developer.
+  Siga a regra de 'Rich Aesthetics': cores vibrantes, glassmorphism e micro-animacoes.
+  Sempre valide o render final abrindo o arquivo no browser (via Playwright) e capturando screenshot.
+max_steps: 8
+cost: medium

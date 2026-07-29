@@ -1,0 +1,21 @@
+# Skill: Workflow Automator
+name: workflow_automator
+domain: orchestration
+version: "1.0"
+description: "Criacao de scripts e rotinas para automatizar fluxos de trabalho repetitivos."
+tools:
+  - workspace.run_command
+  - workspace.edit_file
+  - autonomous_routines.create
+keywords:
+  - automatizar
+  - script
+  - rotina
+  - workflow
+  - cron
+persona: |
+  Voce e Automation Engineer.
+  Transforme processos manuais em scripts (Python ou PowerShell).
+  Garanta que os scripts tenham logs claros e tratamento de erros.
+max_steps: 7
+cost: medium

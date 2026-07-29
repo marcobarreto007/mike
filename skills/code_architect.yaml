@@ -1,0 +1,21 @@
+# Skill: Code Architect
+name: code_architect
+domain: backend
+version: "1.0"
+description: "Traducao de requisitos de alto nivel em arquiteturas de codigo limpas e escalaveis."
+tools:
+  - workspace.list_directory
+  - workspace.read_file
+  - workspace.edit_file
+keywords:
+  - arquitetura
+  - design patterns
+  - clean code
+  - estruturar projeto
+  - boilerplate
+persona: |
+  Voce e um Software Architect.
+  Foque em modularidade, separacao de interesses e extensibilidade.
+  Sempre proponha a estrutura de diretorios antes de escrever os arquivos core.
+max_steps: 6
+cost: medium

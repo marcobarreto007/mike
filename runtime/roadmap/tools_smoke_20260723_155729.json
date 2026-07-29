@@ -1,0 +1,1011 @@
+﻿{
+    "timestamp":  "2026-07-23T15:59:35.2402133-04:00",
+    "base_url":  "http://127.0.0.1:8083",
+    "tool_count":  80,
+    "ok_count":  54,
+    "tool_error_count":  7,
+    "http_error_count":  0,
+    "skipped_count":  19,
+    "results":  [
+                    {
+                        "name":  "memory-persistent.create_entities",
+                        "status":  "ok",
+                        "http":  "ok",
+                        "ok":  true,
+                        "arguments":  {
+                                          "entities":  [
+                                                           {
+                                                               "observations":  [
+                                                                                    "created-by-smoke-test"
+                                                                                ],
+                                                               "name":  "mike_smoke_entity_20260723_155729",
+                                                               "entityType":  "smoke"
+                                                           }
+                                                       ]
+                                      },
+                        "text":  "[\n  {\n    \"name\": \"mike_smoke_entity_20260723_155729\",\n    \"entityType\": \"smoke\",\n    \"observations\": [\n      \"created-by-smoke-test\"\n    ]\n  }\n]",
+                        "reason":  ""
+                    },
+                    {
+                        "name":  "memory-persistent.create_relations",
+                        "status":  "ok",
+                        "http":  "ok",
+                        "ok":  true,
+                        "arguments":  {
+                                          "relations":  [
+                                                            {
+                                                                "from":  "mike_smoke_entity_20260723_155729",
+                                                                "to":  "mike_smoke_entity_20260723_155729",
+                                                                "relationType":  "self_test"
+                                                            }
+                                                        ]
+                                      },
+                        "text":  "[\n  {\n    \"from\": \"mike_smoke_entity_20260723_155729\",\n    \"to\": \"mike_smoke_entity_20260723_155729\",\n    \"relationType\": \"self_test\"\n  }\n]",
+                        "reason":  ""
+                    },
+                    {
+                        "name":  "memory-persistent.add_observations",
+                        "status":  "ok",
+                        "http":  "ok",
+                        "ok":  true,
+                        "arguments":  {
+                                          "observations":  [
+                                                               {
+                                                                   "contents":  [
+                                                                                    "second-observation"
+                                                                                ],
+                                                                   "entityName":  "mike_smoke_entity_20260723_155729"
+                                                               }
+                                                           ]
+                                      },
+                        "text":  "[\n  {\n    \"entityName\": \"mike_smoke_entity_20260723_155729\",\n    \"addedObservations\": [\n      \"second-observation\"\n    ]\n  }\n]",
+                        "reason":  ""
+                    },
+                    {
+                        "name":  "memory-persistent.delete_entities",
+                        "status":  "ok",
+                        "http":  "ok",
+                        "ok":  true,
+                        "arguments":  {
+                                          "entityNames":  [
+                                                              "mike_smoke_entity_20260723_155729"
+                                                          ]
+                                      },
+                        "text":  "Entities deleted successfully",
+                        "reason":  ""
+                    },
+                    {
+                        "name":  "memory-persistent.delete_observations",
+                        "status":  "ok",
+                        "http":  "ok",
+                        "ok":  true,
+                        "arguments":  {
+                                          "deletions":  [
+                                                            {
+                                                                "observations":  [
+                                                                                     "second-observation"
+                                                                                 ],
+                                                                "entityName":  "mike_smoke_entity_20260723_155729"
+                                                            }
+                                                        ]
+                                      },
+                        "text":  "Observations deleted successfully",
+                        "reason":  ""
+                    },
+                    {
+                        "name":  "memory-persistent.delete_relations",
+                        "status":  "ok",
+                        "http":  "ok",
+                        "ok":  true,
+                        "arguments":  {
+                                          "relations":  [
+                                                            {
+                                                                "from":  "mike_smoke_entity_20260723_155729",
+                                                                "to":  "mike_smoke_entity_20260723_155729",
+                                                                "relationType":  "self_test"
+                                                            }
+                                                        ]
+                                      },
+                        "text":  "Relations deleted successfully",
+                        "reason":  ""
+                    },
+                    {
+                        "name":  "memory-persistent.read_graph",
+                        "status":  "ok",
+                        "http":  "ok",
+                        "ok":  true,
+                        "arguments":  {
+
+                                      },
+                        "text":  "{\n  \"entities\": [],\n  \"relations\": []\n}",
+                        "reason":  ""
+                    },
+                    {
+                        "name":  "memory-persistent.search_nodes",
+                        "status":  "ok",
+                        "http":  "ok",
+                        "ok":  true,
+                        "arguments":  {
+                                          "query":  "mike_smoke_entity_20260723_155729"
+                                      },
+                        "text":  "{\n  \"entities\": [],\n  \"relations\": []\n}",
+                        "reason":  ""
+                    },
+                    {
+                        "name":  "memory-persistent.open_nodes",
+                        "status":  "ok",
+                        "http":  "ok",
+                        "ok":  true,
+                        "arguments":  {
+                                          "names":  [
+                                                        "mike_smoke_entity_20260723_155729"
+                                                    ]
+                                      },
+                        "text":  "{\n  \"entities\": [],\n  \"relations\": []\n}",
+                        "reason":  ""
+                    },
+                    {
+                        "name":  "sequential-thinking.sequentialthinking",
+                        "status":  "ok",
+                        "http":  "ok",
+                        "ok":  true,
+                        "arguments":  {
+                                          "thoughtNumber":  1,
+                                          "nextThoughtNeeded":  false,
+                                          "thought":  "Smoke test thought",
+                                          "totalThoughts":  1
+                                      },
+                        "text":  "{\n  \"thoughtNumber\": 1,\n  \"totalThoughts\": 1,\n  \"nextThoughtNeeded\": false,\n  \"branches\": [],\n  \"thoughtHistoryLength\": 1\n}",
+                        "reason":  ""
+                    },
+                    {
+                        "name":  "filesystem.read_file",
+                        "status":  "tool_error",
+                        "http":  "ok",
+                        "ok":  false,
+                        "arguments":  {
+                                          "path":  "C:\\Users\\Admin\\Desktop\\mike\\LICENSE",
+                                          "head":  20
+                                      },
+                        "text":  "ENOENT: no such file or directory, open \u0027C:\\Users\\Admin\\Desktop\\mike\\LICENSE\u0027",
+                        "reason":  ""
+                    },
+                    {
+                        "name":  "filesystem.read_text_file",
+                        "status":  "tool_error",
+                        "http":  "ok",
+                        "ok":  false,
+                        "arguments":  {
+                                          "path":  "C:\\Users\\Admin\\Desktop\\mike\\LICENSE",
+                                          "head":  20
+                                      },
+                        "text":  "ENOENT: no such file or directory, open \u0027C:\\Users\\Admin\\Desktop\\mike\\LICENSE\u0027",
+                        "reason":  ""
+                    },
+                    {
+                        "name":  "filesystem.read_media_file",
+                        "status":  "ok",
+                        "http":  "ok",
+                        "ok":  true,
+                        "arguments":  {
+                                          "path":  "C:\\Users\\Admin\\Desktop\\mike\\dashboard\\icons\\apple-touch-icon.png"
+                                      },
+                        "text":  "",
+                        "reason":  ""
+                    },
+                    {
+                        "name":  "filesystem.read_multiple_files",
+                        "status":  "ok",
+                        "http":  "ok",
+                        "ok":  true,
+                        "arguments":  {
+                                          "paths":  [
+                                                        "C:\\Users\\Admin\\Desktop\\mike\\LICENSE",
+                                                        "C:\\Users\\Admin\\Desktop\\mike\\CLAUDE.md"
+                                                    ]
+                                      },
+                        "text":  "C:\\Users\\Admin\\Desktop\\mike\\LICENSE: Error - ENOENT: no such file or directory, open \u0027C:\\Users\\Admin\\Desktop\\mike\\LICENSE\u0027\n---\nC:\\Users\\Admin\\Desktop\\mike\\CLAUDE.md: Error - ENOENT: no such file or directory, open \u0027C:\\Users\\Admin\\Desktop\\mike\\CLAUDE.md\u0027",
+                        "reason":  ""
+                    },
+                    {
+                        "name":  "filesystem.write_file",
+                        "status":  "ok",
+                        "http":  "ok",
+                        "ok":  true,
+                        "arguments":  {
+                                          "content":  "filesystem-smoke",
+                                          "path":  "C:\\Users\\Admin\\Desktop\\mike\\scratch\\\\tool_smoke_20260723_155729\\proof.txt"
+                                      },
+                        "text":  "Successfully wrote to C:\\Users\\Admin\\Desktop\\mike\\scratch\\tool_smoke_20260723_155729\\proof.txt",
+                        "reason":  ""
+                    },
+                    {
+                        "name":  "filesystem.edit_file",
+                        "status":  "ok",
+                        "http":  "ok",
+                        "ok":  true,
+                        "arguments":  {
+                                          "path":  "C:\\Users\\Admin\\Desktop\\mike\\scratch\\\\tool_smoke_20260723_155729\\proof.txt",
+                                          "edits":  [
+                                                        {
+                                                            "oldText":  "filesystem-smoke",
+                                                            "newText":  "filesystem-smoke-edited"
+                                                        }
+                                                    ],
+                                          "dryRun":  false
+                                      },
+                        "text":  "```diff\nIndex: C:\\Users\\Admin\\Desktop\\mike\\scratch\\tool_smoke_20260723_155729\\proof.txt\n===================================================================\n--- C:\\Users\\Admin\\Desktop\\mike\\scratch\\tool_smoke_20260723_155729\\proof.txt\toriginal\n+++ C:\\Users\\Admin\\Desktop\\mike\\scratch\\tool_smoke_20260723_155729\\proof.txt\tmodified\n@@ -1,1 +1,1 @@\n-filesystem-smoke\n\\ No newline at end of file\n+filesyste ...",
+                        "reason":  ""
+                    },
+                    {
+                        "name":  "filesystem.create_directory",
+                        "status":  "ok",
+                        "http":  "ok",
+                        "ok":  true,
+                        "arguments":  {
+                                          "path":  "C:\\Users\\Admin\\Desktop\\mike\\scratch\\\\tool_smoke_20260723_155729"
+                                      },
+                        "text":  "Successfully created directory C:\\Users\\Admin\\Desktop\\mike\\scratch\\tool_smoke_20260723_155729",
+                        "reason":  ""
+                    },
+                    {
+                        "name":  "filesystem.list_directory",
+                        "status":  "ok",
+                        "http":  "ok",
+                        "ok":  true,
+                        "arguments":  {
+                                          "path":  "C:\\Users\\Admin\\Desktop\\mike"
+                                      },
+                        "text":  "[DIR] .claude\n[DIR] .codex\n[DIR] .git\n[DIR] .github\n[FILE] .gitignore\n[FILE] .mcp.json\n[DIR] .playwright-mcp\n[DIR] .system\n[DIR] .venv\n[DIR] .vscode\n[DIR] agents\n[DIR] assets\n[DIR] config\n[DIR] core\n[DIR] dashboard\n[DIR] llama.cpp\n[DIR] llama_new\n[FILE] llama_new.zip\n[DIR] llm_cache\n[DIR] logs\n[DIR] mike\n[DIR] node_modules\n[FILE] README.md\n[DIR] runtime\n[DIR] scratch\n[DIR] scripts\n[DIR] skills\n[DI ...",
+                        "reason":  ""
+                    },
+                    {
+                        "name":  "filesystem.list_directory_with_sizes",
+                        "status":  "ok",
+                        "http":  "ok",
+                        "ok":  true,
+                        "arguments":  {
+                                          "path":  "C:\\Users\\Admin\\Desktop\\mike",
+                                          "sortBy":  "name"
+                                      },
+                        "text":  "[DIR] .claude                        \n[DIR] .codex                         \n[DIR] .git                           \n[DIR] .github                        \n[FILE] .gitignore                        1.03 KB\n[FILE] .mcp.json                           500 B\n[DIR] .playwright-mcp                \n[DIR] .system                        \n[DIR] .venv                          \n[DIR] .vscode                        ...",
+                        "reason":  ""
+                    },
+                    {
+                        "name":  "filesystem.directory_tree",
+                        "status":  "ok",
+                        "http":  "ok",
+                        "ok":  true,
+                        "arguments":  {
+                                          "path":  "C:\\Users\\Admin\\Desktop\\mike",
+                                          "excludePatterns":  [
+                                                                  "**/.venv/**"
+                                                              ]
+                                      },
+                        "text":  "[\n  {\n    \"name\": \".claude\",\n    \"type\": \"directory\",\n    \"children\": [\n      {\n        \"name\": \"agent-memory\",\n        \"type\": \"directory\",\n        \"children\": [\n          {\n            \"name\": \"swat-architect\",\n            \"type\": \"directory\",\n            \"children\": [\n              {\n                \"name\": \"architecture-eval-2026-07-23.md\",\n                \"type\": \"file\"\n              },\n      ...",
+                        "reason":  ""
+                    },
+                    {
+                        "name":  "filesystem.move_file",
+                        "status":  "ok",
+                        "http":  "ok",
+                        "ok":  true,
+                        "arguments":  {
+                                          "destination":  "C:\\Users\\Admin\\Desktop\\mike\\scratch\\\\tool_smoke_20260723_155729\\proof_moved.txt",
+                                          "source":  "C:\\Users\\Admin\\Desktop\\mike\\scratch\\\\tool_smoke_20260723_155729\\proof.txt"
+                                      },
+                        "text":  "Successfully moved C:\\Users\\Admin\\Desktop\\mike\\scratch\\\\tool_smoke_20260723_155729\\proof.txt to C:\\Users\\Admin\\Desktop\\mike\\scratch\\\\tool_smoke_20260723_155729\\proof_moved.txt",
+                        "reason":  ""
+                    },
+                    {
+                        "name":  "filesystem.search_files",
+                        "status":  "ok",
+                        "http":  "ok",
+                        "ok":  true,
+                        "arguments":  {
+                                          "path":  "C:\\Users\\Admin\\Desktop\\mike",
+                                          "pattern":  "**/*.md",
+                                          "excludePatterns":  [
+                                                                  "**/.venv/**"
+                                                              ]
+                                      },
+                        "text":  "C:\\Users\\Admin\\Desktop\\mike\\.claude\\agent-memory\\swat-architect\\architecture-eval-2026-07-23.md\nC:\\Users\\Admin\\Desktop\\mike\\.claude\\agent-memory\\swat-architect\\MEMORY.md\nC:\\Users\\Admin\\Desktop\\mike\\.claude\\agent-memory\\swat-backend\\mcp_common_module.md\nC:\\Users\\Admin\\Desktop\\mike\\.claude\\agent-memory\\swat-backend\\MEMORY.md\nC:\\Users\\Admin\\Desktop\\mike\\.claude\\agent-memory\\swat-backend\\monolith-phas ...",
+                        "reason":  ""
+                    },
+                    {
+                        "name":  "filesystem.get_file_info",
+                        "status":  "ok",
+                        "http":  "ok",
+                        "ok":  true,
+                        "arguments":  {
+                                          "path":  "C:\\Users\\Admin\\Desktop\\mike"
+                                      },
+                        "text":  "size: 0\ncreated: Wed Jul 22 2026 11:11:53 GMT-0400 (Eastern Daylight Time)\nmodified: Thu Jul 23 2026 15:57:30 GMT-0400 (Eastern Daylight Time)\naccessed: Thu Jul 23 2026 15:58:29 GMT-0400 (Eastern Daylight Time)\nisDirectory: true\nisFile: false\npermissions: 666",
+                        "reason":  ""
+                    },
+                    {
+                        "name":  "filesystem.list_allowed_directories",
+                        "status":  "ok",
+                        "http":  "ok",
+                        "ok":  true,
+                        "arguments":  {
+
+                                      },
+                        "text":  "Allowed directories:\nC:\\Users\\Admin\\Desktop\\mike\nC:\\Users\\Admin\\Desktop\\mike\\runtime\nC:\\Users\\Admin\\Desktop\\mike\\config",
+                        "reason":  ""
+                    },
+                    {
+                        "name":  "github.create_or_update_file",
+                        "status":  "skipped",
+                        "http":  "ok",
+                        "ok":  false,
+                        "arguments":  {
+
+                                      },
+                        "text":  "skip",
+                        "reason":  "Operacao de escrita GitHub ignorada por padrao (use -IncludeGithubWrite)."
+                    },
+                    {
+                        "name":  "github.search_repositories",
+                        "status":  "ok",
+                        "http":  "ok",
+                        "ok":  true,
+                        "arguments":  {
+                                          "query":  "mike"
+                                      },
+                        "text":  "{\n  \"total_count\": 37128,\n  \"incomplete_results\": false,\n  \"items\": [\n    {\n      \"id\": 1224854794,\n      \"node_id\": \"R_kgDOSQHNCg\",\n      \"name\": \"mike\",\n      \"full_name\": \"Open-Legal-Products/mike\",\n      \"private\": false,\n      \"owner\": {\n        \"login\": \"Open-Legal-Products\",\n        \"id\": 297879885,\n        \"node_id\": \"O_kgDOEcFJTQ\",\n        \"avatar_url\": \"https://avatars.githubusercontent. ...",
+                        "reason":  ""
+                    },
+                    {
+                        "name":  "github.create_repository",
+                        "status":  "skipped",
+                        "http":  "ok",
+                        "ok":  false,
+                        "arguments":  {
+
+                                      },
+                        "text":  "skip",
+                        "reason":  "Operacao de escrita GitHub ignorada por padrao (use -IncludeGithubWrite)."
+                    },
+                    {
+                        "name":  "github.get_file_contents",
+                        "status":  "ok",
+                        "http":  "ok",
+                        "ok":  true,
+                        "arguments":  {
+                                          "path":  "README",
+                                          "owner":  "octocat",
+                                          "repo":  "Hello-World"
+                                      },
+                        "text":  "{\n  \"name\": \"README\",\n  \"path\": \"README\",\n  \"sha\": \"980a0d5f19a64b4b30a87d4206aade58726b60e3\",\n  \"size\": 13,\n  \"url\": \"https://api.github.com/repos/octocat/Hello-World/contents/README?ref=master\",\n  \"html_url\": \"https://github.com/octocat/Hello-World/blob/master/README\",\n  \"git_url\": \"https://api.github.com/repos/octocat/Hello-World/git/blobs/980a0d5f19a64b4b30a87d4206aade58726b60e3\",\n  \"download_ ...",
+                        "reason":  ""
+                    },
+                    {
+                        "name":  "github.push_files",
+                        "status":  "skipped",
+                        "http":  "ok",
+                        "ok":  false,
+                        "arguments":  {
+
+                                      },
+                        "text":  "skip",
+                        "reason":  "Operacao de escrita GitHub ignorada por padrao (use -IncludeGithubWrite)."
+                    },
+                    {
+                        "name":  "github.create_issue",
+                        "status":  "skipped",
+                        "http":  "ok",
+                        "ok":  false,
+                        "arguments":  {
+
+                                      },
+                        "text":  "skip",
+                        "reason":  "Operacao de escrita GitHub ignorada por padrao (use -IncludeGithubWrite)."
+                    },
+                    {
+                        "name":  "github.create_pull_request",
+                        "status":  "skipped",
+                        "http":  "ok",
+                        "ok":  false,
+                        "arguments":  {
+
+                                      },
+                        "text":  "skip",
+                        "reason":  "Operacao de escrita GitHub ignorada por padrao (use -IncludeGithubWrite)."
+                    },
+                    {
+                        "name":  "github.fork_repository",
+                        "status":  "skipped",
+                        "http":  "ok",
+                        "ok":  false,
+                        "arguments":  {
+
+                                      },
+                        "text":  "skip",
+                        "reason":  "Operacao de escrita GitHub ignorada por padrao (use -IncludeGithubWrite)."
+                    },
+                    {
+                        "name":  "github.create_branch",
+                        "status":  "skipped",
+                        "http":  "ok",
+                        "ok":  false,
+                        "arguments":  {
+
+                                      },
+                        "text":  "skip",
+                        "reason":  "Operacao de escrita GitHub ignorada por padrao (use -IncludeGithubWrite)."
+                    },
+                    {
+                        "name":  "github.list_commits",
+                        "status":  "ok",
+                        "http":  "ok",
+                        "ok":  true,
+                        "arguments":  {
+                                          "owner":  "octocat",
+                                          "repo":  "Hello-World"
+                                      },
+                        "text":  "[\n  {\n    \"sha\": \"7fd1a60b01f91b314f59955a4e4d4e80d8edf11d\",\n    \"node_id\": \"MDY6Q29tbWl0MTI5NjI2OTo3ZmQxYTYwYjAxZjkxYjMxNGY1OTk1NWE0ZTRkNGU4MGQ4ZWRmMTFk\",\n    \"commit\": {\n      \"author\": {\n        \"name\": \"The Octocat\",\n        \"email\": \"octocat@nowhere.com\",\n        \"date\": \"2012-03-06T23:06:50Z\"\n      },\n      \"committer\": {\n        \"name\": \"The Octocat\",\n        \"email\": \"octocat@nowhere.com\", ...",
+                        "reason":  ""
+                    },
+                    {
+                        "name":  "github.list_issues",
+                        "status":  "ok",
+                        "http":  "ok",
+                        "ok":  true,
+                        "arguments":  {
+                                          "owner":  "octocat",
+                                          "repo":  "Hello-World"
+                                      },
+                        "text":  "[\n  {\n    \"url\": \"https://api.github.com/repos/octocat/Hello-World/issues/10612\",\n    \"repository_url\": \"https://api.github.com/repos/octocat/Hello-World\",\n    \"labels_url\": \"https://api.github.com/repos/octocat/Hello-World/issues/10612/labels{/name}\",\n    \"comments_url\": \"https://api.github.com/repos/octocat/Hello-World/issues/10612/comments\",\n    \"events_url\": \"https://api.github.com/repos/octoc ...",
+                        "reason":  ""
+                    },
+                    {
+                        "name":  "github.update_issue",
+                        "status":  "skipped",
+                        "http":  "ok",
+                        "ok":  false,
+                        "arguments":  {
+
+                                      },
+                        "text":  "skip",
+                        "reason":  "Operacao de escrita GitHub ignorada por padrao (use -IncludeGithubWrite)."
+                    },
+                    {
+                        "name":  "github.add_issue_comment",
+                        "status":  "skipped",
+                        "http":  "ok",
+                        "ok":  false,
+                        "arguments":  {
+
+                                      },
+                        "text":  "skip",
+                        "reason":  "Operacao de escrita GitHub ignorada por padrao (use -IncludeGithubWrite)."
+                    },
+                    {
+                        "name":  "github.search_code",
+                        "status":  "tool_error",
+                        "http":  "ok",
+                        "ok":  false,
+                        "arguments":  {
+                                          "q":  "mike"
+                                      },
+                        "text":  "RuntimeError: McpError: Authentication Failed: Requires authentication",
+                        "reason":  ""
+                    },
+                    {
+                        "name":  "github.search_issues",
+                        "status":  "ok",
+                        "http":  "ok",
+                        "ok":  true,
+                        "arguments":  {
+                                          "q":  "mike"
+                                      },
+                        "text":  "{\n  \"total_count\": 1211448,\n  \"incomplete_results\": false,\n  \"items\": [\n    {\n      \"url\": \"https://api.github.com/repos/osrf/docker_images/issues/894\",\n      \"repository_url\": \"https://api.github.com/repos/osrf/docker_images\",\n      \"labels_url\": \"https://api.github.com/repos/osrf/docker_images/issues/894/labels{/name}\",\n      \"comments_url\": \"https://api.github.com/repos/osrf/docker_images/issue ...",
+                        "reason":  ""
+                    },
+                    {
+                        "name":  "github.search_users",
+                        "status":  "ok",
+                        "http":  "ok",
+                        "ok":  true,
+                        "arguments":  {
+                                          "q":  "mike"
+                                      },
+                        "text":  "{\n  \"total_count\": 212614,\n  \"incomplete_results\": false,\n  \"items\": [\n    {\n      \"login\": \"mike\",\n      \"id\": 1550195,\n      \"node_id\": \"MDQ6VXNlcjE1NTAxOTU=\",\n      \"avatar_url\": \"https://avatars.githubusercontent.com/u/1550195?v=4\",\n      \"gravatar_id\": \"\",\n      \"url\": \"https://api.github.com/users/mike\",\n      \"html_url\": \"https://github.com/mike\",\n      \"followers_url\": \"https://api.github. ...",
+                        "reason":  ""
+                    },
+                    {
+                        "name":  "github.get_issue",
+                        "status":  "ok",
+                        "http":  "ok",
+                        "ok":  true,
+                        "arguments":  {
+                                          "issue_number":  1,
+                                          "owner":  "octocat",
+                                          "repo":  "Hello-World"
+                                      },
+                        "text":  "{\n  \"url\": \"https://api.github.com/repos/octocat/Hello-World/issues/1\",\n  \"repository_url\": \"https://api.github.com/repos/octocat/Hello-World\",\n  \"labels_url\": \"https://api.github.com/repos/octocat/Hello-World/issues/1/labels{/name}\",\n  \"comments_url\": \"https://api.github.com/repos/octocat/Hello-World/issues/1/comments\",\n  \"events_url\": \"https://api.github.com/repos/octocat/Hello-World/issues/1/ev ...",
+                        "reason":  ""
+                    },
+                    {
+                        "name":  "github.get_pull_request",
+                        "status":  "ok",
+                        "http":  "ok",
+                        "ok":  true,
+                        "arguments":  {
+                                          "pull_number":  1,
+                                          "owner":  "octocat",
+                                          "repo":  "Hello-World"
+                                      },
+                        "text":  "{\n  \"url\": \"https://api.github.com/repos/octocat/Hello-World/pulls/1\",\n  \"id\": 140900,\n  \"node_id\": \"MDExOlB1bGxSZXF1ZXN0MTQwOTAw\",\n  \"html_url\": \"https://github.com/octocat/Hello-World/pull/1\",\n  \"diff_url\": \"https://github.com/octocat/Hello-World/pull/1.diff\",\n  \"patch_url\": \"https://github.com/octocat/Hello-World/pull/1.patch\",\n  \"issue_url\": \"https://api.github.com/repos/octocat/Hello-World/is ...",
+                        "reason":  ""
+                    },
+                    {
+                        "name":  "github.list_pull_requests",
+                        "status":  "ok",
+                        "http":  "ok",
+                        "ok":  true,
+                        "arguments":  {
+                                          "per_page":  1,
+                                          "owner":  "microsoft",
+                                          "repo":  "vscode",
+                                          "state":  "open"
+                                      },
+                        "text":  "[\n  {\n    \"url\": \"https://api.github.com/repos/microsoft/vscode/pulls/327191\",\n    \"id\": 4119449156,\n    \"node_id\": \"PR_kwDOAn8RLM71ic5E\",\n    \"html_url\": \"https://github.com/microsoft/vscode/pull/327191\",\n    \"diff_url\": \"https://github.com/microsoft/vscode/pull/327191.diff\",\n    \"patch_url\": \"https://github.com/microsoft/vscode/pull/327191.patch\",\n    \"issue_url\": \"https://api.github.com/repos/m ...",
+                        "reason":  ""
+                    },
+                    {
+                        "name":  "github.create_pull_request_review",
+                        "status":  "skipped",
+                        "http":  "ok",
+                        "ok":  false,
+                        "arguments":  {
+
+                                      },
+                        "text":  "skip",
+                        "reason":  "Operacao de escrita GitHub ignorada por padrao (use -IncludeGithubWrite)."
+                    },
+                    {
+                        "name":  "github.merge_pull_request",
+                        "status":  "skipped",
+                        "http":  "ok",
+                        "ok":  false,
+                        "arguments":  {
+
+                                      },
+                        "text":  "skip",
+                        "reason":  "Operacao de escrita GitHub ignorada por padrao (use -IncludeGithubWrite)."
+                    },
+                    {
+                        "name":  "github.get_pull_request_files",
+                        "status":  "ok",
+                        "http":  "ok",
+                        "ok":  true,
+                        "arguments":  {
+                                          "pull_number":  1,
+                                          "owner":  "octocat",
+                                          "repo":  "Hello-World"
+                                      },
+                        "text":  "[\n  {\n    \"sha\": \"719be62e9382eaed6b25ec98d8190e141ce329eb\",\n    \"filename\": \"README\",\n    \"status\": \"modified\",\n    \"additions\": 6,\n    \"deletions\": 1,\n    \"changes\": 7,\n    \"blob_url\": \"https://github.com/octocat/Hello-World/blob/7044a8a032e85b6ab611033b2ac8af7ce85805b2/README\",\n    \"raw_url\": \"https://github.com/octocat/Hello-World/raw/7044a8a032e85b6ab611033b2ac8af7ce85805b2/README\",\n    \"cont ...",
+                        "reason":  ""
+                    },
+                    {
+                        "name":  "github.get_pull_request_status",
+                        "status":  "ok",
+                        "http":  "ok",
+                        "ok":  true,
+                        "arguments":  {
+                                          "pull_number":  1,
+                                          "owner":  "octocat",
+                                          "repo":  "Hello-World"
+                                      },
+                        "text":  "{\n  \"state\": \"pending\",\n  \"statuses\": [],\n  \"sha\": \"7044a8a032e85b6ab611033b2ac8af7ce85805b2\",\n  \"total_count\": 0\n}",
+                        "reason":  ""
+                    },
+                    {
+                        "name":  "github.update_pull_request_branch",
+                        "status":  "skipped",
+                        "http":  "ok",
+                        "ok":  false,
+                        "arguments":  {
+
+                                      },
+                        "text":  "skip",
+                        "reason":  "Operacao de escrita GitHub ignorada por padrao (use -IncludeGithubWrite)."
+                    },
+                    {
+                        "name":  "github.get_pull_request_comments",
+                        "status":  "skipped",
+                        "http":  "ok",
+                        "ok":  false,
+                        "arguments":  {
+
+                                      },
+                        "text":  "skip",
+                        "reason":  "Sem pull request de referencia para comments/reviews; aguardando retorno de github.list_pull_requests."
+                    },
+                    {
+                        "name":  "github.get_pull_request_reviews",
+                        "status":  "skipped",
+                        "http":  "ok",
+                        "ok":  false,
+                        "arguments":  {
+
+                                      },
+                        "text":  "skip",
+                        "reason":  "Sem pull request de referencia para comments/reviews; aguardando retorno de github.list_pull_requests."
+                    },
+                    {
+                        "name":  "sqlite.query",
+                        "status":  "ok",
+                        "http":  "ok",
+                        "ok":  true,
+                        "arguments":  {
+                                          "sql":  "SELECT name FROM sqlite_master WHERE type=\u0027table\u0027 LIMIT 5;"
+                                      },
+                        "text":  "[]",
+                        "reason":  ""
+                    },
+                    {
+                        "name":  "sqlite.execute",
+                        "status":  "ok",
+                        "http":  "ok",
+                        "ok":  true,
+                        "arguments":  {
+                                          "sql":  "CREATE TABLE IF NOT EXISTS mike_smoke_155730 (id INTEGER PRIMARY KEY, note TEXT);"
+                                      },
+                        "text":  "{\n  \"changes\": 0,\n  \"lastInsertRowid\": 0,\n  \"message\": \"Statement executed successfully. 0 row(s) affected.\"\n}",
+                        "reason":  ""
+                    },
+                    {
+                        "name":  "sqlite.describe-table",
+                        "status":  "ok",
+                        "http":  "ok",
+                        "ok":  true,
+                        "arguments":  {
+                                          "tableName":  "mike_smoke_155730"
+                                      },
+                        "text":  "{\n  \"tableName\": \"mike_smoke_155730\",\n  \"columns\": [\n    {\n      \"cid\": 0,\n      \"name\": \"id\",\n      \"type\": \"INTEGER\",\n      \"notnull\": 0,\n      \"dflt_value\": null,\n      \"pk\": 1\n    },\n    {\n      \"cid\": 1,\n      \"name\": \"note\",\n      \"type\": \"TEXT\",\n      \"notnull\": 0,\n      \"dflt_value\": null,\n      \"pk\": 0\n    }\n  ],\n  \"indexes\": [],\n  \"foreignKeys\": [],\n  \"columnCount\": 2,\n  \"formattedColumn ...",
+                        "reason":  ""
+                    },
+                    {
+                        "name":  "sqlite.list-tables",
+                        "status":  "ok",
+                        "http":  "ok",
+                        "ok":  true,
+                        "arguments":  {
+
+                                      },
+                        "text":  "[\n  {\n    \"name\": \"mike_smoke_155730\",\n    \"sql\": \"CREATE TABLE mike_smoke_155730 (id INTEGER PRIMARY KEY, note TEXT)\"\n  }\n]",
+                        "reason":  ""
+                    },
+                    {
+                        "name":  "sqlite.create-table",
+                        "status":  "ok",
+                        "http":  "ok",
+                        "ok":  true,
+                        "arguments":  {
+                                          "name":  "mike_smoke_155730",
+                                          "columns":  [
+                                                          {
+                                                              "primaryKey":  true,
+                                                              "name":  "id",
+                                                              "type":  "INTEGER"
+                                                          },
+                                                          {
+                                                              "name":  "note",
+                                                              "type":  "TEXT"
+                                                          }
+                                                      ],
+                                          "ifNotExists":  true
+                                      },
+                        "text":  "{\n  \"message\": \"Table \u0027mike_smoke_155730\u0027 created successfully\",\n  \"sql\": \"CREATE TABLE IF NOT EXISTS mike_smoke_155730 (id INTEGER PRIMARY KEY, note TEXT)\",\n  \"changes\": 0\n}",
+                        "reason":  ""
+                    },
+                    {
+                        "name":  "sqlite.drop-table",
+                        "status":  "ok",
+                        "http":  "ok",
+                        "ok":  true,
+                        "arguments":  {
+                                          "ifExists":  true,
+                                          "name":  "mike_smoke_155730_drop"
+                                      },
+                        "text":  "{\n  \"message\": \"Table \u0027mike_smoke_155730_drop\u0027 dropped successfully\",\n  \"sql\": \"DROP TABLE IF EXISTS mike_smoke_155730_drop\",\n  \"changes\": 0\n}",
+                        "reason":  ""
+                    },
+                    {
+                        "name":  "sqlite.insert-record",
+                        "status":  "ok",
+                        "http":  "ok",
+                        "ok":  true,
+                        "arguments":  {
+                                          "table":  "mike_smoke_155730",
+                                          "data":  {
+                                                       "note":  "hello"
+                                                   }
+                                      },
+                        "text":  "{\n  \"message\": \"Record inserted successfully\",\n  \"insertedId\": 1,\n  \"changes\": 1,\n  \"sql\": \"INSERT INTO mike_smoke_155730 (note) VALUES (?)\"\n}",
+                        "reason":  ""
+                    },
+                    {
+                        "name":  "sqlite.update-record",
+                        "status":  "ok",
+                        "http":  "ok",
+                        "ok":  true,
+                        "arguments":  {
+                                          "where":  "note=\u0027hello\u0027",
+                                          "table":  "mike_smoke_155730",
+                                          "data":  {
+                                                       "note":  "updated"
+                                                   }
+                                      },
+                        "text":  "{\n  \"message\": \"Records updated successfully\",\n  \"changes\": 1,\n  \"sql\": \"UPDATE mike_smoke_155730 SET note = ? WHERE note=\u0027hello\u0027\"\n}",
+                        "reason":  ""
+                    },
+                    {
+                        "name":  "sqlite.delete-record",
+                        "status":  "ok",
+                        "http":  "ok",
+                        "ok":  true,
+                        "arguments":  {
+                                          "table":  "mike_smoke_155730",
+                                          "where":  "1=1"
+                                      },
+                        "text":  "{\n  \"message\": \"Records deleted successfully\",\n  \"changes\": 1,\n  \"sql\": \"DELETE FROM mike_smoke_155730 WHERE 1=1\"\n}",
+                        "reason":  ""
+                    },
+                    {
+                        "name":  "sqlite.transaction",
+                        "status":  "ok",
+                        "http":  "ok",
+                        "ok":  true,
+                        "arguments":  {
+                                          "statements":  [
+                                                             "CREATE TABLE IF NOT EXISTS mike_smoke_155730 (id INTEGER PRIMARY KEY, note TEXT)",
+                                                             "INSERT INTO mike_smoke_155730 (note) VALUES (\u0027tx\u0027)"
+                                                         ]
+                                      },
+                        "text":  "{\n  \"message\": \"Transaction completed successfully\",\n  \"results\": [\n    {\n      \"sql\": \"CREATE TABLE IF NOT EXISTS mike_smoke_155730 (id INTEGER PRIMARY KEY, note TEXT)\",\n      \"changes\": 0,\n      \"lastInsertRowid\": 0\n    },\n    {\n      \"sql\": \"INSERT INTO mike_smoke_155730 (note) VALUES (\u0027tx\u0027)\",\n      \"changes\": 1,\n      \"lastInsertRowid\": 1\n    }\n  ],\n  \"totalStatements\": 2\n}",
+                        "reason":  ""
+                    },
+                    {
+                        "name":  "puppeteer.puppeteer_navigate",
+                        "status":  "ok",
+                        "http":  "ok",
+                        "ok":  true,
+                        "arguments":  {
+                                          "url":  "about:blank"
+                                      },
+                        "text":  "Navigated to about:blank",
+                        "reason":  ""
+                    },
+                    {
+                        "name":  "puppeteer.puppeteer_screenshot",
+                        "status":  "ok",
+                        "http":  "ok",
+                        "ok":  true,
+                        "arguments":  {
+                                          "encoded":  true,
+                                          "name":  "smoke_shot_20260723_155729",
+                                          "height":  600,
+                                          "width":  800
+                                      },
+                        "text":  "Screenshot \u0027smoke_shot_20260723_155729\u0027 taken at 800x600\ndata:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAyAAAAJYCAIAAAAVFBUnAAAKXUlEQVR4nOzWQQ0AMAgAMbJMAf7FYuKerYr+3R0AADpvAABICRYAQEywAABiggUAEBMsAICYYAEAxAQLACAmWAAAMcECAIgJFgBATLAAAGKCBQAQEywAgJhgAQDEBAsAICZYAAAxwQIAiAkWAEBMsAAAYoIFABATLACAmGABAMQECwAgJlgAADHBAgCICRYAQEywAABiggUAEBMsAICYYAEAxAQLACAmWAAAMcECAIgJFgBATLAAAGKCBQAQEywAgJhgAQDEBAsAICZYA ...",
+                        "reason":  ""
+                    },
+                    {
+                        "name":  "puppeteer.puppeteer_click",
+                        "status":  "skipped",
+                        "http":  "ok",
+                        "ok":  false,
+                        "arguments":  {
+
+                                      },
+                        "text":  "skip",
+                        "reason":  "Interacoes de seletor desativadas por padrao (dependem de sessao browser persistente); use -IncludePuppeteerInteractive."
+                    },
+                    {
+                        "name":  "puppeteer.puppeteer_fill",
+                        "status":  "skipped",
+                        "http":  "ok",
+                        "ok":  false,
+                        "arguments":  {
+
+                                      },
+                        "text":  "skip",
+                        "reason":  "Interacoes de seletor desativadas por padrao (dependem de sessao browser persistente); use -IncludePuppeteerInteractive."
+                    },
+                    {
+                        "name":  "puppeteer.puppeteer_select",
+                        "status":  "skipped",
+                        "http":  "ok",
+                        "ok":  false,
+                        "arguments":  {
+
+                                      },
+                        "text":  "skip",
+                        "reason":  "Interacoes de seletor desativadas por padrao (dependem de sessao browser persistente); use -IncludePuppeteerInteractive."
+                    },
+                    {
+                        "name":  "puppeteer.puppeteer_hover",
+                        "status":  "skipped",
+                        "http":  "ok",
+                        "ok":  false,
+                        "arguments":  {
+
+                                      },
+                        "text":  "skip",
+                        "reason":  "Interacoes de seletor desativadas por padrao (dependem de sessao browser persistente); use -IncludePuppeteerInteractive."
+                    },
+                    {
+                        "name":  "puppeteer.puppeteer_evaluate",
+                        "status":  "ok",
+                        "http":  "ok",
+                        "ok":  true,
+                        "arguments":  {
+                                          "script":  "() =\u003e document.title"
+                                      },
+                        "text":  "Execution result:\n{}\n\nConsole output:",
+                        "reason":  ""
+                    },
+                    {
+                        "name":  "web.search_and_cache",
+                        "status":  "tool_error",
+                        "http":  "ok",
+                        "ok":  false,
+                        "arguments":  {
+                                          "limit":  1,
+                                          "query":  "Mike server health check"
+                                      },
+                        "text":  "AttributeError: \u0027NoneType\u0027 object has no attribute \u0027search\u0027",
+                        "reason":  ""
+                    },
+                    {
+                        "name":  "memory.checkpoint_save",
+                        "status":  "ok",
+                        "http":  "ok",
+                        "ok":  true,
+                        "arguments":  {
+                                          "label":  "smoke-20260723_155729"
+                                      },
+                        "text":  "Checkpoint salvo com sucesso!\n- ID: ckpt-a5207b56726f\n- Sessao: main\n- Turns: 607\n- Label: smoke-20260723_155729\nVoce pode restaurar esse estado a qualquer momento.",
+                        "reason":  ""
+                    },
+                    {
+                        "name":  "memory.checkpoint_list",
+                        "status":  "ok",
+                        "http":  "ok",
+                        "ok":  true,
+                        "arguments":  {
+                                          "limit":  3
+                                      },
+                        "text":  "Checkpoints disponiveis:\n\n- **ckpt-a5207b56726f** [smoke-20260723_155729]\n  Sessao: main | Turns: 607 | 2026-07-23T19:59:30Z\n  Resumo: - Quanto e 15 + 27? Responda apenas com o numero.\n- Oi Mike! Tudo bem?\n- Escreva uma funcao Python que recebe uma lista e retorna apenas os numeros pares. Apenas o codigo, s\n- Qual e a capital do Bras\n- **ckpt-083bb81b1b07** [smoke-20260511_075837]\n  Sessao: main | ...",
+                        "reason":  ""
+                    },
+                    {
+                        "name":  "memory.checkpoint_restore",
+                        "status":  "ok",
+                        "http":  "ok",
+                        "ok":  true,
+                        "arguments":  {
+                                          "checkpoint_id":  "ckpt-a5207b56726f"
+                                      },
+                        "text":  "Checkpoint restaurado!\n- ID: ckpt-a5207b56726f\n- Sessao: main\n- Turns: 607\n- Label: smoke-20260723_155729\n- Mensagens recuperadas: 1214\n- Resumo do estado:\n- Quanto e 15 + 27? Responda apenas com o numero.\n- Oi Mike! Tudo bem?\n- Escreva uma funcao Python que recebe uma lista e retorna apenas os numeros pares. Apenas o codigo, s\n- Qual e a capital do Brasil? Responda apenas com o nome da cidade.\n-  ...",
+                        "reason":  ""
+                    },
+                    {
+                        "name":  "memory.session_summary",
+                        "status":  "ok",
+                        "http":  "ok",
+                        "ok":  true,
+                        "arguments":  {
+                                          "summary":  "smoke summary",
+                                          "topics":  [
+                                                         "smoke",
+                                                         "tools"
+                                                     ]
+                                      },
+                        "text":  "Resumo da sessao salvo com sucesso!\n- Sessao: main\n- Topicos: smoke, tools\n- Resumo: smoke summary\nEsse resumo sera usado em sessoes futuras para contexto.",
+                        "reason":  ""
+                    },
+                    {
+                        "name":  "expert.consult_deepseek",
+                        "status":  "ok",
+                        "http":  "ok",
+                        "ok":  true,
+                        "arguments":  {
+                                          "prompt":  "responda apenas: ok",
+                                          "mode":  "reasoning"
+                                      },
+                        "text":  "ok",
+                        "reason":  ""
+                    },
+                    {
+                        "name":  "email.send",
+                        "status":  "tool_error",
+                        "http":  "ok",
+                        "ok":  false,
+                        "arguments":  {
+                                          "subject":  "smoke",
+                                          "to":  "noreply@example.invalid",
+                                          "body":  "smoke",
+                                          "html":  false
+                                      },
+                        "text":  "Falha de autenticaÃ§Ã£o SMTP. Verifique MIKE_SMTP_USER e MIKE_SMTP_PASSWORD.",
+                        "reason":  ""
+                    },
+                    {
+                        "name":  "email.list_inbox",
+                        "status":  "tool_error",
+                        "http":  "ok",
+                        "ok":  false,
+                        "arguments":  {
+                                          "unread_only":  false,
+                                          "folder":  "INBOX",
+                                          "limit":  1
+                                      },
+                        "text":  "Erro de autenticaÃ§Ã£o IMAP: b\u0027[AUTHENTICATIONFAILED] Invalid credentials (Failure)\u0027",
+                        "reason":  ""
+                    },
+                    {
+                        "name":  "email.read",
+                        "status":  "skipped",
+                        "http":  "ok",
+                        "ok":  false,
+                        "arguments":  {
+
+                                      },
+                        "text":  "skip",
+                        "reason":  "email.read depende de UID real obtido de email.list_inbox."
+                    },
+                    {
+                        "name":  "email.search",
+                        "status":  "tool_error",
+                        "http":  "ok",
+                        "ok":  false,
+                        "arguments":  {
+                                          "query":  "smoke",
+                                          "limit":  1,
+                                          "folder":  "INBOX"
+                                      },
+                        "text":  "Erro de autenticaÃ§Ã£o IMAP: b\u0027[AUTHENTICATIONFAILED] Invalid credentials (Failure)\u0027",
+                        "reason":  ""
+                    },
+                    {
+                        "name":  "mike.introspect",
+                        "status":  "ok",
+                        "http":  "ok",
+                        "ok":  true,
+                        "arguments":  {
+                                          "section":  "all"
+                                      },
+                        "text":  "ð MAPA REAL DO CODIGO-FONTE DO MIKE\n\n\n[PROJECT_ROOT]\n  C:\\Users\\Admin\\Desktop\\mike\n\n[SERVER]\n  main: C:\\Users\\Admin\\Desktop\\mike\\core\\server\\mike_server.py\n  config: C:\\Users\\Admin\\Desktop\\mike\\core\\server\\mike_config.py\n  auth: C:\\Users\\Admin\\Desktop\\mike\\core\\server\\mike_auth.py\n  token_budget: C:\\Users\\Admin\\Desktop\\mike\\core\\server\\mike_token_budget.py\n  payloads: C:\\Users\\Admin\\Desktop\\mik ...",
+                        "reason":  ""
+                    },
+                    {
+                        "name":  "mike.hot_cache_list",
+                        "status":  "ok",
+                        "http":  "ok",
+                        "ok":  true,
+                        "arguments":  {
+
+                                      },
+                        "text":  "ð¥ HOT CACHE â 7 item(s):\n\nâ¢ test_key_xyz [] (2026-05-05)\n  test_value_123...\nâ¢ debug20-key [[\u0027debug\u0027, \u0027tool\u0027]] (2026-05-10)\n  conteudo teste 20...\nâ¢ debug20-key-1778421872 [[\u0027debug\u0027]] (2026-05-10)\n  conteudo...\nâ¢ debug20-cache-1778421952 [[\u0027debug\u0027, \u0027tools\u0027]] (2026-05-10)\n  conteudo-cache-1778421952...\nâ¢ smoke-20260511_074622 [smoke,test] (2026-05-11)\n  ok...\nâ¢ smoke-20260511_07491 ...",
+                        "reason":  ""
+                    },
+                    {
+                        "name":  "mike.hot_cache_add",
+                        "status":  "ok",
+                        "http":  "ok",
+                        "ok":  true,
+                        "arguments":  {
+                                          "content":  "ok",
+                                          "key":  "smoke-20260723_155729",
+                                          "tags":  "smoke,test"
+                                      },
+                        "text":  "â\u0085 \u0027smoke-20260723_155729\u0027 adicionado ao hot cache.\nC:\\Users\\Admin\\Desktop\\mike\\runtime\\cache\\hot_cache.json",
+                        "reason":  ""
+                    }
+                ]
+}

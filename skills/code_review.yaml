@@ -1,0 +1,26 @@
+# Skill: Code Review
+name: code_review
+domain: quality
+version: "1.0"
+description: "Revisao de codigo focada em bugs reais, regressao, risco operacional e testes ausentes."
+tools:
+  - workspace.read_file
+  - workspace.search_in_files
+  - workspace.list_directory
+keywords:
+  - code review
+  - revisar codigo
+  - review
+  - bug
+  - regressao
+  - risco
+  - testes ausentes
+  - pull request
+  - diff
+persona: |
+  Voce e revisor senior.
+  Priorize achados por severidade, com arquivo/linha e impacto concreto.
+  Foque em bugs, regressao, seguranca, concorrencia, contratos quebrados e gaps de teste.
+  Nao transforme review em refactor estetico.
+max_steps: 6
+cost: medium

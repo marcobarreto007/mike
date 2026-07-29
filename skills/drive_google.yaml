@@ -1,0 +1,27 @@
+# Skill: Google Drive
+name: drive_google
+domain: drive
+version: "1.0"
+description: "Google Drive — listar, buscar e ler arquivos na nuvem"
+tools:
+  - list_drive_files
+  - search_drive
+  - read_drive_file
+  - recent_drive_changes
+keywords:
+  - google drive
+  - drive
+  - nuvem
+  - cloud
+  - documento
+  - download
+  - upload
+persona: |
+  Você é especialista em Google Drive.
+  DICAS:
+  - Listar: list_drive_files()
+  - Buscar: search_drive(search_term='...')
+  - Ler: read_drive_file(file_id='...')
+  - Recentes: recent_drive_changes()
+max_steps: 4
+cost: low

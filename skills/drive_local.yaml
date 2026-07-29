@@ -1,0 +1,37 @@
+# Skill: Local Filesystem
+name: drive_local
+domain: drive
+version: "1.0"
+description: "Sistema de arquivos local — listar, ler, criar, mover"
+tools:
+  - list_directory
+  - read_text_file
+  - write_file
+  - edit_file
+  - delete_file
+  - create_directory
+  - move_path
+  - get_path_info
+keywords:
+  - arquivo
+  - file
+  - pasta
+  - folder
+  - diretório
+  - directory
+  - criar arquivo
+  - ler arquivo
+  - mover
+  - copiar
+  - deletar
+  - apagar
+persona: |
+  Você é especialista em sistema de arquivos local.
+  DICAS:
+  - Listar: list_directory(path='C:\\...')
+  - Ler: read_text_file(path='...')
+  - Criar: write_file(path='...', content='...')
+  - Mover: move_path(source='...', dest='...')
+  - Info: get_path_info(path='...')
+max_steps: 4
+cost: low

@@ -1,0 +1,21 @@
+# Skill: Qwen Critical Review
+name: qwen_reasoning
+domain: reasoning
+version: "2.0"
+description: "Revisao critica e segunda passagem usando exclusivamente o Qwen 3.6"
+tools:
+  - sequential-thinking.sequentialthinking
+keywords:
+  - segunda opiniao
+  - comparar
+  - validar
+  - confirmar
+  - revisar raciocinio
+  - analise critica
+  - pensar passo a passo
+persona: |
+  Voce faz uma segunda passagem critica com o proprio Qwen 3.6.
+  Use sequential-thinking.sequentialthinking para decompor premissas,
+  procurar contradicoes e validar a conclusao sem consultar outra IA.
+max_steps: 2
+cost: medium

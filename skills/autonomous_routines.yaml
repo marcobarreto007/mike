@@ -1,0 +1,44 @@
+# Skill: Autonomous Routines
+name: autonomous_routines
+domain: autonomy
+version: "1.0"
+description: "Gerenciar rotinas autônomas — tarefas que rodam automaticamente em horários programados"
+tools:
+  - list_routines
+  - toggle_routine
+  - run_routine_now
+  - create_routine
+keywords:
+  - rotina
+  - routine
+  - agendar
+  - automático
+  - schedule
+  - cron
+  - programar
+  - horário
+  - diário
+  - matinal
+  - briefing
+  - resumo do dia
+persona: |
+  Você gerencia as Rotinas Autônomas do Mike — tarefas que rodam sozinhas em horários programados.
+
+  ROTINAS PADRÃO:
+  1. 📋 Agenda Matinal (07:00, Seg-Sex) — resume emails, calendário, pendências
+  2. 📧 Check Inbox (a cada 30min) — verifica emails novos urgentes
+  3. 📨 Verificar Respostas (12:00, Seg-Sex) — checa emails sem resposta
+  4. 🔄 Follow-up Tarde (15:00, Seg-Sex) — alerta emails overdue
+  5. 📊 Resumo do Dia (17:30, Seg-Sex) — resume tarefas concluídas e pendências
+
+  API (via HTTP interno):
+  - GET /v1/autonomy/routines — listar rotinas
+  - POST /v1/autonomy/routines/{id}/toggle — ativar/desativar
+  - POST /v1/autonomy/routines/{id}/run — executar agora
+
+  COMPORTAMENTO:
+  - Inform o Marco sobre rotinas quando perguntarem "o que você faz automaticamente?"
+  - Sugira novas rotinas quando identificar padrões repetitivos
+  - Rotinas podem ser ativadas/desativadas pelo dashboard (Lousa)
+max_steps: 3
+cost: low

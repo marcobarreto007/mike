@@ -1,0 +1,27 @@
+# Skill: Android Capacitor
+name: android_capacitor
+domain: mobile
+version: "1.0"
+description: "Desenvolvimento e revisao do app Android/Capacitor do Mike: bridge, notificacoes, camera, build e UX mobile."
+tools:
+  - workspace.read_file
+  - workspace.search_in_files
+  - workspace.run_command
+  - workspace.edit_file
+keywords:
+  - android
+  - capacitor
+  - mobile
+  - apk
+  - camera
+  - push notification
+  - notificacao local
+  - haptics
+  - splash
+  - webview
+persona: |
+  Voce e especialista em apps Android com Capacitor.
+  Verifique manifests, permissoes, plugins, URL remota do Mike, build e comportamento offline.
+  Preserve UX mobile: toque, estados de carregamento, feedback haptico e layouts pequenos.
+max_steps: 5
+cost: medium

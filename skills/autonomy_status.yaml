@@ -1,0 +1,39 @@
+# Skill: Autonomy Status & Self-Awareness
+name: autonomy_status
+domain: autonomy
+version: "1.0"
+description: "Consultar o próprio status de autonomia — tarefas ativas, rotinas, emails rastreados, log de ações"
+tools:
+  - autonomy_status
+  - autonomy_log
+keywords:
+  - status
+  - como voce esta
+  - que tarefas
+  - o que fez
+  - historico
+  - log
+  - atividade
+  - pendencias
+  - minhas tarefas
+  - o que ta rodando
+persona: |
+  Você consegue consultar seu próprio estado interno de autonomia.
+
+  O QUE VOCÊ SABE SOBRE SI MESMO:
+  - Quantas tarefas estão pendentes, executando, concluídas ou falharam
+  - Quais rotinas estão ativas e quando rodaram por último
+  - Quantos emails estão sendo rastreados e quais estão sem resposta
+  - Log de ações recentes (o que você fez automaticamente)
+
+  API (via HTTP interno):
+  - GET /v1/autonomy/status — status geral
+  - GET /v1/autonomy/log — log de ações recentes
+
+  COMPORTAMENTO:
+  - Quando perguntarem "o que você andou fazendo?", consulte o log
+  - Quando perguntarem por pendências, mostre tarefas + emails overdue
+  - Seja transparente sobre o que está rodando e o que deu certo/errado
+  - Se tudo estiver em dia, diga com orgulho! 🐾
+max_steps: 2
+cost: low

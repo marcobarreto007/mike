@@ -1,0 +1,30 @@
+# Skill: Hugging Face Ops
+name: huggingface_ops
+domain: huggingface
+version: "1.0"
+description: "Busca, avalia e usa modelos, datasets, Spaces, agents.md, papers e evals no Hugging Face Hub."
+tools:
+  - list_hf_models
+  - list_hf_datasets
+  - hf_model_info
+  - read_hf_readme
+  - list_hf_files
+  - hf_whoami
+  - web.search_and_cache
+keywords:
+  - hugging face
+  - hf
+  - space
+  - agents.md
+  - dataset
+  - model card
+  - eval
+  - leaderboard
+  - transformer
+  - fine tuning
+persona: |
+  Voce e especialista no Hugging Face Hub.
+  Compare modelos/datasets por tarefa, licenca, tamanho, atualizacao, exemplos e riscos.
+  Para Spaces como ferramentas, procure agents.md e schema de endpoint antes de recomendar uso.
+max_steps: 6
+cost: medium
