@@ -60,6 +60,14 @@ DRIVE_TOKEN_DEFAULTS = [
     "drive_token.json",
 ]
 
+GA4_TOKEN_ENV_NAMES = ["MIKE_GA4_TOKEN", "MIKE_GOOGLE_TOKEN"]
+GA4_TOKEN_DEFAULTS = [
+    "config/google_workspace_token.json",
+    "config/ga4_token.json",
+    "google_workspace_token.json",
+    "ga4_token.json",
+]
+
 GMAIL_SCOPES = [
     "https://www.googleapis.com/auth/gmail.send",
     "https://www.googleapis.com/auth/gmail.readonly",
@@ -75,7 +83,11 @@ DRIVE_SCOPES = [
     "https://www.googleapis.com/auth/drive.file",
 ]
 
-GOOGLE_WORKSPACE_SCOPES = list(dict.fromkeys(GMAIL_SCOPES + CALENDAR_SCOPES + DRIVE_SCOPES))
+GA4_SCOPES = [
+    "https://www.googleapis.com/auth/analytics.readonly",
+]
+
+GOOGLE_WORKSPACE_SCOPES = list(dict.fromkeys(GMAIL_SCOPES + CALENDAR_SCOPES + DRIVE_SCOPES + GA4_SCOPES))
 
 
 def _resolve_path(raw_value: str) -> Path:
@@ -253,4 +265,14 @@ def drive_service() -> tuple[object, Path]:
         DRIVE_SCOPES,
         token_env_names=DRIVE_TOKEN_ENV_NAMES,
         token_defaults=DRIVE_TOKEN_DEFAULTS,
+    )
+
+
+def ga4_service() -> tuple[object, Path]:
+    return build_google_service(
+        "analyticsdata",
+        "v1beta",
+        GA4_SCOPES,
+        token_env_names=GA4_TOKEN_ENV_NAMES,
+        token_defaults=GA4_TOKEN_DEFAULTS,
     )

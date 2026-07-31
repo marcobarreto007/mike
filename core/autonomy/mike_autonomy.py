@@ -891,7 +891,19 @@ class MikeAutonomy:
                 elif check_type == "inbox":
                     if self._email_search_fn:
                         try:
-                            emails = await self._email_search_fn(query="is:unread", max_results=5)
+                            emails = await asyncio.to_thread(
+                                self._email_search_fn,
+                                term="is:unread",
+                                days_back=0,
+                                limit=5,
+                            )
+                            if (
+                                isinstance(emails, list)
+                                and emails
+                                and isinstance(emails[0], dict)
+                                and emails[0].get("error")
+                            ):
+                                raise RuntimeError(str(emails[0]["error"]))
                             unread = len(emails) if isinstance(emails, list) else 0
                             result_text = f"Inbox: {unread} nao lido(s)"
                             success = True

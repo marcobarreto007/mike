@@ -296,10 +296,6 @@ async def integrations_status(request: Request):
     except Exception:
         google_state = "unavailable"
 
-    smtp_present = bool(
-        os.getenv("MIKE_SMTP_USER", "").strip()
-        and os.getenv("MIKE_SMTP_PASSWORD", "").strip()
-    )
     telegram_configured = bool(
         os.getenv("MIKE_TELEGRAM_ENABLED", "").strip().lower()
         in {"1", "true", "yes", "on"}
@@ -356,10 +352,9 @@ async def integrations_status(request: Request):
             "ready": google_state == "ready",
             "state": google_state,
         },
-        "email_imap_smtp": {
-            "ready": False,
-            "state": "configured_unverified" if smtp_present else "missing_credentials",
-            "credentials_present": smtp_present,
+        "email_gmail_api": {
+            "ready": google_state == "ready",
+            "state": google_state,
         },
         "telegram": {
             "ready": telegram_configured,

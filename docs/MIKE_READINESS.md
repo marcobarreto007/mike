@@ -1,84 +1,116 @@
-# Mike — Estado de prontidão
+# MIKE — estado real de readiness
 
-Atualizado em 2026-07-24. Este documento separa capacidade operacional de
-integração apenas instalada/configurada.
+Atualizado em **30 de julho de 2026**, a partir do runtime e não apenas do
+estado do Git.
 
-## Núcleo operacional
+## Resultado atual
 
-| Componente | Estado | Evidência |
+| Área | Estado | Evidência |
 |---|---|---|
-| Cérebro | Pronto | Somente `llama_server`, modelo Qwen3.6-35B-A3B IQ4_XS |
-| API/dashboard | Pronto | FastAPI saudável em `http://127.0.0.1:8083` |
-| Tools | Pronto | 153 tools em 16 servidores, incluindo tools locais |
-| Skills | Pronto | 48/48 empacotadas e executáveis; cobertura de padrões 100% |
-| TaskMesh | Pronto | Planejamento, escopo semântico e uma tool por passo |
-| Autonomia | Pronto | Motor ativo, 6/6 rotinas habilitadas |
-| Governança | Pronto | Loop ativo e último ciclo saudável |
-| Memória | Pronto | Mem0 OSS + SQLite + BGE-M3 + Memory Mesh |
-| LightRAG | Pronto | Índice criado e consulta de validação concluída |
-| Busca web | Pronto | DDGS e Fetch funcionais sem chave paga |
+| Qwen local | Pronto | `8081/health` retornou `ok` |
+| Modelo | Pronto | Qwen3.6-35B-A3B UD-IQ4_XS, aproximadamente 18,2 GB |
+| API/dashboard | Pronto | `8083/health` retornou `healthy` |
+| Memória | Pronto | SQLite, Mem0 e LightRAG inicializados |
+| Autonomia | Pronto | motor ativo, 6 rotinas habilitadas |
+| Governança | Pronto | loop ativo e último ciclo saudável |
+| Skills | Pronto para tools | 54 carregadas e 54 com tools disponíveis |
+| Tools | Pronto | 186 tools em 18 servidores |
+| Cobertura de tools | Pronto | 100% dos padrões declarados resolvidos |
+| Gmail | Pronto | listagem real validada via OAuth |
+| Calendar | Pronto | 9 calendários encontrados |
+| Drive | Pronto | listagem real validada via OAuth |
+| Google Workspace/GA4 | Pronto | token com todos os escopos requeridos |
+| Email local | Pronto | adaptador Gmail retornou mensagem real |
+| Testes unitários | Pronto | 234 passaram; 3 manuais foram ignorados |
 
-O launcher oficial valida/inicia primeiro o Qwen na porta 8081 e recusa outro
-modelo nessa porta. A API não cai silenciosamente para mock ou DeepSeek.
-
-## MCPs validados
-
-- workspace: listagem dos diretórios permitidos;
-- filesystem: leitura/listagem dentro das raízes autorizadas;
-- memory-persistent: leitura do grafo;
-- sequential-thinking: execução de raciocínio sequencial;
-- SQLite: listagem de tabelas e consultas;
-- Fetch: leitura HTTP de página externa;
-- Puppeteer: abertura do dashboard local;
-- GitHub: busca pública de repositórios;
-- Excel: listagem/leitura/escrita local controlada;
-- Appointments: agenda persistente e máquina de estados;
-- Hugging Face: identidade pública, modelos, datasets e model cards;
-- Autonomia: status e lousa de tarefas;
-- Workspace PowerShell: execução não interativa, confinada ao `cwd` autorizado;
-- Qwen tool loop: `autonomy_status` e `execute_powershell` escolhidas e
-  executadas pelo próprio Qwen em conversas reais.
-
-## Dependências externas pendentes
-
-Estas integrações não podem ser ativadas corretamente sem credenciais ou
-software do proprietário:
-
-| Integração | Estado atual | Necessário |
-|---|---|---|
-| Google Workspace | OAuth ausente | Executar `scripts/setup/setup_google_workspace_oauth.py` |
-| Email IMAP/SMTP | Credencial rejeitada | Gerar/configurar senha de app válida |
-| Telegram | Token ausente | Bot token e chat IDs |
-| Twilio | Credenciais ausentes | Account SID, auth token e números |
-| CrawlConsole | HTTP 401 | Chave/header de autenticação |
-| Brave Search | Chave ausente | `BRAVE_API_KEY` (DDGS continua disponível) |
-| GitHub privado/escrita | Token ausente | Token com o menor escopo necessário |
-| Agente Windows remoto | Host fora do ar/chave ausente | Ligar o agente em `192.168.40.60:3000` e configurar `MIKE_REMOTE_AGENT_KEY` |
-| Neo4j | Serviço ausente | Instalar, configurar e habilitar o grafo |
-| Cloudflare Tunnel | Binário/config ausente | Instalar `cloudflared` e configurar túnel |
-| Perfis familiares | 5 senhas ausentes | Configurar senhas de Raphael, Alice, Matheus, Marilene e Visitante |
-
-## Limitações honestas
-
-- Qwen3.6-35B-A3B é text-only. Visão fica desabilitada até existir um caminho
-  compatível que preserve a regra de um único cérebro.
-- A RTX 2070 funciona, é detectada como GPU0 e é observada pela governança.
-- LightRAG foi validado com o README. A base principal já possui busca híbrida
-  sobre 179 documentos e mais de 63 mil chunks; uma reconstrução integral do
-  grafo LightRAG deve ser agendada, pois é uma operação longa.
-
-## Verificações rápidas
+O readiness local passa:
 
 ```powershell
+.\.venv\Scripts\python.exe scripts\ops\check_mike_readiness.py
+```
+
+## Readiness local versus estrito
+
+O modo normal exige:
+
+- API, Qwen, memória, autonomia e governança saudáveis;
+- apenas o backend `llama_server` como cérebro;
+- tools locais essenciais funcionando;
+- skills ligadas a tools reais.
+
+O modo estrito também exige todas as integrações opcionais:
+
+```powershell
+.\.venv\Scripts\python.exe scripts\ops\check_mike_readiness.py --strict
+```
+
+Não use o resultado estrito para declarar o núcleo local quebrado quando uma
+integração opcional não foi contratada, autorizada ou ligada.
+
+## Probes locais validadas
+
+- workspace e execução PowerShell confinada;
+- memória persistente;
+- raciocínio sequencial;
+- filesystem;
+- GitHub público;
+- SQLite;
+- busca web local;
+- Puppeteer;
+- Excel;
+- appointments;
+- Hugging Face;
+- autonomia e task board;
+- Gmail, Calendar e Drive;
+- email local via Gmail API;
+- introspecção do MIKE.
+
+## Integrações externas ainda opcionais
+
+| Integração | Estado | Ação necessária |
+|---|---|---|
+| GA4 | OAuth pronto | configurar a propriedade quando for usar relatórios |
+| Google Ads | Depende da conta | configurar developer token e customer IDs |
+| Shopify | Depende da loja | configurar domínio e access token |
+| Telegram | Sem credenciais confirmadas | configurar bot token e chat IDs |
+| Twilio | Sem credenciais | configurar SID, token e números |
+| CrawlConsole | HTTP 401 | configurar autenticação válida |
+| Neo4j | Desativado/ausente | instalar e habilitar se o grafo externo for necessário |
+| Cloudflare Tunnel | Não instalado | instalar somente para acesso público |
+| GitHub escrita | Leitura pública | configurar token de menor privilégio |
+| Agente remoto | Offline/sem chave | ligar `192.168.40.60:3000` e configurar chave |
+| Perfis familiares | 5 senhas ausentes | configurar Raphael, Alice, Matheus, Marilene e Visitante |
+
+O token combinado de Google Workspace foi renovado com Gmail, Calendar, Drive
+e `analytics.readonly`.
+
+## Limitações conhecidas
+
+- O Qwen atual é text-only; visão permanece desabilitada.
+- O modelo usa CPU e GPU em conjunto; não cabe integralmente na RTX 2070.
+- O agente remoto demora até o timeout quando o computador remoto está fora.
+- Alguns servidores MCP opcionais podem estar carregados, mas exigem conta ou
+  credenciais específicas para executar operações reais.
+- O inventário de skills pode mudar quando novos YAMLs são adicionados; use o
+  endpoint de coverage como fonte atual.
+
+## Comandos de auditoria
+
+```powershell
+Invoke-RestMethod http://127.0.0.1:8081/health
 Invoke-RestMethod http://127.0.0.1:8083/health
 Invoke-RestMethod http://127.0.0.1:8083/v1/health/models
-Invoke-RestMethod http://127.0.0.1:8083/v1/tools
 Invoke-RestMethod http://127.0.0.1:8083/v1/skills/coverage
 Invoke-RestMethod http://127.0.0.1:8083/v1/autonomy/status
 Invoke-RestMethod http://127.0.0.1:8083/v1/governance
-python scripts/ops/check_mike_readiness.py
+
+.\.venv\Scripts\python.exe scripts\ops\check_mike_readiness.py
+.\.venv\Scripts\python.exe -m pytest -q
+.\scripts\ops\test_ops_hardening.ps1
 ```
 
-O verificador retorna `0` quando cérebro, memória, autonomia, governança,
-skills e ferramentas locais estão prontos. Use `--strict` para exigir também
-OAuth, tokens, túnel, Neo4j e o computador remoto.
+## Critério para atualizar este documento
+
+Atualize a tabela somente depois de executar as probes correspondentes. Não
+copie contagens ou estados de uma sessão antiga: portas, credenciais, skills e
+servidores MCP são estado de runtime e podem mudar sem alterar o Git.

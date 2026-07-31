@@ -180,9 +180,9 @@ def build_report(base_url: str, run_smoke: bool) -> dict[str, Any]:
                 {"query": "mcp server", "perPage": 1},
             ),
             "sqlite": ("sqlite.list-tables", {}),
-            "fetch": (
-                "fetch.fetch_txt",
-                {"url": "https://example.com", "max_length": 300},
+            "web-search": (
+                "web.search_and_cache",
+                {"query": "OpenAI official website", "limit": 1},
             ),
             "puppeteer": (
                 "puppeteer.puppeteer_navigate",

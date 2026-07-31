@@ -1,7 +1,7 @@
 # =============================================================================
 # MIKE — Qwen3.6-35B-A3B IQ4_XS Server (O Modelo Certo)
 # RTX 2070 8GB + 40GB RAM | IQ4_XS ~18GB | 128 experts pequenos
-# Alvo: 22-27 tok/s comprovado pela comunidade
+# O throughput depende do hardware, do contexto e da distribuição CPU/GPU.
 # =============================================================================
 
 param(
@@ -19,29 +19,24 @@ $ErrorActionPreference = "Stop"
 $ProjectRoot = [System.IO.Path]::GetFullPath(
     (Split-Path -Parent (Split-Path -Parent $PSScriptRoot))
 )
+. (Join-Path $PSScriptRoot "mike_common.ps1")
 
-if (-not $ModelPath) {
-    $ModelPath = Join-Path $ProjectRoot "llm_cache\Qwen3.6-35B-A3B-UD-IQ4_XS.gguf"
-}
-$ModelPath = [System.IO.Path]::GetFullPath($ModelPath)
+$ModelPath = Resolve-MikeQwenModelPath -ProjectRoot $ProjectRoot -ModelPath $ModelPath
 
 $LlamaDir = Join-Path $ProjectRoot "llama.cpp\build\bin"
 $ServerExe = Join-Path $LlamaDir "llama-server.exe"
 if (-not (Test-Path -LiteralPath $ServerExe)) {
     throw "llama-server.exe not found: $ServerExe"
 }
-if (-not (Test-Path -LiteralPath $ModelPath)) {
-    throw "Qwen 3.6 model not found: $ModelPath"
-}
 $env:PATH = "$LlamaDir;$env:PATH"
 
 Write-Host "============================================"
-Write-Host "  MIKE - Qwen3.6-35B-A3B IQ4_XS (22-27 tok/s)"
+Write-Host "  MIKE - Qwen3.6-35B-A3B IQ4_XS"
 Write-Host "============================================"
 Write-Host "  Modelo : Qwen3.6-35B-A3B (35B MoE, 3B ativos)"
 Write-Host "  Quant  : IQ4_XS (~18 GB, 128 experts)"
-Write-Host "  GPU    : RTX 2070 (8GB) + 40GB RAM"
-Write-Host "  Config : n_cpu_moe=99, FA=on, KV=q8_0"
+Write-Host "  Modo   : hibrido CPU/GPU"
+Write-Host "  Config : n_cpu_moe=$CpuMoe, gpu_layers=$GpuLayers, FA=on, KV=q8_0"
 Write-Host "  API    : http://127.0.0.1:${Port}/v1"
 Write-Host "============================================"
 

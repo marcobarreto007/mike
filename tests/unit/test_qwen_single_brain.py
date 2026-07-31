@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import os
 import sys
 import unittest
 from pathlib import Path
@@ -81,6 +82,8 @@ class QwenSingleBrainTests(unittest.TestCase):
         self.assertIn("StructuredContent", content_types)
 
     def test_auto_reply_reports_missing_email_configuration(self):
+        os.environ["MIKE_AUTO_REPLY_ENABLED"] = "true"
+        self.addCleanup(os.environ.pop, "MIKE_AUTO_REPLY_ENABLED", None)
         result = auto_reply_to_family(
             list_inbox_fn=lambda **_: [{"error": "OAuth token missing"}],
         )

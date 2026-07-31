@@ -186,6 +186,50 @@ function Get-RuntimeEnvValue {
     return $line -replace "^$([regex]::Escape($Name))=", ""
 }
 
+function Resolve-MikeQwenModelPath {
+    param(
+        [string]$ProjectRoot,
+        [string]$ModelPath
+    )
+
+    $root = Get-MikeProjectRoot -ProjectRoot $ProjectRoot
+    $configured = $ModelPath
+    if ([string]::IsNullOrWhiteSpace($configured)) {
+        $configured = $env:MIKE_MODEL_FILE
+    }
+    if ([string]::IsNullOrWhiteSpace($configured)) {
+        $configured = Get-RuntimeEnvValue -Name "MIKE_MODEL_FILE" -ProjectRoot $root
+    }
+    if ([string]::IsNullOrWhiteSpace($configured)) {
+        $configured = "Qwen3.6-35B-A3B-UD-IQ4_XS.gguf"
+    }
+    $configured = $configured.Trim().Trim('"')
+
+    $candidates = [System.Collections.Generic.List[string]]::new()
+    if ([System.IO.Path]::IsPathRooted($configured)) {
+        $candidates.Add($configured)
+    } else {
+        $candidates.Add((Join-Path $root $configured))
+        $candidates.Add((Join-Path $root (Join-Path "llm_cache" $configured)))
+        $candidates.Add((Join-Path $root (Join-Path "llama.cpp\models" $configured)))
+        $candidates.Add((Join-Path $root (Join-Path "llama.cpp-turboquant\models" $configured)))
+    }
+
+    $seen = @{}
+    foreach ($candidate in $candidates) {
+        $fullPath = [System.IO.Path]::GetFullPath($candidate)
+        $key = $fullPath.ToLowerInvariant()
+        if ($seen.ContainsKey($key)) { continue }
+        $seen[$key] = $true
+        if (Test-Path -LiteralPath $fullPath -PathType Leaf) {
+            return $fullPath
+        }
+    }
+
+    $checked = ($seen.Keys | Sort-Object) -join "; "
+    throw "Qwen model not found. Configured value: '$configured'. Checked: $checked"
+}
+
 function Show-RecentLogs {
     param([string]$StdoutLog, [string]$StderrLog)
     Write-Host "`nRecent stdout:" -ForegroundColor Yellow

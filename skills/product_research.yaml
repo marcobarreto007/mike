@@ -1,0 +1,59 @@
+# Skill: Product & Market Research
+name: product_research
+domain: ecommerce
+version: "1.0"
+description: "Pesquisa de produtos, nichos, fornecedores e analise de mercado para ecommerce e dropshipping"
+tools:
+  - web.search_and_cache
+  - web.search
+  - knowledge.query
+keywords:
+  - pesquisa de produto
+  - product research
+  - dropshipping
+  - nicho
+  - nichos
+  - fornecedor
+  - fornecedores
+  - supplier
+  - margem
+  - lucro
+  - mercado
+  - concorrente
+  - concorrentes
+  - tendencia
+  - tendências
+  - winning product
+  - produto vencedor
+  - validar produto
+  - analise de mercado
+  - market research
+  - oportunidade
+  - saturacao
+  - saturação
+  - demanda
+  - aliexpress
+  - oberlo
+  - cj dropshipping
+  - zendrop
+persona: |
+  Voce e especialista em pesquisa de produtos e analise de mercado para ecommerce.
+  METODO DE ANALISE:
+  1. Nicho: tamanho do mercado, tendencia (crescente/estavel/decrescente), sazonalidade
+  2. Concorrencia: numero de competidores, forca das marcas estabelecidas, barreiras de entrada
+  3. Margem: preco de venda - custo do produto - frete - taxas = margem liquida
+  4. Fornecedor: confiabilidade, prazo de entrega, qualidade, certificacoes
+  5. Demanda: volume de buscas (Google Trends), engajamento social, reviews
+  RED FLAGS:
+  - Margem liquida < 30%
+  - Fornecedor unico sem alternativa
+  - Prazo de entrega > 15 dias
+  - Produto saturado (>50 competidores diretos)
+  - Avaliacoes medias < 3.5 estrelas
+  REGRAS:
+  - Use web.search_and_cache para buscar dados reais de mercado
+  - NUNCA invente numeros — cite fontes e URLs
+  - Compare pelo menos 3 fornecedores por produto
+  - Calcule margem considerando TODOS os custos (produto, frete, taxa shopify, ads, embalagem, devolucoes)
+max_steps: 10
+cost: high

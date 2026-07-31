@@ -1,81 +1,60 @@
-# =============================================================================
-# MIKE - Teste de Inferencia Otimizada GPU Puro
-# =============================================================================
-# Objetivo: Maxima velocidade (min 20 tok/s) com Qwen3.6-35B-A3B
-# GPUs: RTX 2070 8GB + P106-100 6GB (14GB VRAM, PCIe x16)
-# =============================================================================
+# Teste de inferência do Qwen já carregado pelo launcher.
 
 param(
-    [string]$ModelPath = "$PSScriptRoot\..\..\llm_cache\Qwen3.6-35B-A3B-UD-Q2_K_XL.gguf",
-    [int]$Threads = 8,
-    [int]$GpuLayers = 999,
-    [string]$TensorSplit = "8,6",
-    [int]$CtxSize = 16384,
-    [int]$BatchSize = 1024,
-    [int]$UbatchSize = 256,
-    [string]$Prompt = "Explique o que e um modelo MoE (Mixture of Experts) em 3 frases."
+    [string]$BaseUrl = "http://127.0.0.1:8081",
+    [string]$Prompt = "Responda exatamente com MIKE_LOCAL_OK e nada mais.",
+    [int]$MaxTokens = 64
 )
 
-$BinDir = "$PSScriptRoot\..\..\llama.cpp\build\bin"
-$LlamaCli = Join-Path $BinDir "llama-cli.exe"
+$ErrorActionPreference = "Stop"
 
-$env:PATH = "$BinDir;$env:PATH"
+$health = Invoke-RestMethod -Uri "$BaseUrl/health" -TimeoutSec 10
+if ($health.status -ne "ok") {
+    throw "Qwen health check failed at $BaseUrl"
+}
 
-Write-Output "============================================"
-Write-Output "  MIKE - Inferencia Otimizada (GPU Puro)"
-Write-Output "============================================"
-Write-Output "  Modelo  : Qwen3.6-35B-A3B MoE"
-Write-Output "  Quant   : UD-Q2_K_XL (12.3 GB)"
-Write-Output "  GPUs    : RTX 2070 (8GB) + P106 (6GB)"
-Write-Output "  Split   : layer mode, tensor_split=$TensorSplit"
-Write-Output "  Contexto: $CtxSize tokens"
-Write-Output "  Batch   : $BatchSize / ubatch=$UbatchSize"
-Write-Output "============================================"
+$models = Invoke-RestMethod -Uri "$BaseUrl/v1/models" -TimeoutSec 15
+$modelId = @($models.data)[0].id
+if ([string]::IsNullOrWhiteSpace($modelId)) {
+    throw "Qwen returned no model ID."
+}
 
-# Parametros otimizados para maxima velocidade:
-# --flash-attn      : Atencao otimizada (menos VRAM, mais rapido)
-# --split-mode layer: Obrigatorio pra MoE (unico compativel)
-# --tensor-split    : Proporcional ao VRAM de cada GPU
-# --main-gpu 0      : RTX 2070 como GPU principal
-# --cache-type-k/q  : KV cache quantizado 4-bit (economiza VRAM pra contexto)
-# --cont-batching   : Batching continuo (melhor throughput)
-# --mlock           : Trava memoria RAM (evita swap)
-# --threads         : Threads de CPU (so pra partes nao-GPU)
-# --batch-size      : Batch grande = prompt processing mais rapido
-# --ubatch-size     : Micro-batch menor = decode mais rapido
-# --temp            : Temperatura 0 pra teste deterministico
-# --repeat-penalty  : Penalidade leve pra evitar repeticoes
+$payload = @{
+    model = $modelId
+    messages = @(
+        @{
+            role = "user"
+            content = $Prompt
+        }
+    )
+    temperature = 0
+    max_tokens = $MaxTokens
+    stream = $false
+    chat_template_kwargs = @{
+        enable_thinking = $false
+    }
+} | ConvertTo-Json -Depth 8
 
-$Args = @(
-    "--model", $ModelPath,
-    "--n-gpu-layers", $GpuLayers,
-    "--split-mode", "layer",
-    "--tensor-split", $TensorSplit,
-    "--main-gpu", "0",
-    "--ctx-size", $CtxSize,
-    "--threads", $Threads,
-    "--batch-size", $BatchSize,
-    "--ubatch-size", $UbatchSize,
-    "--cache-type-k", "q4_0",
-    "--cache-type-v", "q4_0",
-    "--flash-attn",
-    "--cont-batching",
-    "--mlock",
-    "--temp", "0.0",
-    "--repeat-penalty", "1.05",
-    "--no-display-prompt",
-    "--prompt", $Prompt
-)
+$stopwatch = [System.Diagnostics.Stopwatch]::StartNew()
+$response = Invoke-RestMethod `
+    -Uri "$BaseUrl/v1/chat/completions" `
+    -Method Post `
+    -ContentType "application/json" `
+    -Body $payload `
+    -TimeoutSec 120
+$stopwatch.Stop()
 
-Write-Output ""
-Write-Output "  Executando teste de inferencia..."
-Write-Output ""
+$answer = [string]$response.choices[0].message.content
+if ([string]::IsNullOrWhiteSpace($answer)) {
+    throw "Qwen returned an empty completion."
+}
 
-$sw = [System.Diagnostics.Stopwatch]::StartNew()
-& $LlamaCli $Args 2>&1
-$sw.Stop()
-
-Write-Output ""
-Write-Output "============================================"
-Write-Output "  Tempo total: $([math]::Round($sw.Elapsed.TotalSeconds,1))s"
-Write-Output "============================================"
+[pscustomobject]@{
+    status = "ok"
+    model = $response.model
+    answer = $answer
+    prompt_tokens = $response.usage.prompt_tokens
+    completion_tokens = $response.usage.completion_tokens
+    elapsed_sec = [math]::Round($stopwatch.Elapsed.TotalSeconds, 2)
+    predicted_tokens_per_second = $response.timings.predicted_per_second
+} | ConvertTo-Json -Depth 5

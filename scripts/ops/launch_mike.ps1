@@ -41,9 +41,9 @@ function Ensure-QwenServer {
     }
 
     $qwenScript = Join-Path $ProjectRoot "scripts\ops\start_qwen36_server.ps1"
-    $modelPath = Join-Path $ProjectRoot "llm_cache\Qwen3.6-35B-A3B-UD-IQ4_XS.gguf"
+    $modelPath = Resolve-MikeQwenModelPath -ProjectRoot $ProjectRoot
     if (-not (Test-Path $qwenScript)) { throw "Qwen launcher not found: $qwenScript" }
-    if (-not (Test-Path $modelPath)) { throw "Qwen model not found: $modelPath" }
+    Write-Host "Qwen model resolved: $modelPath" -ForegroundColor Green
 
     $logsDir = Join-Path $ProjectRoot "logs"
     New-Item -ItemType Directory -Force -Path $logsDir | Out-Null

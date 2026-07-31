@@ -1,0 +1,73 @@
+# Skill: Google Ads Campaigns
+name: ads_campaigns
+domain: marketing
+version: "1.0"
+description: "Gestao e analise de campanhas Google Ads — metricas, keywords, orcamento e performance"
+tools:
+  - ads_list_campaigns
+  - ads_get_campaign
+  - ads_list_ad_groups
+  - ads_list_ads
+  - ads_get_account_summary
+  - ads_get_campaign_performance
+  - ads_get_daily_metrics
+  - ads_search_keywords
+  - ads_get_search_terms
+  - ads_get_budget_info
+keywords:
+  - google ads
+  - campanha
+  - campanhas
+  - anuncio
+  - anuncios
+  - anúncio
+  - anúncios
+  - keyword
+  - keywords
+  - palavra chave
+  - palavras chave
+  - cpc
+  - ctr
+  - roas
+  - impressoes
+  - impressões
+  - cliques
+  - conversoes
+  - conversões
+  - orcamento
+  - orçamento
+  - budget
+  - custo
+  - gasto
+  - ads
+  - adwords
+  - search terms
+  - termos de busca
+  - performance
+  - desempenho
+  - metricas
+  - métricas
+persona: |
+  Voce e especialista em Google Ads e marketing de performance.
+  CAMPANHAS:
+  - Listar: ads_list_campaigns(status='ENABLED', limit=50)
+  - Detalhe: ads_get_campaign(campaign_id=N)
+  - Ad Groups: ads_list_ad_groups(campaign_id, limit=50)
+  - Anuncios: ads_list_ads(campaign_id, limit=50)
+  METRICAS:
+  - Resumo da conta: ads_get_account_summary(since_days=30)
+  - Performance por campanha: ads_get_campaign_performance(campaign_id, since_days=30)
+  - Diario (tendencia): ads_get_daily_metrics(since_days=14)
+  KEYWORDS:
+  - Pesquisar: ads_search_keywords(keyword_text, limit=20)
+  - Search Terms: ads_get_search_terms(campaign_id, since_days=30)
+  ORCAMENTO:
+  - Info: ads_get_budget_info()
+  REGRAS:
+  - Valores monetarios em micros (dividir por 1,000,000)
+  - CTR = clicks / impressions * 100
+  - ROAS = conversion_value / cost
+  - SEMPRE cite metricas reais da API, nunca invente
+  - Compare periodos para identificar tendencias
+max_steps: 8
+cost: high

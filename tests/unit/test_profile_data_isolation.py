@@ -69,7 +69,7 @@ class _ChatMemory:
 
 def test_chat_query_cannot_override_authenticated_profile(monkeypatch):
     fake = _ChatMemory()
-    monkeypatch.setattr(mike_server, "memory_service", fake)
+    monkeypatch.setattr(mike_server._chat_core, "memory_service", fake)
     request = _request("marco")
 
     asyncio.run(mike_server.chat_sessions(request, profile="anapaula"))

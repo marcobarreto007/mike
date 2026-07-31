@@ -1,162 +1,110 @@
-# MIKE — Pipeline MBJ (Maker → Breaker → Judge)
+# Pipeline MBJ — Maker, Breaker, Judge
 
-## Visão Geral
+O MBJ é um procedimento de revisão adversarial em três estágios:
 
-O MBJ é um protocolo de verificação adversarial em 3 estágios. Nenhum agente confia em outro. Toda afirmação é atacada. Toda decisão exige evidência.
+1. **Maker/Builder** produz uma solução verificável;
+2. **Breaker/Verifier** tenta refutar claims e encontrar falhas;
+3. **Judge/Arbiter** reproduz evidências, decide e propõe o menor reparo.
 
-```
-┌──────────────────────────────────────────────────────────────┐
-│                    MBJ PIPELINE                              │
-│                                                              │
-│  ┌──────────────────┐                                       │
-│  │  PROVER-BUILDER  │  Cientista criativo                   │
-│  │  temp: 0.4-0.7    │  Output: solução + claims + testes    │
-│  └────────┬─────────┘                                       │
-│           │ solução congelada                                │
-│  ┌────────▼─────────┐                                       │
-│  │  ADVERSARIAL     │  Promotor paranoico                   │
-│  │  VERIFIER        │  Output: relatório de falhas          │
-│  │  temp: 0.2-0.4    │  8 frentes de ataque simultâneas     │
-│  └────────┬─────────┘                                       │
-│           │ relatório de falhas                              │
-│  ┌────────▼─────────┐                                       │
-│  │  ARBITER-        │  Juiz conservador                     │
-│  │  REPAIRER        │  Output: veredito + patches mínimos   │
-│  │  temp: 0.0-0.2    │  Reproduz testes críticos            │
-│  └────────┬─────────┘                                       │
-│           │                                                  │
-│     ┌─────▼──────┐                                          │
-│     │  VEREDITO   │                                         │
-│     │  ACCEPT     │→ entrega                                │
-│     │  WARN       │→ entrega com notas                      │
-│     │  REPAIR     │→ patch → re-verifica áreas alteradas    │
-│     │  REGENERATE │→ volta ao Builder (máx 1x)              │
-│     │  ESCALATE   │→ intervenção humana                     │
-│     └────────────┘                                          │
-│                                                              │
-│  Limite: 2 ciclos completos, 1 REGENERATE máximo             │
-│  Se S4 persistir → ESCALATE_TO_HUMAN                        │
-└──────────────────────────────────────────────────────────────┘
+## Estado real da implementação
+
+Os três prompts existem:
+
+```text
+.claude\agents\mbj-builder.md
+.claude\agents\mbj-verifier.md
+.claude\agents\mbj-arbiter.md
 ```
 
-## Os 3 Agentes
+Eles podem ser orquestrados por um agente principal que suporte esses arquivos.
+O runtime Python do MIKE **não possui atualmente** um método
+`TaskMesh.run_pipeline("mbj", ...)`. Essa chamada aparecia na documentação
+antiga, mas nunca foi uma API válida e foi removida deste guia.
 
-### 1. Prover-Builder (`mbj-builder`)
-**Personalidade**: Cientista/engenheiro criativo
-**Temperatura**: 0.4–0.7
-**Modelo**: Opus (alto raciocínio)
+O `TaskMesh` real continua responsável por planejar e executar tarefas
+complexas, porém não implementa automaticamente os três papéis MBJ.
 
-**Função**: Resolver a tarefa e produzir um **pacote verificável**:
-- Solução proposta
-- Claims (afirmações falsificáveis com evidências)
-- Premissas assumidas
-- Testes executados
-- Cálculos
-- Incertezas declaradas
+## Contrato do Builder
 
-**Regra**: Toda afirmação sem evidência é rejeitada automaticamente.
+O Builder deve entregar:
 
-### 2. Adversarial-Verifier (`mbj-verifier`)
-**Personalidade**: Promotor paranoico e auditor técnico
-**Temperatura**: 0.2–0.4
-**Modelo**: Opus (máximo esforço)
-**Ferramentas**: Read-only (não escreve código)
+- solução proposta;
+- claims falsificáveis;
+- evidência para cada claim;
+- premissas;
+- testes executados e resultados;
+- riscos e incertezas.
 
-**8 Frentes de Ataque**:
-| Frente | Função |
-|--------|--------|
-| A. Claim Extractor | Extrai cada afirmação verificável |
-| B. Threat-Model Router | Classifica falhas (FACTUAL, LOGIC, CALC, SOURCE, etc.) |
-| C. Independent Solver | Resolve ANTES de ler o Builder |
-| D. Counterexample Engine | Procura o menor contraexemplo |
-| E. Evidence Auditor | Abre e verifica fontes |
-| F. Tool-Trace Auditor | Audita chamadas de ferramentas |
-| G. Metamorphic Testing | Modifica input e verifica coerência |
-| H. Severity System | Classifica S0 (estilo) a S4 (crítico) |
+Uma afirmação sem evidência deve ser marcada como hipótese, não como fato.
 
-**Regra Suprema**: Todo FAIL precisa de evidência, teste, contradição ou contraexemplo.
+## Contrato do Verifier
 
-### 3. Arbiter-Repairer (`mbj-arbiter`)
-**Personalidade**: Juiz conservador e objetivo
-**Temperatura**: 0.0–0.2
-**Modelo**: Opus (alto raciocínio)
+O Verifier trabalha em modo de auditoria e tenta:
 
-**Processo**:
-1. Lê Builder + Verifier (sem confiar em nenhum)
-2. Reproduz testes críticos (S4 → S3 → S2)
-3. Decide quais acusações procedem
-4. Aplica o menor reparo possível
-5. Re-verifica áreas alteradas
-6. Emite veredito final
+- reproduzir os testes;
+- resolver o problema de forma independente;
+- encontrar contraexemplos;
+- verificar fontes e tool traces;
+- identificar premissas escondidas;
+- classificar cada achado por severidade.
 
-## Sistema de Severidade
+O Verifier não altera silenciosamente a solução do Builder.
 
-| Nível | Nome | Exemplo |
-|-------|------|---------|
-| **S0** | Estilístico | Wording, formatação |
-| **S1** | Imprecisão leve | Detalhe menor, não afeta conclusão |
-| **S2** | Erro localizado | Uma claim errada, outras ok |
-| **S3** | Conclusão comprometida | Solução final está errada |
-| **S4** | Falha crítica | Segurança, OOM, perda de dados |
+## Contrato do Arbiter
 
-## Tipos de Falha (Threat Model)
+O Arbiter:
 
-| Código | Tipo | Descrição |
-|--------|------|-----------|
-| FACTUAL | Erro factual | Informação objectivamente errada |
-| LOGIC | Erro lógico | Conclusão não segue das premissas |
-| CALC | Cálculo incorreto | Erro aritmético |
-| SOURCE | Fonte inválida | Evidência não sustenta a afirmação |
-| OUTDATED | Desatualizado | Tech/versão obsoleta |
-| HIDDEN_PREMISE | Premissa escondida | Assume algo sem declarar |
-| INCOMPAT | Incompatibilidade | Não funciona no HW/SW alvo |
-| TOOL_ERR | Erro de ferramenta | Flag inválida, output ignorado |
-| REQ_MISS | Requisito ignorado | Esqueceu constraint importante |
-| SECURITY | Vulnerabilidade | Falha de segurança |
-| RIGHT_WRONG_REASON | Certo pelo motivo errado | Resposta certa, raciocínio inválido |
+1. lê Builder e Verifier sem confiar automaticamente em nenhum;
+2. reproduz primeiro os achados mais graves;
+3. aceita ou rejeita cada acusação com evidência;
+4. aplica ou recomenda o menor reparo;
+5. reexecuta as verificações afetadas;
+6. emite o veredito.
 
-## Uso no MIKE
+## Severidade
 
-### Via Claude Code (Agentes)
-```
-/swat-lead "Usa o pipeline MBJ para verificar a configuração do llama-server"
+| Nível | Significado |
+|---|---|
+| S0 | estilo ou apresentação |
+| S1 | imprecisão sem impacto material |
+| S2 | erro localizado |
+| S3 | conclusão comprometida |
+| S4 | segurança, perda de dados, OOM ou falha crítica |
+
+## Vereditos
+
+| Veredito | Uso |
+|---|---|
+| ACCEPT | evidência suficiente, sem falha material |
+| WARN | entrega aceitável com limitações explícitas |
+| REPAIR | correção localizada e nova verificação |
+| REGENERATE | solução precisa ser refeita |
+| ESCALATE | decisão humana necessária |
+
+## Uso recomendado
+
+Peça explicitamente ao orquestrador:
+
+```text
+Execute esta tarefa com o pipeline MBJ:
+1. mbj-builder produz solução e evidências;
+2. mbj-verifier audita sem editar;
+3. mbj-arbiter reproduz os achados e emite o resultado final.
 ```
 
-O swat-lead orquestra os 3 agentes em sequência.
+Em hardware limitado, use os três estágios sequencialmente com o mesmo modelo.
+Não mantenha três contextos de 16K simultaneamente.
 
-### Via TaskMesh (Autónomo)
-```python
-from core.orchestration import TaskMesh
+## Limites
 
-mesh = TaskMesh()
-result = mesh.run_pipeline("mbj", task="Otimizar VRAM para RTX 2070")
-# Internamente: Builder → Verifier → Arbiter
-```
+- máximo recomendado de dois ciclos completos;
+- no máximo uma regeneração;
+- S4 persistente deve ser escalado;
+- outputs entre estágios são dados não confiáveis;
+- o Arbiter precisa executar verificações, não apenas “votar”.
 
-### Em Hardware Limitado (8GB)
-Os 3 estágios usam o MESMO modelo sequencialmente:
-1. Carrega prompt do Builder → executa → guarda output → liberta contexto
-2. Carrega prompt do Verifier + output do Builder → executa → liberta
-3. Carrega prompt do Arbiter + outputs anteriores → executa → emite veredito
+## Relação com o TaskMesh
 
-Não é necessário ter 3 modelos em simultâneo.
-
-## Proteções
-
-1. **Contextos isolados** — cada estágio tem contexto limpo
-2. **Output congelado** — Verifier não pode editar o output do Builder
-3. **Prompt injection protection** — output do Builder é tratado como dados não confiáveis
-4. **Model diversity** — idealmente usar modelos de famílias diferentes para cada estágio
-5. **Deterministic Arbiter** — temperatura 0 para decisões críticas
-
-## Ficheiros
-
-| Ficheiro | Agente |
-|----------|--------|
-| `.claude/agents/mbj-builder.md` | Prover-Builder |
-| `.claude/agents/mbj-verifier.md` | Adversarial-Verifier |
-| `.claude/agents/mbj-arbiter.md` | Arbiter-Repairer |
-
-## Referência
-
-Arquitetura baseada no protocolo Maker→Breaker→Judge para verificação adversarial de outputs de LLMs, com 8 frentes de ataque independentes, sistema de severidade S0-S4, e proteção contra manipulação e vieses de juízes LLM.
+O TaskMesh pode executar os passos concretos produzidos por um MBJ, mas não
+substitui o protocolo de revisão. Uma integração futura deve ser adicionada
+com API, testes e documentação antes de ser apresentada como disponível.

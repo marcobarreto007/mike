@@ -127,12 +127,10 @@ def test_skill_library_execute_endpoint_is_owner_only(monkeypatch):
             calls.append((skill_id, params))
             return {"success": True, "output": "ok"}
 
-    fake_server = types.ModuleType("mike_server")
-    fake_server._get_skill_library = lambda: FakeLibrary()
-    fake_server._request_profile_scope = lambda request: getattr(
+    monkeypatch.setattr(autonomy_router, "_get_skill_library", lambda: FakeLibrary())
+    monkeypatch.setattr(autonomy_router, "_request_profile_scope", lambda request: getattr(
         request.state, "profile", None
-    )
-    monkeypatch.setitem(sys.modules, "mike_server", fake_server)
+    ))
 
     visitor_request = _request_with_json({"skill_id": "safe", "params": {}})
     visitor_request.state.profile = "visitante"
@@ -148,6 +146,18 @@ def test_skill_library_execute_endpoint_is_owner_only(monkeypatch):
 
     assert allowed == {"success": True, "output": "ok"}
     assert calls == [("safe", {"x": 1})]
+
+
+def test_skill_reload_uses_registry_load_all(monkeypatch):
+    class FakeRegistry:
+        def load_all(self):
+            return 48
+
+    monkeypatch.setattr(autonomy_router, "_get_skill_registry", lambda: FakeRegistry())
+
+    result = asyncio.run(autonomy_router.skills_reload())
+
+    assert result == {"status": "ok", "loaded_skill_count": 48}
 
 
 def test_sensitive_mcp_servers_are_owner_only_in_all_configs():

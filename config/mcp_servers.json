@@ -43,6 +43,17 @@
     "description": "Google Drive OAuth somente leitura, busca e extracao de documentos"
   },
   {
+    "name": "mike_ga4",
+    "command": "${MIKE_HOME}\\.venv\\Scripts\\python.exe",
+    "args": ["core/mcp/mike_ga4_mcp.py"],
+    "env": {
+      "PYTHONPATH": "${MIKE_HOME}"
+    },
+    "capabilities": ["analytics", "ga4", "traffic", "ecommerce", "conversions"],
+    "access": "owner",
+    "description": "Google Analytics 4 — trafego, conversoes, ecommerce, audiencia"
+  },
+  {
     "name": "appointments",
     "command": "${MIKE_HOME}\\.venv\\Scripts\\python.exe",
     "args": ["core/mcp/mike_appointments_mcp.py"],
@@ -59,6 +70,15 @@
     "capabilities": ["spreadsheet", "excel", "workbook"],
     "access": "owner",
     "description": "Excel local seguro — leitura, inspecao, criacao e edicao de workbooks"
+  },
+  {
+    "name": "google-ads",
+    "command": "${MIKE_HOME}\\.venv\\Scripts\\python.exe",
+    "args": ["core/mcp/mike_google_ads_mcp.py"],
+    "tool_prefix": "ads",
+    "capabilities": ["google_ads", "campaigns", "metrics", "keywords", "advertising"],
+    "access": "owner",
+    "description": "Google Ads API — campanhas, metricas, anuncios, pesquisa de keywords. Requer GOOGLE_ADS_ACCOUNT_ID, GOOGLE_ADS_DEVELOPER_TOKEN e OAuth2 com scope adwords"
   },
   {
     "name": "huggingface",
@@ -145,5 +165,14 @@
     "capabilities": ["web_search", "brave_search", "real_time_search"],
     "access": "any",
     "description": "Busca web via Brave Search API — desativado ate configurar BRAVE_API_KEY"
+  },
+  {
+    "name": "shopify",
+    "command": "${MIKE_HOME}\\.venv\\Scripts\\python.exe",
+    "args": ["core/mcp/mike_shopify_mcp.py"],
+    "tool_prefix": "shopify",
+    "capabilities": ["shopify", "ecommerce", "products", "orders", "customers", "inventory"],
+    "access": "owner",
+    "description": "Shopify Admin API — produtos, pedidos, clientes, inventario. Requer SHOPIFY_STORE_URL e SHOPIFY_ACCESS_TOKEN"
   }
 ]

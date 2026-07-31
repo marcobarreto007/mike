@@ -1,166 +1,220 @@
-# MIKE — Yorkshire Operator Console
+# MIKE — assistente local da família Barreto
 
-Assistente pessoal de IA com personalidade de Yorkshire Terrier para a familia Barreto.
-LLM local (Qwen3.6 35B MoE) via `llama-server`, com Qwen como unico cerebro.
+MIKE é um assistente pessoal de IA executado localmente no Windows. O cérebro
+de produção é um único modelo Qwen3.6-35B-A3B em GGUF, servido por
+`llama-server`. A API e o dashboard usam FastAPI e uma PWA em JavaScript.
 
-## Features
+## Estado validado
 
-- **Chat multi-perfil** — Marco, Ana Paula, Raphael, Alice, Matheus, Marilene, Visitante
-- **LLM local** — Qwen3.6-35B-A3B GGUF com GPU offload, zero custo de API
-- **Backend unico** — sem fallback silencioso para mock, DeepSeek ou outro modelo
-- **Dashboard PWA** — Chat, Lousa de Tarefas, Status, voz, camera, TTS
-- **Motor de Autonomia** — briefing matinal, email tracking, missoes, governanca
-- **RAG / Memoria** — busca hibrida (BM25 + embeddings + reranker), LightRAG, Mem0
-- **Email SMTP/IMAP** — Gmail integrado para envio e leitura
-- **153 Tools / 16 servidores** — workspace e PowerShell controlado, memoria,
-  raciocinio sequencial, filesystem, GitHub, SQLite, Fetch, Puppeteer, Excel,
-  agendamentos, Hugging Face, Google Workspace e agente Windows remoto
-- **48 Skills executaveis** — 48/48 ligadas a ferramentas reais, com 100% dos
-  padroes declarados resolvidos no manifesto
-- **Twilio SMS** — envio de SMS e voice calls (requer token)
-- **Telegram** — notificacoes proativas (requer token)
-- **Google Workspace** — Gmail API, Calendar, Drive (requer OAuth)
+Última validação local: **30 de julho de 2026**.
 
-## Pre-requisitos
+- Qwen ativo em `http://127.0.0.1:8081`;
+- API e dashboard ativos em `http://127.0.0.1:8083`;
+- modelo ativo: `Qwen3.6-35B-A3B-UD-IQ4_XS.gguf`;
+- memória SQLite + Mem0 + LightRAG saudável;
+- autonomia e governança em execução;
+- 54 skills carregadas;
+- 186 tools descobertas em 18 servidores MCP;
+- cobertura dos padrões de tools das skills: 100%;
+- Gmail, Google Calendar, Google Drive e email local validados com OAuth;
+- suíte unitária: 234 testes passando, 3 testes manuais ignorados.
 
-- Windows 10/11 com PowerShell 5.1+
-- Python 3.11+ (com venv)
-- NVIDIA GPU com 8GB+ VRAM (RTX 2070 ou superior)
-- NVIDIA Driver 450+ com CUDA 12.x
-- [llama.cpp](https://github.com/ggerganov/llama.cpp) compilado com CUDA
-- Node.js 18+ (para MCP servers)
-- Git
+O comando oficial de readiness não estrito passa. Integrações opcionais sem
+credenciais ou serviços próprios continuam aparecendo como bloqueios no modo
+`--strict`. Veja [docs/MIKE_READINESS.md](docs/MIKE_READINESS.md).
 
-## Instalacao Rapida
+## Requisitos
+
+- Windows 10 ou 11;
+- PowerShell 5.1 ou superior;
+- Python 3.11;
+- Node.js 18 ou superior;
+- GPU NVIDIA compatível com CUDA;
+- pelo menos 24 GB de RAM disponível para o modo híbrido CPU/GPU;
+- aproximadamente 20 GB livres para o modelo e arquivos auxiliares.
+
+A máquina validada usa uma RTX 2070 de 8 GB. O modelo tem aproximadamente
+18,2 GB e usa offload híbrido: parte na GPU e os especialistas MoE na CPU.
+
+## Instalação
 
 ```powershell
-# 1. Clona o repo
 git clone <repo-url> mike
 cd mike
 
-# 2. Cria virtualenv
 python -m venv .venv
-.venv\Scripts\activate
+.\.venv\Scripts\Activate.ps1
+pip install -r config\requirements.txt
 
-# 3. Instala dependencias
-pip install -r config/requirements.txt
-
-# 4. Configura ambiente
-copy config/.env.example config/.env.runtime
-# Edita config/.env.runtime com os teus tokens e paths
-
-# 5. Descarrega o modelo Qwen GGUF (~18,2 GB)
-scripts/ops/download_model.ps1
-
-# 6. Inicia Qwen, Mike e as verificacoes de saude
-scripts/ops/launch_mike.ps1
+Copy-Item config\.env.example config\.env.runtime
 ```
 
-Abre http://localhost:8083 no browser.
+Configure `config\.env.runtime` sem versionar tokens ou senhas.
 
-## Acesso em Familia (LAN)
-
-Com `MIKE_HOST=0.0.0.0`, o Mike fica acessivel em toda a rede local.
-Dispositivos na mesma rede acedem via `http://<ip-do-pc>:8083`.
-
-Para acesso externo seguro, configura o Cloudflare Tunnel:
-```powershell
-scripts/ops/install_tunnel_service.ps1
-```
-
-## Arquitetura
-
-```
-core/
-  server/       FastAPI + chat + streaming + auth
-  autonomy/     Motor proativo (heartbeat, missoes, task board)
-  memory/       RAG hibrido (SQLite + embeddings + LightRAG + Mem0)
-  chat/         Contexto virtual multi-perfil (MemGPT-style)
-  mcp/          MCPs: workspace, email, calendar, Drive, Excel, appointments,
-                Hugging Face e agente remoto
-  integrations/ Qwen/llama-server, Google OAuth, Drive Indexer, Web Search
-  orchestration/ Swarm multi-agente + Agent SDK + Task Mesh
-  comms/        Email SMTP/IMAP, Twilio SMS, Telegram
-  shared/       Utilitarios partilhados (time, etc.)
-
-dashboard/      SPA (vanilla JS, PWA, voice, camera, TTS)
-config/         .env.runtime, identity, family profiles, MCP servers
-scripts/        PowerShell (launch, tunnel, email, setup)
-skills/         Skills YAML catalog (48 skills)
-tests/          Smoke, unit, integration, E2E, performance
-```
-
-## Variaveis de Ambiente Principais
-
-| Variavel | Default | Descricao |
-|----------|---------|-----------|
-| `MIKE_HOST` | `0.0.0.0` | Interface de rede |
-| `MIKE_PORT` | `8083` | Porta do servidor |
-| `MIKE_LLM_BACKEND` | `llama_server` | Backend unico de inferencia |
-| `MIKE_LLM_BACKENDS` | `llama_server` | Cadeia permitida (somente Qwen) |
-| `MIKE_LLAMA_SERVER_URL` | `http://127.0.0.1:8081/v1` | API do Qwen |
-| `MIKE_LLAMA_SERVER_MODEL` | `mike` | Alias OpenAI-compatible |
-| `MIKE_QWEN_ENABLE_THINKING` | `false` | Desativa blocos de raciocinio na resposta |
-| `MIKE_PROFILE_*_PASSWORD` | — | Password por perfil |
-| `MIKE_ENABLE_VISION` | `false` | Desabilitado: o Qwen atual e text-only |
-| `MIKE_ENABLE_MCP_TOOLS` | `true` | MCP tools ativas |
-| `MIKE_GRAPH_ENABLED` | `false` | Neo4j knowledge graph |
-| `MIKE_CLEANUP_ON_BOOT` | `false` | Limpeza no startup |
-
-Ver `config/.env.example` para a lista completa.
-
-## Prontidao das Integracoes
-
-O nucleo local funciona sem servicos pagos. Integracoes externas aparecem como
-indisponiveis, em vez de simularem sucesso, ate receberem credenciais validas:
-
-- Google Workspace: execute
-  `python scripts/setup/setup_google_workspace_oauth.py` e configure o token OAuth;
-- email IMAP/SMTP: configure uma senha de app valida;
-- Telegram e Twilio: configure os respectivos tokens;
-- CrawlConsole e Brave: configure as chaves de API;
-- agente Windows remoto: configure `MIKE_REMOTE_AGENT_KEY` e mantenha
-  `MIKE_REMOTE_AGENT_URL` acessivel;
-- Neo4j: instale o servico e habilite `MIKE_GRAPH_ENABLED`;
-- acesso publico: instale e configure `cloudflared`.
-
-O endpoint `GET /v1/tools` mostra o inventario e o erro de cada servidor MCP.
-`GET /v1/skills/coverage` confirma se todas as skills estao alcancaveis.
-
-Auditoria completa e nao destrutiva:
+Para baixar o modelo quando ele ainda não existir:
 
 ```powershell
-python scripts/ops/check_mike_readiness.py
+.\scripts\ops\download_model.ps1 -Quant UD-IQ4_XS
 ```
 
-O comando retorna sucesso quando o nucleo e todas as tools locais passam.
-Use `--strict` para tambem exigir credenciais e integracoes externas.
+## Localização do modelo
+
+O launcher resolve `MIKE_MODEL_FILE` nesta ordem:
+
+1. caminho absoluto passado por `-ModelPath`;
+2. variável de ambiente `MIKE_MODEL_FILE`;
+3. valor de `MIKE_MODEL_FILE` em `config\.env.runtime`;
+4. caminho relativo à raiz do projeto;
+5. `llm_cache\`;
+6. `llama.cpp\models\`;
+7. `llama.cpp-turboquant\models\`.
+
+Na instalação validada, o arquivo está em:
+
+```text
+llama.cpp\models\Qwen3.6-35B-A3B-UD-IQ4_XS.gguf
+```
+
+Não copie o arquivo de 18,2 GB apenas para satisfazer um caminho antigo. O
+resolver centralizado permite manter uma única cópia.
+
+## Iniciar e parar
+
+Inicialização local recomendada:
+
+```powershell
+.\scripts\ops\launch_mike.ps1 -SkipTunnel
+```
+
+Sem abrir o navegador:
+
+```powershell
+.\scripts\ops\launch_mike.ps1 -SkipTunnel -NoBrowser
+```
+
+Consultar o estado:
+
+```powershell
+.\scripts\ops\recover_mike.ps1 -Mode status
+```
+
+Reiniciar o conjunto:
+
+```powershell
+.\scripts\ops\recover_mike.ps1 -Mode restart -SkipTunnel
+```
+
+Reiniciar somente a API, mantendo o Qwen carregado:
+
+```powershell
+.\scripts\ops\start_mike.ps1 -Port 8083 -ForceRestart -SkipTunnel
+```
+
+Os scripts recusam encerrar processos que não sejam o MIKE desta workspace.
+
+## Verificação
+
+Saúde rápida:
+
+```powershell
+Invoke-RestMethod http://127.0.0.1:8081/health
+Invoke-RestMethod http://127.0.0.1:8083/health
+Invoke-RestMethod http://127.0.0.1:8083/v1/health/models
+```
+
+Readiness do núcleo e das tools locais:
+
+```powershell
+.\.venv\Scripts\python.exe scripts\ops\check_mike_readiness.py
+```
+
+Auditoria incluindo todas as integrações externas:
+
+```powershell
+.\.venv\Scripts\python.exe scripts\ops\check_mike_readiness.py --strict
+```
+
+O primeiro comando deve passar para operação local. O segundo somente passa
+quando todas as integrações opcionais também estiverem configuradas.
 
 ## Testes
 
+`pytest` executa somente testes unitários e offline:
+
 ```powershell
-# Smoke test (servidor precisa estar a correr)
-python tests/test_smoke.py
-
-# Suite completa
-python tests/e2e/test_e2e_full.py
-
-# PowerShell
-tests/e2e/run_mike_a_to_z.ps1
+.\.venv\Scripts\python.exe -m pytest -q
 ```
 
-## Seguranca
+Testes dependentes do runtime ficam em `tests\integration`, `tests\e2e` e nos
+scripts de smoke da raiz de `tests`. Eles não são coletados automaticamente.
 
-- HMAC-SHA256 para sessoes com timing-attack protection
-- PBKDF2-HMAC-SHA256 (200K iteracoes) para passwords
-- Rate limiting: 60 req/min global
-- Headers: X-Content-Type-Options, X-Frame-Options, Referrer-Policy
-- SQL parameterizado (sem injection)
-- DOMPurify no dashboard (XSS protection)
-- Cloudflare Tunnel para HTTPS externo
-- `mike_verifier.py` — scan estatico de anti-patterns
+Exemplos:
 
-## Licenca
+```powershell
+.\.venv\Scripts\python.exe tests\test_smoke.py
+.\.venv\Scripts\python.exe tests\e2e\test_e2e_full.py
+.\tests\e2e\run_mike_a_to_z.ps1
+```
 
-Proprietary software — see LICENSE file in project root.
-Copyright (c) 2025-2026 Marco Barreto. All rights reserved.
+Veja [docs/TESTING.md](docs/TESTING.md).
+
+## Google Workspace
+
+O mesmo token OAuth atende Gmail, Calendar, Drive e, quando autorizado, GA4:
+
+```powershell
+$env:PYTHONPATH = (Resolve-Path core\integrations).Path
+.\.venv\Scripts\python.exe scripts\setup\setup_google_workspace_oauth.py
+```
+
+Quando novos escopos forem adicionados, o script abre o navegador novamente.
+O token é armazenado em `config\google_workspace_token.json` e não deve ser
+versionado.
+
+## Arquitetura
+
+```text
+core/
+  server/          FastAPI, autenticação, chat, SSE e tools locais
+  autonomy/        rotinas, missões, governança, skills e task board
+  memory/          SQLite, busca híbrida, Mem0, LightRAG e reranking
+  chat/            contexto virtual e montagem de contexto
+  mcp/             Gmail, Calendar, Drive, Excel, GA4, Ads, Shopify etc.
+  integrations/    Qwen/llama-server, Google OAuth e busca web
+  orchestration/   TaskMesh, Agent SDK e swarm
+  comms/           email, Telegram e Twilio
+
+dashboard/         PWA em JavaScript
+config/            configuração local e manifesto MCP
+scripts/           setup, operação, recuperação e auditoria
+skills/            catálogo YAML de skills
+tests/unit/        testes offline coletados pelo pytest
+tests/integration/ testes de integração explícitos
+tests/e2e/         fluxos completos com runtime
+runtime/           memória, índices, estado e conhecimento gerados
+```
+
+## Segurança
+
+- sessões assinadas com HMAC-SHA256;
+- senhas de perfil com PBKDF2-HMAC-SHA256;
+- comparação constante de chaves e hashes;
+- rate limiting e headers de segurança;
+- isolamento de memória e sessões por perfil;
+- tools sensíveis restritas ao proprietário;
+- execução PowerShell confinada às raízes permitidas;
+- integrações indisponíveis retornam erro real, sem simular sucesso.
+
+O acesso LAN usa `MIKE_HOST=0.0.0.0`. Não exponha a porta 8083 diretamente à
+internet. Para acesso público, use HTTPS e um túnel autenticado.
+
+## Documentação
+
+- [Estado de readiness](docs/MIKE_READINESS.md)
+- [Operação no Windows](docs/WINDOWS_OPERATIONS.md)
+- [Estratégia de testes](docs/TESTING.md)
+- [Pipeline MBJ](docs/MBJ-PIPELINE.md)
+
+## Licença
+
+Software proprietário. Copyright © 2025–2026 Marco Barreto.

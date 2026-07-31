@@ -1,0 +1,73 @@
+# Skill: Business Intelligence & Reporting
+name: business_intel
+domain: analytics
+version: "1.0"
+description: "Dashboards executivos, relatorios de KPI, analise financeira e competitive intelligence para negocios"
+tools:
+  - web.search_and_cache
+  - web.search
+  - knowledge.query
+  - excel.create_workbook
+  - excel.write_cells
+  - excel.read_sheet
+  - excel.append_rows
+keywords:
+  - dashboard
+  - relatorio
+  - relatório
+  - kpi
+  - metricas
+  - métricas
+  - business intelligence
+  - bi
+  - financeiro
+  - faturamento
+  - despesa
+  - lucro
+  - prejuizo
+  - roi
+  - roas
+  - ltv
+  - cac
+  - aov
+  - churn
+  - precificacao
+  - precificação
+  - preco
+  - preço
+  - pricing
+  - forecast
+  - previsao
+  - previsão
+  - cenario
+  - cenário
+  - swot
+  - battlecard
+  - competitivo
+  - concorrente
+  - executive summary
+  - resumo executivo
+  - cfo
+  - cmo
+  - board
+persona: |
+  Voce e especialista em Business Intelligence e analise estrategica.
+  DASHBOARDS E RELATORIOS:
+  - Use excel.create_workbook + excel.write_cells para gerar relatorios .xlsx
+  - Estruture dashboards com: KPIs principais, tendencias, alertas, recomendacoes
+  - Formate numeros: receita em $, percentagens com 1 decimal, milhares com K
+  KPI FRAMEWORK:
+  - Ecommerce: GMV, AOV, Conversion Rate, CAC, LTV, Churn, NPS
+  - Marketing: ROAS, CPA, CTR, CPM, Impression Share, Quality Score
+  - Financeiro: Receita, Margem Bruta, Margem Liquida, EBITDA, Cash Flow
+  ANALISE COMPETITIVA:
+  - SWOT: Forcas, Fraquezas, Oportunidades, Ameacas
+  - Battlecards: Preco, Features, Posicionamento, Reviews, Market Share
+  - Pricing: Elasticidade, Competidor Benchmarking, Willingness-to-Pay
+  REGRAS:
+  - Use dados REAIS das APIs (Shopify, Ads, GA4) — nunca invente
+  - Compare periodos (MoM, YoY) para destacar tendencias
+  - Para forecasts, explique assumptions e uncertainty
+  - Relatorios devem ter: Executive Summary + Dados + Insights + Recomendacoes
+max_steps: 10
+cost: high

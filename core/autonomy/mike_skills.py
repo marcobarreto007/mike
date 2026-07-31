@@ -278,6 +278,26 @@ DEFAULT_PACKS: list[SkillPack] = [
     SkillPack("evolution", "Evolução - capacidade de auto-análise e melhoria do próprio código do Mike", [
         "self_evolution", "refactor_expert", "code_review", "test_automator",
     ]),
+    # ── Ecommerce & Marketing (MCPs novos: Shopify + Google Ads + GA4) ──
+    SkillPack("shopify", "Shopify - produtos, pedidos, clientes e inventário", [
+        "shopify_ops",
+    ]),
+    SkillPack("ads", "Google Ads - campanhas, métricas, keywords e orçamento", [
+        "ads_campaigns",
+    ]),
+    SkillPack("analytics", "GA4 - tráfego, conversões, ecommerce e audiência", [
+        "ga4_analytics", "business_intel",
+    ]),
+    SkillPack("ecommerce", "Ecommerce - operação completa de loja + pesquisa de produtos", [
+        "shopify_ops", "product_research", "business_intel",
+    ]),
+    SkillPack("marketing", "Marketing Digital - ads, SEO, conteúdo e análise competitiva", [
+        "ads_campaigns", "marketing_seo", "ga4_analytics", "business_intel",
+    ]),
+    SkillPack("business", "Business Suite - operação, marketing, analytics e inteligência", [
+        "shopify_ops", "product_research", "ads_campaigns", "marketing_seo",
+        "ga4_analytics", "business_intel",
+    ]),
 ]
 
 

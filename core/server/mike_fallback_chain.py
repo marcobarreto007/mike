@@ -73,7 +73,7 @@ class FallbackChain:
     def status(self) -> Dict[str, Any]:
         """Per-backend health status dictionary."""
         result: Dict[str, Any] = {}
-        healthy_states = {CircuitState.CLOSED}
+        healthy_states = {CircuitState.CLOSED.value}
         for name, _fn, cb, _stream_fn in self._backends:
             result[name] = {
                 "healthy": cb.state in healthy_states,
@@ -86,7 +86,7 @@ class FallbackChain:
     def active_backend(self) -> Optional[str]:
         """Name of the first CLOSED backend, or None."""
         for name, _fn, cb, _stream_fn in self._backends:
-            if cb.state in {CircuitState.CLOSED}:
+            if cb.state == CircuitState.CLOSED.value:
                 return name
         return None
 

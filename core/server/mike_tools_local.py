@@ -769,7 +769,11 @@ async def _execute_local_tool(name: str, arguments: dict) -> Optional[dict]:
             return {"ok": True, "text": "Caixa de entrada vazia (nenhum email encontrado).", "content_types": ["TextContent"], "server_name": "local"}
         lines = [f"\U0001f4ec {len(emails)} email(s) em {folder}:\n"]
         for i, e in enumerate(emails, 1):
-            lines.append(f"{i}. UID:{e['uid']} | De: {e['from']} | Assunto: {e['subject']} | Data: {e['date']}")
+            message_id = e.get("uid") or e.get("id") or "?"
+            lines.append(
+                f"{i}. ID:{message_id} | De: {e.get('from', '')} | "
+                f"Assunto: {e.get('subject', '(sem assunto)')} | Data: {e.get('date', '')}"
+            )
         return {"ok": True, "text": "\n".join(lines), "content_types": ["TextContent"], "server_name": "local"}
 
     if name == "email.read":
@@ -807,7 +811,11 @@ async def _execute_local_tool(name: str, arguments: dict) -> Optional[dict]:
             return {"ok": True, "text": f"Nenhum email encontrado para '{query}'.", "content_types": ["TextContent"], "server_name": "local"}
         lines = [f"\U0001f50d {len(emails)} resultado(s) para '{query}':\n"]
         for i, e in enumerate(emails, 1):
-            lines.append(f"{i}. UID:{e['uid']} | De: {e['from']} | Assunto: {e['subject']} | Data: {e['date']}")
+            message_id = e.get("uid") or e.get("id") or "?"
+            lines.append(
+                f"{i}. ID:{message_id} | De: {e.get('from', '')} | "
+                f"Assunto: {e.get('subject', '(sem assunto)')} | Data: {e.get('date', '')}"
+            )
         return {"ok": True, "text": "\n".join(lines), "content_types": ["TextContent"], "server_name": "local"}
 
     # ── Autoconsciência ──

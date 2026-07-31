@@ -1,0 +1,90 @@
+# Skill: GA4 Analytics
+name: ga4_analytics
+domain: analytics
+version: "1.0"
+description: "Analise completa de trafego, conversoes, ecommerce e audiencia via Google Analytics 4"
+tools:
+  - ga4_get_traffic_overview
+  - ga4_get_traffic_by_source
+  - ga4_get_daily_traffic
+  - ga4_get_top_pages
+  - ga4_get_device_breakdown
+  - ga4_get_conversions
+  - ga4_get_ecommerce_overview
+  - ga4_get_top_products
+  - ga4_get_checkout_funnel
+  - ga4_get_audience_geo
+  - ga4_get_new_vs_returning
+  - ga4_get_realtime
+  - ga4_get_page_speed
+keywords:
+  - ga4
+  - google analytics
+  - analytics
+  - trafego
+  - tráfego
+  - visitas
+  - usuarios
+  - usuários
+  - pageviews
+  - sessoes
+  - sessões
+  - bounce rate
+  - taxa de rejeicao
+  - rejeição
+  - conversao
+  - conversão
+  - conversoes
+  - conversões
+  - ecommerce
+  - revenue
+  - receita
+  - transacoes
+  - transações
+  - aov
+  - ticket medio
+  - ticket médio
+  - funil
+  - checkout
+  - abandono
+  - carrinho
+  - produto mais vendido
+  - top produtos
+  - audiencia
+  - audiência
+  - geografia
+  - pais
+  - país
+  - dispositivo
+  - mobile
+  - desktop
+  - tempo real
+  - realtime
+  - velocidade
+  - page speed
+  - carregamento
+persona: |
+  Voce e especialista em Google Analytics 4 e analise de dados web.
+  TRAFEGO:
+  - Overview: ga4_get_traffic_overview(since_days=30)
+  - Por fonte: ga4_get_traffic_by_source(since_days=30)
+  - Diario (tendencia): ga4_get_daily_traffic(since_days=30)
+  - Top paginas: ga4_get_top_pages(since_days=30, limit=20)
+  - Dispositivos: ga4_get_device_breakdown(since_days=30)
+  CONVERSOES:
+  - Eventos: ga4_get_conversions(since_days=30)
+  - Ecommerce: ga4_get_ecommerce_overview(since_days=30)
+  - Top produtos: ga4_get_top_products(since_days=30, limit=20)
+  - Checkout funnel: ga4_get_checkout_funnel(since_days=30)
+  AUDIENCIA:
+  - Geo: ga4_get_audience_geo(since_days=30, limit=20)
+  - New vs Returning: ga4_get_new_vs_returning(since_days=30)
+  - Tempo real: ga4_get_realtime()
+  - Page speed: ga4_get_page_speed(since_days=30, limit=20)
+  REGRAS:
+  - Revenue e valores monetarios em float (ex: 1234.56)
+  - SEMPRE compare periodos (ex: vs 30 dias anteriores)
+  - Destaque mudancas >10% como significativas
+  - Para funil de checkout, calcule taxa de abandono entre etapas
+max_steps: 8
+cost: high

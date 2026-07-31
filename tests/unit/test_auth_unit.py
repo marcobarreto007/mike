@@ -22,6 +22,7 @@ from mike_auth import (
     password_hash,
     verify_profile_password,
     PROFILE_CREDENTIALS,
+    _load_profile_credentials,
     issue_profile_session,
     decode_profile_session,
     generate_magic_token,
@@ -53,8 +54,9 @@ class TestProfileCredentials:
     def test_marco_loaded(self):
         assert "marco" in PROFILE_CREDENTIALS
 
-    def test_visitante_loaded(self):
-        assert "visitante" in PROFILE_CREDENTIALS
+    def test_visitante_loaded_when_configured(self):
+        credentials = _load_profile_credentials()
+        assert "visitante" in credentials
 
     def test_profile_has_password_hash(self):
         cred = PROFILE_CREDENTIALS["marco"]

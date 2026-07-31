@@ -419,10 +419,11 @@ class TestCorruptedDatabase(unittest.TestCase):
         conn.execute("CREATE TABLE IF NOT EXISTS test (id INTEGER)")
         conn.close()
 
-        # Corrupt it
+        # Corrupt the SQLite header deterministically. Writing into an unused
+        # region of the first page is not guaranteed to make SQLite reject it.
         with open(self.db_path, "r+b") as f:
-            f.seek(256)
-            f.write(b"\x00" * 256)
+            f.seek(0)
+            f.write(b"not-a-sqlite-db!")
 
         os.environ["MIKE_MEMORY_INTEGRITY_CHECK"] = "1"
         os.environ["MIKE_VECTOR_SEARCH_ENABLED"] = "0"

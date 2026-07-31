@@ -473,8 +473,8 @@ async def skills_match(request: Request):
 async def skills_reload():
     reg = _get_skill_registry()
     if reg is None: return JSONResponse(status_code=503, content={"error": "Skills registry nao disponivel"})
-    reg.reload()
-    return {"status": "ok"}
+    loaded = reg.load_all()
+    return {"status": "ok", "loaded_skill_count": loaded}
 
 
 # ── SkillLibrary (Voyager pattern) ─────────────────────────────────
