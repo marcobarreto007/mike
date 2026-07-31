@@ -1,0 +1,2 @@
+# Ignore false positive in test file - test credential, not production
+tests/unit/test_security_gate.py
