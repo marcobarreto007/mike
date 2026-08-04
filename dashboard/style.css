@@ -987,3 +987,89 @@ a { color: var(--blue); }
 .lousa-check-btn:hover { background: rgba(232, 160, 76, 0.1); transform: scale(1.1); }
 .lousa-check-btn.checked:hover { background: rgba(95, 204, 122, 0.12); }
 
+
+
+/* =========================================================
+   Regras repostas de 1a1ad3e.
+   O PR #1 removeu-as do style.css mas o dashboard/index.html e o
+   app.js continuam a usar estas classes, o que deixava os paineis
+   canvas/status/lousa sem estilo nenhum.
+   ========================================================= */
+/* ===== LOUSA: Bulk actions ===== */
+.lousa-bulk-actions {
+  margin-top: 24px; padding-top: 18px;
+  border-top: 1px solid var(--border);
+  display: flex; justify-content: flex-end; gap: 10px;
+}
+
+.lousa-email-card {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 14px; border-radius: var(--r-sm);
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+}
+
+.lousa-email-card.overdue { border-color: rgba(232, 160, 76, 0.3); background: linear-gradient(135deg, rgba(232, 160, 76, 0.06), transparent); }
+
+.lousa-email-card.replied { border-color: rgba(95, 204, 122, 0.25); }
+
+.lousa-email-icon { font-size: 1.2rem; flex-shrink: 0; }
+
+.lousa-email-info { min-width: 0; }
+
+.lousa-email-to { font-weight: 500; font-size: .88rem; }
+
+.lousa-email-subj { font-size: .82rem; color: var(--text-3); }
+
+.lousa-email-meta { font-size: .72rem; color: var(--dim); font-family: var(--mono); margin-top: 2px; }
+
+.lousa-log-entry { padding: 6px 10px; border-radius: var(--r-sm); font-size: .8rem; color: var(--text-3); transition: background .15s; }
+
+.lousa-log-entry:hover { background: var(--bg-hover); }
+
+.lousa-log-time { font-family: var(--mono); font-size: .72rem; color: var(--dim); margin-right: 6px; }
+
+.cmp-speak { transition: color 0.2s, transform 0.2s; }
+
+.cmp-speak:hover { color: var(--accent); }
+
+.cmp-speak.speaking {
+  color: var(--danger);
+  animation: speak-glow 1.2s ease-in-out infinite;
+}
+
+/* ===== STATUS PAGE ===== */
+.status-layout {
+  flex: 1; display: flex; flex-direction: column;
+  gap: 16px; padding: 20px 24px; overflow-y: auto; max-width: 1100px; margin: 0 auto; width: 100%;
+}
+
+.status-header {
+  display: flex; align-items: center; gap: 12px;
+}
+
+.status-header h2 {
+  margin: 0; font-family: var(--serif); font-size: 1.2rem; font-weight: 400; flex: 1;
+}
+
+.status-row {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;
+}
+
+.status-card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--r2); padding: 16px 18px;
+  backdrop-filter: blur(10px); display: flex; flex-direction: column; gap: 10px;
+}
+
+.status-card-title {
+  font-size: .75rem; text-transform: uppercase; letter-spacing: .08em;
+  color: var(--accent); font-family: var(--mono); font-weight: 600;
+}
+
+.status-kv { display: flex; flex-direction: column; gap: 5px; }
+
+@media (max-width: 700px) {
+  .status-row { grid-template-columns: 1fr; }
+  .status-layout { padding: 12px 14px; }
+}
