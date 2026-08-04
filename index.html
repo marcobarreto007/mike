@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F51 Labs | L'Avenir de l'IA Opérationnelle</title>
+    <meta name="description" content="F51 Labs développe Mike, l'assistant IA autonome conçu pour propulser les PME de Montréal vers le futur.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root {
+            --bg-dark: #030712;
+            --bg-card: #111827;
+            --primary: #3b82f6; /* Blue */
+            --accent: #8b5cf6; /* Violet */
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --gradient: linear-gradient(135deg, var(--primary), var(--accent));
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 { font-weight: 800; letter-spacing: -0.02em; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+
+        /* --- Header --- */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 5%;
+            position: absolute;
+            width: 100%;
+            z-index: 10;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .cta-btn {
+            background: var(--gradient);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 5%;
+            position: relative;
+            background: radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.15) 0%, transparent 50%);
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            max-width: 1200px;
+        }
+
+        .hero h1 span {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin-bottom: 3rem;
+        }
+
+        /* --- Interface Mockup --- */
+        .interface-mockup {
+            width: 100%;
+            max-width: 900px;
+            background: rgba(17, 24, 39, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            margin-top: 4rem;
+            transform: perspective(1000px) rotateX(5deg);
+            transition: transform 0.5s ease;
+        }
+
+        .interface-mockup:hover {
+            transform: perspective(1000px) rotateX(0deg);
+        }
+
+        .mock-header {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .dot { width: 12px; height: 12px; border-radius: 50%; }
+        .red { background: #ef4444; }
+        .yellow { background: #f59e0b; }
+        .green { background: #10b981; }
+
+        .mock-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 20px;
+            text-align: left;
+            min-height: 300px;
+        }
+
+        .sidebar {
+            background: rgba(255,255,255,0.03);
+            border-radius: 8px;
+            padding: 15px;
+        }
+
+        .chat-area {
+            background: rgba(0,0,0,0.3);
+            border-radius: 8px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        .msg {
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            max-width: 80%;
+        }
+
+        .msg.ai {
+            background: rgba(59, 130, 246, 0.2);
+            border-left: 3px solid var(--primary);
+            align-self: flex-start;
+        }
+
+        .msg.user {
+            background: rgba(139, 92, 246, 0.2);
+            border-right: 3px solid var(--accent);
+            align-self: flex-end;
+            text-align: right;
+        }
+
+        .typing::after {
+            content: '...';
+            animation: dots 1.5s infinite;
+        }
+
+        @keyframes dots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60%, 100% { content: '...'; }
+        }
+
+        /* --- Features Grid --- */
+        .features {
+            padding: 8rem 5%;
+            background: #0b0f19;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title h2 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .section-title p { color: var(--text-muted); }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        .icon-box {
+            width: 50px;
+            height: 50px;
+            background: rgba(59, 130, 246, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .card h3 { margin-bottom: 1rem; font-size: 1.25rem; }
+        .card p { color: var(--text-muted); font-size: 0.95rem; }
+
+        /* --- Stats / Trust --- */
+        .stats {
+            padding: 4rem 5%;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .stat-item {
+            text-align: center;
+            margin: 1rem;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--primary);
+            display: block;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* --- Footer --- */
+        footer {
+            padding: 4rem 5%;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .footer-links {
+            margin-bottom: 2rem;
+        }
+
+        .footer-links a {
+            color: var(--text-main);
+            margin: 0 1rem;
+            text-decoration: none;
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .mock-content { grid-template-columns: 1fr; }
+            .sidebar { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <i data-lucide="cpu"></i> F51 LABS
+        </div>
+        <div style="display: flex; align-items: center; gap: 20px;">
+            <button id="lang-toggle" class="cta-btn" style="background: transparent; border: 1px solid rgba(255,255,255,0.3); padding: 0.5rem 1rem; font-size: 0.9rem;">
+                🇬🇧 EN
+            </button>
+            <a href="#contact" class="cta-btn" data-key="cta_beta">Rejoindre la Beta</a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1 data-key="hero_title">L'Intelligence Artificielle <br> <span>Opérationnelle</span> pour Montréal.</h1>
+        <p data-key="hero_subtitle">Nous ne construisons pas des chatbots. Nous construisons des collègues numériques. Découvrez Mike, le premier OS d'entreprise autonome conçu pour les PME ambitieuses.</p>
+        
+        <div style="display: flex; gap: 1rem;">
+            <a href="#demo" class="cta-btn" data-key="btn_demo">Voir Mike en action</a>
+            <a href="#about" style="padding: 0.8rem 1.5rem; color: white; text-decoration: none; border: 1px solid rgba(255,255,255,0.2); border-radius: 50px;" data-key="btn_vision">Notre Vision</a>
+        </div>
+
+        <div class="interface-mockup" id="demo">
+            <div class="mock-header">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <span class="mono" style="margin-left: 10px; font-size: 0.8rem; color: #666;">mike_business_os.exe</span>
+            </div>
+            <div class="mock-content">
+                <div class="sidebar mono">
+                    <div style="font-size: 0.7rem; color: #666; margin-bottom: 10px;">MODULES ACTIFS</div>
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px; color: var(--primary);"><i data-lucide="message-square" size="14"></i> Chat Contextuel</div>
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px; color: var(--text-muted);"><i data-lucide="kanban" size="14"></i> Gestion Tâches</div>
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px; color: var(--text-muted);"><i data-lucide="bar-chart" size="14"></i> Analytics</div>
+                    <div style="display: flex; align-items: center; gap: 8px; color: var(--text-muted);"><i data-lucide="globe" size="14"></i> Multilingue FR/EN</div>
+                </div>
+                <div class="chat-area" id="chat-simulation">
+                    <div class="msg ai" data-key="chat_init">Bonjour! Je suis Mike. Comment puis-je optimiser votre journée aujourd'hui?</div>
+                    <!-- Messages will be injected via JS -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats">
+        <div class="stat-item">
+            <span class="stat-number">10x</span>
+            <span class="stat-label" data-key="stat_prod">Productivité</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number">24/7</span>
+            <span class="stat-label" data-key="stat_avail">Disponibilité</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number">100%</span>
+            <span class="stat-label" data-key="stat_data">Données Locales</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number">FR/EN</span>
+            <span class="stat-label" data-key="stat_lang">Natif Québec</span>
+        </div>
+    </section>
+
+    <section class="features" id="about">
+        <div class="section-title">
+            <h2 data-key="why_title">Pourquoi F51 Labs?</h2>
+            <p data-key="why_subtitle">Nous combinons ingénierie de pointe et compréhension du marché local.</p>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <div class="icon-box"><i data-lucide="brain-circuit"></i></div>
+                <h3 data-key="feat_agent_title">Agent Autonome</h3>
+                <p data-key="feat_agent_desc">Mike ne se contente pas de répondre. Il planifie, exécute des tâches sur votre tableau de bord et anticipe vos besoins opérationnels.</p>
+            </div>
+            <div class="card">
+                <div class="icon-box"><i data-lucide="shield-check"></i></div>
+                <h3 data-key="feat_privacy_title">Souveraineté des Données</h3>
+                <p data-key="feat_privacy_desc">Vos données d'entreprise restent sécurisées. Conçu avec une architecture "Privacy-First" pour respecter les lois canadiennes.</p>
+            </div>
+            <div class="card">
+                <div class="icon-box"><i data-lucide="languages"></i></div>
+                <h3 data-key="feat_bilingual_title">Bilinguisme Réel</h3>
+                <p data-key="feat_bilingual_desc">Comprend parfaitement le français québécois, l'anglais des affaires et le "joual" de la rue. Une communication sans friction.</p>
+            </div>
+            <div class="card">
+                <div class="icon-box"><i data-lucide="zap"></i></div>
+                <h3 data-key="feat_integration_title">Intégration Instantanée</h3>
+                <p data-key="feat_integration_desc">Pas de mois d'implémentation. Mike s'intègre à votre flux de travail actuel via notre interface PWA légère et rapide.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="logo" style="justify-content: center; margin-bottom: 2rem;">
+            <i data-lucide="cpu"></i> F51 LABS
+        </div>
+        <p style="margin-bottom: 2rem;" data-key="footer_location">Montréal, QC • Construit pour le futur.</p>
+        <div class="footer-links">
+            <a href="https://www.linkedin.com/in/marco-barreto-3290b5283/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="#">Twitter</a>
+            <a href="mailto:hello@f51labs.ca">hello@f51labs.ca</a>
+        </div>
+        <p>&copy; 2024 F51 Labs Inc. <span data-key="footer_rights">Tous droits réservés.</span></p>
+    </footer>
+
+    <script>
+        // Translations Object
+        const translations = {
+            fr: {
+                cta_beta: "Rejoindre la Beta",
+                hero_title: "L'Intelligence Artificielle <br> <span>Opérationnelle</span> pour Montréal.",
+                hero_subtitle: "Nous ne construisons pas des chatbots. Nous construisons des collègues numériques. Découvrez Mike, le premier OS d'entreprise autonome conçu pour les PME ambitieuses.",
+                btn_demo: "Voir Mike en action",
+                btn_vision: "Notre Vision",
+                chat_init: "Bonjour! Je suis Mike. Comment puis-je optimiser votre journée aujourd'hui?",
+                stat_prod: "Productivité",
+                stat_avail: "Disponibilité",
+                stat_data: "Données Locales",
+                stat_lang: "Natif Québec",
+                why_title: "Pourquoi F51 Labs?",
+                why_subtitle: "Nous combinons ingénierie de pointe et compréhension du marché local.",
+                feat_agent_title: "Agent Autonome",
+                feat_agent_desc: "Mike ne se contente pas de répondre. Il planifie, exécute des tâches sur votre tableau de bord et anticipe vos besoins opérationnels.",
+                feat_privacy_title: "Souveraineté des Données",
+                feat_privacy_desc: "Vos données d'entreprise restent sécurisées. Conçu avec une architecture \"Privacy-First\" pour respecter les lois canadiennes.",
+                feat_bilingual_title: "Bilinguisme Réel",
+                feat_bilingual_desc: "Comprend parfaitement le français québécois, l'anglais des affaires et le \"joual\" de la rue. Une communication sans friction.",
+                feat_integration_title: "Intégration Instantanée",
+                feat_integration_desc: "Pas de mois d'implémentation. Mike s'intègre à votre flux de travail actuel via notre interface PWA légère et rapide.",
+                footer_location: "Montréal, QC • Construit pour le futur.",
+                footer_rights: "Tous droits réservés."
+            },
+            en: {
+                cta_beta: "Join the Beta",
+                hero_title: "Operational <br> <span>Artificial Intelligence</span> for Montreal.",
+                hero_subtitle: "We don't build chatbots. We build digital colleagues. Meet Mike, the first autonomous business OS designed for ambitious SMEs.",
+                btn_demo: "See Mike in Action",
+                btn_vision: "Our Vision",
+                chat_init: "Hello! I'm Mike. How can I optimize your day today?",
+                stat_prod: "Productivity",
+                stat_avail: "Availability",
+                stat_data: "Local Data",
+                stat_lang: "Quebec Native",
+                why_title: "Why F51 Labs?",
+                why_subtitle: "We combine cutting-edge engineering with deep understanding of the local market.",
+                feat_agent_title: "Autonomous Agent",
+                feat_agent_desc: "Mike doesn't just answer. He plans, executes tasks on your dashboard, and anticipates your operational needs.",
+                feat_privacy_title: "Data Sovereignty",
+                feat_privacy_desc: "Your business data stays secure. Built with a \"Privacy-First\" architecture to comply with Canadian laws.",
+                feat_bilingual_title: "True Bilingualism",
+                feat_bilingual_desc: "Perfectly understands Quebec French, business English, and street \"joual\". Frictionless communication.",
+                feat_integration_title: "Instant Integration",
+                feat_integration_desc: "No months of implementation. Mike integrates into your current workflow via our lightweight, fast PWA interface.",
+                footer_location: "Montreal, QC • Built for the future.",
+                footer_rights: "All rights reserved."
+            }
+        };
+
+        let currentLang = 'fr';
+
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Language Toggle Function
+        document.getElementById('lang-toggle').addEventListener('click', function() {
+            currentLang = currentLang === 'fr' ? 'en' : 'fr';
+            this.textContent = currentLang === 'fr' ? '🇬🇧 EN' : '🇫🇷 FR';
+            updateLanguage();
+        });
+
+        function updateLanguage() {
+            const elements = document.querySelectorAll('[data-key]');
+            elements.forEach(el => {
+                const key = el.getAttribute('data-key');
+                if (translations[currentLang][key]) {
+                    el.innerHTML = translations[currentLang][key];
+                }
+            });
+            
+            // Update chat simulation messages
+            updateChatMessages();
+        }
+
+        // Chat Simulation Script
+        const chatContainer = document.getElementById('chat-simulation');
+        let chatMessages = [];
+        
+        function getChatMessages() {
+            return currentLang === 'fr' ? [
+                { type: 'user', text: 'Mike, prépare le rapport de ventes pour la réunion de 14h.' },
+                { type: 'ai', text: 'C\'est fait. J\'ai compilé les données de la semaine et créé une tâche dans votre tableau de bord.' },
+                { type: 'user', text: 'Peux-tu aussi vérifier l\'inventaire du café?' },
+                { type: 'ai', text: 'Analyse en cours... Il reste 15kg de grains. J\'ai drafté un bon de commande pour le fournisseur habituel.' }
+            ] : [
+                { type: 'user', text: 'Mike, prepare the sales report for the 2pm meeting.' },
+                { type: 'ai', text: 'Done. I\'ve compiled this week\'s data and created a task in your dashboard.' },
+                { type: 'user', text: 'Can you also check the coffee inventory?' },
+                { type: 'ai', text: 'Analyzing... 15kg of beans remaining. I\'ve drafted a purchase order for the usual supplier.' }
+            ];
+        }
+
+        function updateChatMessages() {
+            chatMessages = getChatMessages();
+            // Reset chat when language changes
+            chatContainer.innerHTML = '';
+            msgIndex = 0;
+            addMessage('ai', translations[currentLang].chat_init);
+            setTimeout(runSimulation, 3000);
+        }
+
+        let msgIndex = 0;
+
+        function addMessage(type, text) {
+            const div = document.createElement('div');
+            div.className = `msg ${type}`;
+            div.textContent = text;
+            chatContainer.appendChild(div);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        function runSimulation() {
+            if (msgIndex >= chatMessages.length) {
+                setTimeout(() => {
+                    chatContainer.innerHTML = '';
+                    msgIndex = 0;
+                    addMessage('ai', translations[currentLang].chat_init);
+                    setTimeout(runSimulation, 2000);
+                }, 5000);
+                return;
+            }
+
+            const currentMsg = chatMessages[msgIndex];
+            
+            setTimeout(() => {
+                addMessage(currentMsg.type, currentMsg.text);
+                msgIndex++;
+                runSimulation();
+            }, currentMsg.type === 'user' ? 1500 : 2000);
+        }
+
+        // Start simulation after initial load
+        setTimeout(runSimulation, 3000);
+    </script>
+</body>
+</html>
