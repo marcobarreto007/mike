@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import shutil
 import sys
 import tempfile
 import unittest
@@ -94,6 +95,13 @@ class AppointmentMcpTests(unittest.TestCase):
 
 
 class WorkspaceCommandTests(unittest.TestCase):
+    # run_command invoca "powershell.exe" directamente (mike_workspace_mcp.py:211),
+    # por isso este teste so corre onde essa shell existe -- no runner Linux do CI
+    # rebentava com FileNotFoundError.
+    @unittest.skipUnless(
+        shutil.which("powershell.exe"),
+        "requer powershell.exe (Windows)",
+    )
     def test_command_runs_in_allowed_root_and_returns_exit_code(self):
         with tempfile.TemporaryDirectory() as temp_dir:
             previous = workspace_mcp.ALLOWED_ROOTS
