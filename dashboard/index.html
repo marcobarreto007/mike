@@ -1,21 +1,21 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="fr-CA">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Mike Operator Console</title>
-<meta name="description" content="Mike, o ajudante da familia Barreto, pronto para abrir como app na area de trabalho.">
-<meta name="theme-color" content="#0a0806">
+<title>Mike Business OS | Assistant PME Montréal</title>
+<meta name="description" content="Mike Business OS - Assistant IA bilingue pour petites et moyennes entreprises à Montréal. Gestion, opérations, croissance.">
+<meta name="theme-color" content="#0f172a">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Mike">
+<meta name="apple-mobile-web-app-title" content="Mike Business">
 <link rel="icon" type="image/png" sizes="64x64" href="/static/icons/mike-icon-64.png">
 <link rel="icon" href="/static/icons/favicon.ico">
 <link rel="apple-touch-icon" href="/static/icons/apple-touch-icon.png">
 <link rel="manifest" href="/static/manifest.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Caveat:wght@400;600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/static/style.css?v=20260424a">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/style.css?v=20260424biz">
 </head>
 <body>
 
@@ -23,18 +23,18 @@
 <div id="connect-screen" class="screen" hidden>
   <div class="login-card" style="max-width:380px;">
     <div class="login-brand">
-      <div style="font-size:64px;margin-bottom:8px;">🐕</div>
-      <h1 style="font-size:1.5rem;margin:0 0 4px;">Mike</h1>
-      <p style="font-size:.85rem;color:var(--text-3);margin:0 0 16px;">Conectar ao servidor</p>
+      <div style="font-size:64px;margin-bottom:8px;">💼</div>
+      <h1 style="font-size:1.5rem;margin:0 0 4px;">Mike Business</h1>
+      <p style="font-size:.85rem;color:var(--text-3);margin:0 0 16px;">Connexion au serveur</p>
     </div>
     <form id="connect-form" autocomplete="off" style="display:flex;flex-direction:column;gap:12px;">
-      <label style="font-size:.85rem;font-weight:500;color:var(--text-2);">Endereço do servidor</label>
+      <label style="font-size:.85rem;font-weight:500;color:var(--text-2);">Adresse du serveur</label>
       <input id="connect-url" type="url" placeholder="https://mike.supereziorealtime.com"
              style="padding:12px 14px;border-radius:var(--r);border:1px solid var(--border);background:var(--bg-input);color:var(--text);font-size:1rem;"
              required>
       <p id="connect-error" style="color:var(--danger);font-size:.8rem;min-height:1.2em;margin:0;"></p>
-      <button type="submit" class="btn-primary full">Conectar</button>
-      <p style="font-size:.75rem;color:var(--dim);text-align:center;margin:8px 0 0;">O endereço fica salvo no app.</p>
+      <button type="submit" class="btn-primary full">Se connecter</button>
+      <p style="font-size:.75rem;color:var(--dim);text-align:center;margin:8px 0 0;">L'adresse est sauvegardée dans l'app.</p>
     </form>
   </div>
 </div>
@@ -43,29 +43,29 @@
 <div id="login-screen" class="screen" hidden>
   <div class="login-card">
     <div class="login-brand">
-      <div id="login-yorkie" style="width:120px;height:120px;border-radius:50%;overflow:hidden;border:2px solid rgba(232,160,76,0.25);box-shadow:0 8px 32px rgba(232,160,76,0.15);">
+      <div id="login-yorkie" style="width:120px;height:120px;border-radius:50%;overflow:hidden;border:2px solid rgba(59,130,246,0.25);box-shadow:0 8px 32px rgba(59,130,246,0.15);">
         <img src="/static/icons/mike-icon-512.png" alt="Mike" style="width:100%;height:100%;object-fit:cover;object-position:center;">
       </div>
-      <h1>MIKE</h1>
-      <p id="login-subtitle" class="sub">Yorkshire Operator Console</p>
+      <h1>MIKE BUSINESS</h1>
+      <p id="login-subtitle" class="sub">Assistant PME Montréal</p>
     </div>
     <form id="login-form" autocomplete="on">
-      <label id="login-profile-label"><span id="login-profile-label-text">Perfil</span>
+      <label id="login-profile-label"><span id="login-profile-label-text">Utilisateur</span>
         <select id="login-profile" name="profile" autocomplete="username">
-          <option value="" disabled selected>Selecione...</option>
-          <option value="marco">Marco</option>
-          <option value="anapaula">Ana Paula</option>
-          <option value="raphael">Raphael</option>
-          <option value="alice">Alice</option>
-          <option value="matheus">Matheus</option>
-          <option value="visitante">Visitante</option>
+          <option value="" disabled selected>Sélectionner...</option>
+          <option value="proprietaire">Propriétaire</option>
+          <option value="manager">Gérant</option>
+          <option value="employe">Employé</option>
+          <option value="comptabilite">Comptabilité</option>
+          <option value="marketing">Marketing</option>
+          <option value="invite">Invité</option>
         </select>
       </label>
-      <label id="login-password-label"><span>Senha</span>
+      <label id="login-password-label"><span>Mot de passe</span>
         <input type="password" id="login-password" name="current-password"
-               placeholder="Senha do perfil" autocomplete="current-password">
+               placeholder="Mot de passe" autocomplete="current-password">
       </label>
-      <button type="submit" id="login-btn" class="btn-primary full">Entrar</button>
+      <button type="submit" id="login-btn" class="btn-primary full">Se connecter</button>
       <p id="login-error" class="err"></p>
     </form>
   </div>
@@ -80,17 +80,17 @@
         <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
       </svg>
     </button>
-    <span class="sb-title">MIKE</span>
+    <span class="sb-title">MIKE BUSINESS</span>
   </div>
   <!-- Sidebar overlay (mobile) -->
   <div id="sidebar-overlay"></div>
   <aside class="sidebar" id="sidebar">
     <div class="sb-top">
       <div class="sb-brand">
-        <div class="mike-av sm">M</div>
-        <span class="sb-title">MIKE</span>
+        <div class="mike-av sm" style="background:var(--blue);">MB</div>
+        <span class="sb-title">MIKE BUSINESS</span>
       </div>
-      <button id="new-chat-btn" class="btn-outline full">+ Nova conversa</button>
+      <button id="new-chat-btn" class="btn-outline full">+ Nouvelle conversation</button>
     </div>
     <nav class="sb-nav">
       <button class="nav-btn active" data-page="chat">
@@ -106,7 +106,7 @@
           <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
           <line x1="8" y1="21" x2="16" y2="21"/>
           <line x1="12" y1="17" x2="12" y2="21"/>
-        </svg>Status
+        </svg>Tableau de bord
       </button>
       <button class="nav-btn" data-page="lousa">
         <svg viewBox="0 0 24 24" width="18" height="18" fill="none"
@@ -115,12 +115,12 @@
           <line x1="8" y1="9" x2="16" y2="9"/>
           <line x1="8" y1="13" x2="13" y2="13"/>
           <line x1="8" y1="17" x2="11" y2="17"/>
-        </svg>Lousa
+        </svg>Tâches
         <span id="task-badge" class="nav-badge" style="display:none;">0</span>
       </button>
     </nav>
     <div class="sb-sessions">
-      <div class="sb-label">Recentes</div>
+      <div class="sb-label">Récent</div>
       <div id="session-list"></div>
     </div>
     <div class="sb-foot">
@@ -128,28 +128,28 @@
         <span id="user-name">-</span>
         <span class="dim" id="user-session">-</span>
       </div>
-      <button id="chpw-btn" class="btn-outline btn-xs" title="Trocar senha">&#128274;</button>
-      <button id="logout-btn" class="btn-outline btn-xs">Sair</button>
+      <button id="chpw-btn" class="btn-outline btn-xs" title="Changer mot de passe">&#128274;</button>
+      <button id="logout-btn" class="btn-outline btn-xs">Déconnexion</button>
     </div>
   </aside>
 
   <!-- Password change modal -->
   <div id="pw-modal" class="modal-bg" hidden>
     <div class="modal-card">
-      <h3>Trocar senha</h3>
+      <h3>Changer le mot de passe</h3>
       <form id="pw-form">
-        <label><span>Senha atual</span>
-          <input type="password" id="pw-old" placeholder="Senha atual" autocomplete="current-password">
+        <label><span>Mot de passe actuel</span>
+          <input type="password" id="pw-old" placeholder="Mot de passe actuel" autocomplete="current-password">
         </label>
-        <label><span>Nova senha</span>
-          <input type="password" id="pw-new" placeholder="Nova senha (min 4)" autocomplete="new-password">
+        <label><span>Nouveau mot de passe</span>
+          <input type="password" id="pw-new" placeholder="Nouveau mot de passe (min 4)" autocomplete="new-password">
         </label>
-        <label><span>Confirmar</span>
-          <input type="password" id="pw-confirm" placeholder="Confirmar nova senha" autocomplete="new-password">
+        <label><span>Confirmer</span>
+          <input type="password" id="pw-confirm" placeholder="Confirmer nouveau mot de passe" autocomplete="new-password">
         </label>
         <div class="modal-btns">
-          <button type="button" id="pw-cancel" class="btn-outline">Cancelar</button>
-          <button type="submit" class="btn-primary">Salvar</button>
+          <button type="button" id="pw-cancel" class="btn-outline">Annuler</button>
+          <button type="submit" class="btn-primary">Enregistrer</button>
         </div>
         <p id="pw-error" class="err"></p>
         <p id="pw-ok" class="pw-ok"></p>
@@ -162,11 +162,11 @@
     <div id="page-chat" class="page active">
       <div class="chat-scroll" id="chat-scroll">
         <div id="chat-welcome" class="welcome">
-          <div id="welcome-yorkie" style="width:100px;height:100px;border-radius:50%;overflow:hidden;border:2px solid rgba(232,160,76,0.18);box-shadow:0 6px 24px rgba(232,160,76,0.12);">
+          <div id="welcome-yorkie" style="width:100px;height:100px;border-radius:50%;overflow:hidden;border:2px solid rgba(59,130,246,0.18);box-shadow:0 6px 24px rgba(59,130,246,0.12);">
             <img src="/static/icons/mike-icon-512.png" alt="Mike" style="width:100%;height:100%;object-fit:cover;object-position:center;">
           </div>
-          <h2>Olá, Família! 🐾</h2>
-          <p class="dim" style="font-family:var(--hand);font-size:1.1rem;">Sou o <span style="color:var(--accent);">Mike</span>. Como posso ajudar, <span id="welcome-name">Família</span>?</p>
+          <h2>Bonjour! 👋</h2>
+          <p class="dim" style="font-family:var(--hand);font-size:1.1rem;">Je suis <span style="color:var(--blue);">Mike Business</span>. Comment puis-je aider votre entreprise, <span id="welcome-name">Propriétaire</span>?</p>
           <div class="chips" id="suggestions"></div>
         </div>
         <div id="chat-msgs" class="msgs"></div>
@@ -176,7 +176,7 @@
         <div id="composer-note" class="composer-note" hidden></div>
         <div class="cmp-box">
           <!-- Galeria de fotos (desktop e mobile) -->
-          <button type="button" id="attach-btn" class="cmp-icon" title="Anexar foto da galeria">
+          <button type="button" id="attach-btn" class="cmp-icon" title="Joindre une image">
             <svg viewBox="0 0 24 24" width="20" height="20" fill="none"
                  stroke="currentColor" stroke-width="2">
               <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4
@@ -185,7 +185,7 @@
           </button>
           <input type="file" id="file-input" accept="image/*" multiple hidden>
           <!-- Câmera direta (especialmente útil no celular) -->
-          <button type="button" id="camera-btn" class="cmp-icon" title="Tirar foto com a câmera">
+          <button type="button" id="camera-btn" class="cmp-icon" title="Prendre une photo">
             <svg viewBox="0 0 24 24" width="20" height="20" fill="none"
                  stroke="currentColor" stroke-width="2">
               <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
@@ -194,7 +194,7 @@
           </button>
           <input type="file" id="camera-input" accept="image/*" capture="environment" hidden>
           <!-- Microfone (voz para texto via Chrome Speech Recognition) -->
-          <button type="button" id="mic-btn" class="cmp-icon" title="Falar com o Mike">
+          <button type="button" id="mic-btn" class="cmp-icon" title="Parler avec Mike">
             <svg viewBox="0 0 24 24" width="20" height="20" fill="none"
                  stroke="currentColor" stroke-width="2">
               <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
@@ -204,21 +204,21 @@
             </svg>
           </button>
           <textarea id="chat-input" rows="1"
-                    placeholder="Mensagem para o Mike..." autocomplete="off"></textarea>
-          <button type="button" id="send-btn" class="cmp-send" title="Enviar">
+                    placeholder="Message pour Mike (FR/EN)..." autocomplete="off"></textarea>
+          <button type="button" id="send-btn" class="cmp-send" title="Envoyer">
             <svg viewBox="0 0 24 24" width="20" height="20" fill="none"
                  stroke="currentColor" stroke-width="2">
               <line x1="22" y1="2" x2="11" y2="13"/>
               <polygon points="22 2 15 22 11 13 2 9 22 2"/>
             </svg>
           </button>
-          <button type="button" id="stop-btn" class="cmp-stop" hidden title="Parar">
+          <button type="button" id="stop-btn" class="cmp-stop" hidden title="Arrêter">
             <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
               <rect x="6" y="6" width="12" height="12" rx="2"/>
             </svg>
           </button>
           <!-- Ouvir ultima resposta do Mike (TTS) -->
-          <button type="button" id="speak-btn" class="cmp-icon cmp-speak" title="Ouvir resposta do Mike">
+          <button type="button" id="speak-btn" class="cmp-icon cmp-speak" title="Écouter la réponse">
             <svg viewBox="0 0 24 24" width="20" height="20" fill="none"
                  stroke="currentColor" stroke-width="2">
               <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
@@ -230,9 +230,9 @@
         <div class="cmp-foot">
           <label class="toggle">
             <input type="checkbox" id="privacy-toggle">
-            <span id="privacy-label">Salvar conversa no Mike</span>
+            <span id="privacy-label">Sauvegarder la conversation</span>
           </label>
-          <span class="hint">Enter envia &middot; Shift+Enter nova linha</span>
+          <span class="hint">Entrée envoie · Shift+Entrée nouvelle ligne</span>
         </div>
       </div>
     </div>
@@ -245,36 +245,36 @@
         <!-- Coluna Esquerda: Lista de Tarefas -->
         <div class="lousa-wrap">
           <div class="lousa-header">
-            <h2>📋 Lousa de Tarefas</h2>
+            <h2>📋 Tableau des Tâches</h2>
             <div class="lousa-stats">
-              <span id="lousa-pending" class="lousa-badge pending">0 pendentes</span>
-              <span id="lousa-done" class="lousa-badge done">0 concluídas</span>
+              <span id="lousa-pending" class="lousa-badge pending">0 en attente</span>
+              <span id="lousa-done" class="lousa-badge done">0 terminées</span>
               <span id="lousa-total" class="lousa-badge total">0 total</span>
             </div>
           </div>
   
           <!-- Filtros -->
           <div class="lousa-filters">
-            <button class="lousa-filter active" data-filter="all">Todas</button>
-            <button class="lousa-filter" data-filter="pending">Pendentes</button>
-            <button class="lousa-filter" data-filter="done">Concluídas</button>
+            <button class="lousa-filter active" data-filter="all">Toutes</button>
+            <button class="lousa-filter" data-filter="pending">En attente</button>
+            <button class="lousa-filter" data-filter="done">Terminées</button>
           </div>
   
           <!-- Task input -->
           <form id="lousa-form" class="lousa-form">
             <div class="lousa-input-row">
-              <input type="text" id="lousa-title" placeholder="Nova tarefa..." autocomplete="off" required>
-              <select id="lousa-priority" title="Prioridade">
-                <option value="1">🔴 Urgente</option>
-                <option value="2">🟠 Alta</option>
-                <option value="3" selected>🟡 Normal</option>
-                <option value="4">🟢 Baixa</option>
-                <option value="5">⚪ Quando puder</option>
+              <input type="text" id="lousa-title" placeholder="Nouvelle tâche..." autocomplete="off" required>
+              <select id="lousa-priority" title="Priorité">
+                <option value="1">🔴 Urgent</option>
+                <option value="2">🟠 Haute</option>
+                <option value="3" selected>🟡 Normale</option>
+                <option value="4">🟢 Basse</option>
+                <option value="5">⚪ Quand possible</option>
               </select>
-              <button type="submit" class="btn-primary lousa-add-btn">+ Adicionar</button>
+              <button type="submit" class="btn-primary lousa-add-btn">+ Ajouter</button>
             </div>
-            <input type="text" id="lousa-desc" placeholder="Detalhes (opcional)" autocomplete="off" class="lousa-desc-input">
-            <input type="text" id="lousa-checklist-input" placeholder="Itens do checklist separados por vírgula (opcional)" autocomplete="off" class="lousa-desc-input">
+            <input type="text" id="lousa-desc" placeholder="Détails (optionnel)" autocomplete="off" class="lousa-desc-input">
+            <input type="text" id="lousa-checklist-input" placeholder="Éléments de checklist séparés par virgule (optionnel)" autocomplete="off" class="lousa-desc-input">
           </form>
   
           <!-- Task cards -->
@@ -282,7 +282,7 @@
   
           <!-- Ações em lote -->
           <div class="lousa-bulk-actions">
-            <button type="button" id="lousa-clear-done" class="btn-outline btn-xs">🗑️ Limpar concluídas</button>
+            <button type="button" id="lousa-clear-done" class="btn-outline btn-xs">🗑️ Effacer terminées</button>
           </div>
         </div>
 
@@ -291,21 +291,21 @@
           <div class="canvas-header">
             <div class="canvas-title">
               <span class="canvas-icon">✨</span>
-              <h3 id="canvas-active-title">Canvas do Mike</h3>
+              <h3 id="canvas-active-title">Canvas Mike</h3>
             </div>
             <div class="canvas-actions">
-              <button id="canvas-close-btn" class="btn-icon" title="Recolher Canvas">✕</button>
+              <button id="canvas-close-btn" class="btn-icon" title="Réduire Canvas">✕</button>
             </div>
           </div>
           <div class="canvas-content" id="canvas-content">
             <div class="canvas-empty-state">
               <div class="canvas-empty-icon">🎨</div>
-              <p>O Mike ainda não gerou artefatos para esta tarefa.</p>
-              <p class="dim">Quando ele pesquisar ou criar documentos, eles aparecerão aqui!</p>
+              <p>Mike n'a pas encore généré d'artefacts pour cette tâche.</p>
+              <p class="dim">Quand il recherchera ou créera des documents, ils apparaîtront ici!</p>
             </div>
           </div>
           <div class="canvas-footer">
-            <span id="canvas-status">Pronto</span>
+            <span id="canvas-status">Prêt</span>
           </div>
         </div>
       </div>
@@ -315,8 +315,8 @@
     <div id="page-status" class="page" hidden>
       <div class="status-layout">
         <div class="status-header">
-          <h2>&#128200; Status do Mike</h2>
-          <button id="refresh-status-btn" class="btn-outline btn-xs">&#8635; Atualizar</button>
+          <h2>&#128200; Tableau de Bord</h2>
+          <button id="refresh-status-btn" class="btn-outline btn-xs">&#8635; Actualiser</button>
           <span id="status-last-update" class="dim" style="font-size:.75rem;"></span>
         </div>
 

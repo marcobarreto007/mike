@@ -1,95 +1,37 @@
-# ===== Python =====
+# Examples 1:
+(empty)
+
+# Example 2 (Project with artifacts):
+# Compiled and build artifacts
+*.pyc
 __pycache__/
-*.py[cod]
-*.pyo
-*.egg-info/
+*.o
+*.obj
 dist/
-*.egg
+build/
+target/
+
+# Dependencies
 .venv/
 venv/
-
-# ===== Build artifacts =====
-build/
-*.exe
-*.spec
-
-# ===== Runtime & Cache =====
-runtime/cache/
-runtime/memory/
-runtime/downloads-*/
-runtime/llama-*/
-runtime/nvidia-driver-*/
-llm_cache/
-logs/*.log
-*.log
-*.jsonl
-.pytest_cache/
-mike/cache/
-mike/memory/
-runtime/knowledge/learnings/
-
-# ===== Databases =====
-*.db
-*.sqlite
-*.sqlite3
-
-# ===== Environment & Secrets =====
-config/.env.runtime
-config/.env.runtime.*
-config/google_credentials.json
-config/google_workspace_token.json
-.env
-.env.*
-!.env.example
-
-# ===== Node.js =====
 node_modules/
-.pnpm-store/
+.mypy_cache/
+.pytest_cache/
+.gradle/
 
-# ===== IDE & System =====
+# Logs and temp files
+*.log
+*.tmp
+*.swp
+
+# Environment
+.env
+.env.local
+.env.*
+
+# Editors
 .vscode/
 .idea/
-*.swp
-*.swo
-*~
-.DS_Store
-Thumbs.db
-desktop.ini
 
-# ===== Scrap & Temp =====
-scratch/
-tmp/
-temp/
-*.tmp
-*.bak
-*.backup
-
-# ===== Large binaries & models =====
-*.gguf
-*.bin
-*.safetensors
-*.pth
-*.ckpt
-*.zip
-llama.cpp/
-llama.cpp*/
-ik_llama*/
-
-# ===== Sensitive data =====
-data/links_familia.txt
-*.pem
-*.key
-
-# ===== Personal documents & photos =====
-data/*.xlsx
-dashboard/photos/
-runtime/knowledge/drive_docs/
-runtime/knowledge/public_domain_fused/
-
-# ===== Playwright =====
-.playwright-mcp/
-
-# ===== Misc =====
-.codex/
-.system/
-github-login.png
+# Original rules preserved
+*.log
