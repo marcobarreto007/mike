@@ -22,6 +22,9 @@ import mike_remote_agent_mcp as remote_mcp
 import mike_workspace_mcp as workspace_mcp
 from mike_appointments import AppointmentDB, AppointmentEngine
 
+# Skip Windows-specific tests on non-Windows platforms
+IS_WINDOWS = sys.platform == "win32"
+
 
 class ExtendedManifestTests(unittest.TestCase):
     def test_manifests_load_without_external_credentials(self):
@@ -94,6 +97,7 @@ class AppointmentMcpTests(unittest.TestCase):
 
 
 class WorkspaceCommandTests(unittest.TestCase):
+    @unittest.skipUnless(IS_WINDOWS, "PowerShell tests require Windows")
     def test_command_runs_in_allowed_root_and_returns_exit_code(self):
         with tempfile.TemporaryDirectory() as temp_dir:
             previous = workspace_mcp.ALLOWED_ROOTS
@@ -115,6 +119,23 @@ class WorkspaceCommandTests(unittest.TestCase):
         self.assertIn("QWEN_COMMAND_OK", result["output"])
         self.assertEqual(alias_result["exit_code"], 0)
         self.assertIn("QWEN_ALIAS_OK", alias_result["output"])
+
+    @unittest.skipIf(IS_WINDOWS, "Shell command tests require non-Windows platform")
+    def test_command_runs_in_allowed_root_linux(self):
+        """Test run_command on Linux with shell commands."""
+        with tempfile.TemporaryDirectory() as temp_dir:
+            previous = workspace_mcp.ALLOWED_ROOTS
+            workspace_mcp.ALLOWED_ROOTS = [Path(temp_dir).resolve()]
+            try:
+                result = workspace_mcp.run_command(
+                    "echo 'QWEN_COMMAND_OK'",
+                    cwd=temp_dir,
+                    timeout_seconds=10,
+                )
+            finally:
+                workspace_mcp.ALLOWED_ROOTS = previous
+        self.assertEqual(result["exit_code"], 0)
+        self.assertIn("QWEN_COMMAND_OK", result["output"])
 
 
 if __name__ == "__main__":

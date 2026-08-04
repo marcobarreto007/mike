@@ -249,18 +249,39 @@ def start_server():
 banner("FASE 1: Limpeza de processos anteriores")
 kill_mike_processes()
 
-# Verifica porta
-try:
-    result = subprocess.run(
-        ["powershell", "-Command",
-         "$c = Get-NetTCPConnection -State Listen -LocalPort 8080 -ErrorAction SilentlyContinue; "
-         "if ($c) { Stop-Process -Id $c.OwningProcess -Force -ErrorAction SilentlyContinue; 'killed port owner' } "
-         "else { 'Port 8080 is free' }"],
-        capture_output=True, text=True, timeout=5
-    )
-    print(f"  {result.stdout.strip()}")
-except Exception:
-    pass
+# Verifica porta (apenas no Windows)
+if sys.platform == "win32":
+    try:
+        result = subprocess.run(
+            ["powershell", "-Command",
+             "$c = Get-NetTCPConnection -State Listen -LocalPort 8080 -ErrorAction SilentlyContinue; "
+             "if ($c) { Stop-Process -Id $c.OwningProcess -Force -ErrorAction SilentlyContinue; 'killed port owner' } "
+             "else { 'Port 8080 is free' }"],
+            capture_output=True, text=True, timeout=5
+        )
+        print(f"  {result.stdout.strip()}")
+    except Exception:
+        pass
+else:
+    # Linux: usa lsof para verificar porta
+    try:
+        result = subprocess.run(
+            ["lsof", "-i", ":8080", "-t"],
+            capture_output=True, text=True, timeout=5
+        )
+        if result.stdout.strip():
+            pids = result.stdout.strip().split('\n')
+            for pid in pids:
+                try:
+                    os.kill(int(pid), signal.SIGKILL)
+                    print(f"  Killed process {pid} on port 8080")
+                except Exception:
+                    pass
+            print("  Port 8080 freed")
+        else:
+            print("  Port 8080 is free")
+    except Exception:
+        print("  Port 8080 check skipped")
 time.sleep(1)
 
 

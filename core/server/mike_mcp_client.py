@@ -21,7 +21,7 @@ from typing import List, Optional
 import httpx
 from mcp import ClientSession, StdioServerParameters
 from mcp.client.stdio import stdio_client
-from mcp.client.streamable_http import streamable_http_client
+from mcp.client.streamable_http import streamablehttp_client as streamable_http_client
 from mike_config import env_bool
 
 log = logging.getLogger("mike")

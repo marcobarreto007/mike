@@ -206,15 +206,25 @@ def run_command(
             for marker in ("SECRET", "TOKEN", "PASSWORD", "API_KEY", "CREDENTIAL")
         )
     }
-    completed = subprocess.run(
-        [
+    
+    # Platform-specific command execution
+    if sys.platform == "win32":
+        cmd_args = [
             "powershell.exe",
             "-NoLogo",
             "-NoProfile",
             "-NonInteractive",
             "-Command",
             str(command),
-        ],
+        ]
+        creationflags = getattr(subprocess, "CREATE_NO_WINDOW", 0)
+    else:
+        # Linux/Unix: use shell command
+        cmd_args = ["/bin/bash", "-c", str(command)]
+        creationflags = 0
+    
+    completed = subprocess.run(
+        cmd_args,
         cwd=str(workdir),
         env=child_env,
         capture_output=True,
@@ -223,7 +233,7 @@ def run_command(
         errors="replace",
         timeout=timeout,
         check=False,
-        creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0),
+        creationflags=creationflags,
     )
     stdout = completed.stdout or ""
     stderr = completed.stderr or ""
