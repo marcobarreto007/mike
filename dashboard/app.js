@@ -1,5 +1,6 @@
 'use strict';
-/* Mike Dashboard - Orchestration: Navigation, Event Listeners, and Init */
+/* Mike Business OS - Orchestration: Navigation, Event Listeners, and Init */
+/* Assistant IA bilingue pour PME à Montréal */
 
 /* ===== Navigation ===== */
 function switchPage(page) {
@@ -251,7 +252,7 @@ if (_fileTree) {
 }
 
 /* ===== Init ===== */
-$("login-profile").value = "marco";
+$("login-profile").value = "proprietaire";
 autoResize();
 refreshInstallCard();
 
