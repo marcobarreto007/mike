@@ -46,7 +46,12 @@ async def _chat_completions_handler(request: Request):
     """Wrapper for routers/chat.py POST /v1/chat/completions"""
     from mike_server import chat_completions
     from mike_models import ChatRequest
-    body = await request.json()
+    try:
+        body = await request.json()
+    except UnicodeDecodeError:
+        return JSONResponse(status_code=400, content={"error": "Invalid UTF-8 in request body"})
+    except Exception:
+        return JSONResponse(status_code=400, content={"error": "Invalid JSON in request body"})
     req = ChatRequest(**{k: v for k, v in body.items() if k in ChatRequest.model_fields})
     bg = BackgroundTasks()
     return await chat_completions(req, request, bg)

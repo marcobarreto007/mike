@@ -18,6 +18,14 @@ def _ms():
     return shared_state.memory_service
 
 
+def _require_ms():
+    """Return memory_service or a 503 error response."""
+    ms = shared_state.memory_service
+    if ms is None:
+        return None, JSONResponse(status_code=503, content={"error": "Memory service is not available"})
+    return ms, None
+
+
 def _belongs_to_profile(session_id: Optional[str], profile_key: Optional[str]) -> bool:
     """Return whether a stored session is inside the authenticated namespace."""
     if not profile_key:
@@ -53,9 +61,8 @@ async def search_memory(
         if profile_key
         else (scoped_session_id(session_id, None) if session_id else None)
     )
-    ms = _ms()
-    if ms is None:
-        return JSONResponse(status_code=503, content={"error": "Memory service is not available"})
+    ms, err = _require_ms()
+    if err: return err
     return {
         "query": q,
         "session_id": scoped,
@@ -76,6 +83,8 @@ async def search_memory(
 @router.post("/v1/memory/add")
 async def memory_add(request: Request):
     profile_key = profile_from_request(request)
+    ms, err = _require_ms()
+    if err: return err
     body = await request.json()
     user_text = body.get("content", "").strip()
     if not user_text:
@@ -85,7 +94,7 @@ async def memory_add(request: Request):
     try:
         ts = datetime.now(timezone.utc).isoformat()
         assistant_text = body.get("assistant_text", "")
-        _ms().add_conversation(
+        ms.add_conversation(
             timestamp=ts,
             user_text=user_text,
             assistant_text=assistant_text,
@@ -100,22 +109,28 @@ async def memory_add(request: Request):
 # ── Memory Mesh ─────────────────────────────────────────────────
 @router.get("/v1/memory/mesh/neighbors")
 async def mesh_neighbors(request: Request, conversation_id: int, limit: int = 10):
+    ms, err = _require_ms()
+    if err: return err
     profile_key = profile_from_request(request)
     if not _belongs_to_profile(_conversation_session_id(conversation_id), profile_key):
         return JSONResponse(status_code=404, content={"error": "Conversation not found"})
-    return {"conversation_id": conversation_id, "neighbors": _ms().mesh_neighbors(conversation_id, limit=limit)}
+    return {"conversation_id": conversation_id, "neighbors": ms.mesh_neighbors(conversation_id, limit=limit)}
 
 
 @router.get("/v1/memory/mesh/stats")
 async def mesh_stats(request: Request):
+    ms, err = _require_ms()
+    if err: return err
     profile_key = profile_from_request(request)
     if profile_key and profile_key not in {"marco", "anapaula"}:
         return JSONResponse(status_code=403, content={"error": "Owner profile required"})
-    return _ms().mesh_stats()
+    return ms.mesh_stats()
 
 
 @router.post("/v1/memory/mesh/link")
 async def mesh_link(request: Request):
+    ms, err = _require_ms()
+    if err: return err
     profile_key = profile_from_request(request)
     body = await request.json()
     source_id = body.get("source_id")
@@ -129,20 +144,22 @@ async def mesh_link(request: Request):
         return JSONResponse(status_code=404, content={"error": "Conversation not found"})
     relation = body.get("relation", "similar")
     strength = float(body.get("strength", 0.8))
-    ok = _ms().local.mesh_link(int(source_id), int(target_id), relation, strength)
+    ok = ms.local.mesh_link(int(source_id), int(target_id), relation, strength)
     return {"status": "ok" if ok else "error", "source_id": source_id, "target_id": target_id}
 
 
 # ── Checkpoints ─────────────────────────────────────────────────
 @router.post("/v1/memory/checkpoint/save")
 async def checkpoint_save(request: Request):
+    ms, err = _require_ms()
+    if err: return err
     profile_key = profile_from_request(request)
     body = await request.json()
     session_id = body.get("session_id", "main")
     scoped = scoped_session_id(session_id, profile_key)
     label = body.get("label")
     metadata = body.get("metadata")
-    checkpoint_id = _ms().checkpoint_save(scoped, label=label, metadata=metadata)
+    checkpoint_id = ms.checkpoint_save(scoped, label=label, metadata=metadata)
     return {"status": "ok", "checkpoint_id": checkpoint_id}
 
 
@@ -152,10 +169,12 @@ async def checkpoint_list(
     session_id: Optional[str] = None,
     limit: int = 20,
 ):
+    ms, err = _require_ms()
+    if err: return err
     profile_key = profile_from_request(request)
     scoped = scoped_session_id(session_id, profile_key) if session_id else None
     return {
-        "checkpoints": _ms().checkpoint_list(
+        "checkpoints": ms.checkpoint_list(
             session_id=scoped, profile=profile_key, limit=limit
         )
     }
@@ -163,12 +182,14 @@ async def checkpoint_list(
 
 @router.post("/v1/memory/checkpoint/restore")
 async def checkpoint_restore(request: Request):
+    ms, err = _require_ms()
+    if err: return err
     profile_key = profile_from_request(request)
     body = await request.json()
     checkpoint_id = body.get("checkpoint_id", "").strip()
     if not checkpoint_id:
         return JSONResponse(status_code=400, content={"error": "checkpoint_id is required"})
-    result = _ms().checkpoint_restore(checkpoint_id)
+    result = ms.checkpoint_restore(checkpoint_id)
     if not result:
         return JSONResponse(status_code=404, content={"error": "Checkpoint not found"})
     if not _belongs_to_profile(result.get("session_id"), profile_key):
@@ -179,6 +200,8 @@ async def checkpoint_restore(request: Request):
 # ── Session summaries ───────────────────────────────────────────
 @router.post("/v1/memory/session/summary")
 async def session_summary_save(request: Request):
+    ms, err = _require_ms()
+    if err: return err
     profile_key = profile_from_request(request)
     body = await request.json()
     session_id = body.get("session_id", "main")
@@ -187,7 +210,7 @@ async def session_summary_save(request: Request):
     if not summary:
         return JSONResponse(status_code=400, content={"error": "summary is required"})
     topics = body.get("topics", [])
-    ok = _ms().session_summary_save(scoped, summary, topics=topics)
+    ok = ms.session_summary_save(scoped, summary, topics=topics)
     return {"status": "ok" if ok else "error", "session_id": scoped}
 
 
@@ -198,17 +221,21 @@ async def session_summaries_recent(
     profile: Optional[str] = None,
     session_id: Optional[str] = None,
 ):
+    ms, err = _require_ms()
+    if err: return err
     authenticated_profile = profile_from_request(request)
     profile_key = authenticated_profile or profile or "default"
     return {
         "profile": profile_key,
-        "summaries": _ms().session_summaries_recent(profile_key, limit=limit),
+        "summaries": ms.session_summaries_recent(profile_key, limit=limit),
     }
 
 
 # ── Knowledge ───────────────────────────────────────────────────
 @router.get("/v1/knowledge/search")
 async def search_knowledge(q: str, limit: int = 5):
+    ms, err = _require_ms()
+    if err: return err
     return {
         "query": q,
         "results": [
@@ -218,6 +245,6 @@ async def search_knowledge(q: str, limit: int = 5):
                 "content": hit.content,
                 "metadata": hit.metadata,
             }
-            for hit in _ms().search_knowledge(q, limit=limit)
+            for hit in ms.search_knowledge(q, limit=limit)
         ],
     }

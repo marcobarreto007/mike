@@ -1,37 +1,106 @@
-# Examples 1:
-(empty)
-
-# Example 2 (Project with artifacts):
-# Compiled and build artifacts
-*.pyc
+# ===== Python =====
 __pycache__/
-*.o
-*.obj
+*.py[cod]
+*.pyo
+*.egg-info/
 dist/
-build/
-target/
-
-# Dependencies
+*.egg
 .venv/
 venv/
-node_modules/
-.mypy_cache/
-.pytest_cache/
-.gradle/
 
-# Logs and temp files
+# ===== Build artifacts =====
+build/
+*.exe
+*.spec
+
+# ===== Runtime & Cache =====
+runtime/cache/
+runtime/memory/
+runtime/downloads-*/
+runtime/llama-*/
+runtime/nvidia-driver-*/
+llm_cache/
+logs/*.log
 *.log
-*.tmp
-*.swp
+*.jsonl
+.pytest_cache/
+mike/cache/
+mike/memory/
+runtime/knowledge/learnings/
 
-# Environment
+# ===== Databases =====
+*.db
+*.sqlite
+*.sqlite3
+*.db-shm
+*.db-wal
+*.db-journal
+
+# ===== Environment & Secrets =====
+config/.env.runtime
+config/.env.runtime.*
+config/google_credentials.json
+config/google_workspace_token.json
 .env
-.env.local
 .env.*
+!.env.example
 
-# Editors
+# ===== Node.js =====
+node_modules/
+.pnpm-store/
+
+# ===== IDE & System =====
 .vscode/
 .idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+desktop.ini
 
-# Original rules preserved
-*.log
+# ===== Scrap & Temp =====
+scratch/
+tmp/
+temp/
+*.tmp
+*.bak
+*.backup
+
+# ===== Large binaries & models =====
+*.gguf
+*.bin
+*.safetensors
+*.pth
+*.ckpt
+*.zip
+llama.cpp/
+llama.cpp*/
+ik_llama*/
+
+# ===== Sensitive data =====
+data/links_familia.txt
+*.pem
+*.key
+
+# ===== Personal documents & photos =====
+data/*.xlsx
+dashboard/photos/
+runtime/knowledge/drive_docs/
+runtime/knowledge/public_domain_fused/
+
+# ===== Playwright =====
+.playwright-mcp/
+
+# ===== Misc =====
+.codex/
+.system/
+github-login.png
+
+# ===== Absorvido do PR frontend (build/toolchain) =====
+*.o
+*.obj
+target/
+.gradle/
+.mypy_cache/
+.env.local

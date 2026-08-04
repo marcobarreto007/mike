@@ -268,10 +268,33 @@ def scan_mcp_manifest(path: Path, text: str) -> list[Finding]:
     return findings
 
 
+def _ignored_paths(root: Path) -> set[str]:
+    """Paths allowlisted in .gitleaksignore, as POSIX-relative strings.
+
+    Test fixtures for this scanner necessarily embed credential-shaped
+    strings; the repository already lists them for gitleaks, so honour the
+    same file instead of maintaining a second allowlist.
+    """
+    ignore_file = root / ".gitleaksignore"
+    if not ignore_file.is_file():
+        return set()
+    entries = set()
+    for line in ignore_file.read_text(encoding="utf-8").splitlines():
+        entry = line.strip()
+        if not entry or entry.startswith("#"):
+            continue
+        # gitleaks fingerprints look like "path:rule:line"; keep the path.
+        entries.add(entry.split(":")[0].replace("\\", "/"))
+    return entries
+
+
 def scan_repository(root: Path) -> list[Finding]:
     findings: list[Finding] = []
+    ignored = _ignored_paths(root)
     for path in _tracked_files(root):
         if not path.is_file():
+            continue
+        if path.relative_to(root).as_posix() in ignored:
             continue
         data = path.read_bytes()
         if b"\0" in data:
