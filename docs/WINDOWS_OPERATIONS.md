@@ -41,10 +41,23 @@ nome relativo. Os diretórios pesquisados são:
 <raiz>\llama.cpp-turboquant\models\
 ```
 
-Valor atualmente validado:
+Hardware atual e perfil de GPU: [docs/HARDWARE.md](HARDWARE.md).
+
+Exemplos de path nesta máquina:
 
 ```text
-C:\Users\Admin\Desktop\mike\llama.cpp\models\Qwen3.6-35B-A3B-UD-IQ4_XS.gguf
+C:\Users\marco\Desktop\mike\llm_cache\Qwen3.6-35B-A3B-UD-Q3_K_M.gguf
+C:\Users\marco\Desktop\mike\llama.cpp\models\Qwen3.6-35B-A3B-UD-IQ4_XS.gguf
+```
+
+Launcher do cérebro (auto-detecta dual 5060 Ti + 3060):
+
+```powershell
+.\scripts\ops\start_qwen36_server.ps1
+# ou forçar perfil:
+.\scripts\ops\start_qwen36_server.ps1 -Profile dual
+.\scripts\ops\start_qwen36_server.ps1 -Profile gpu0
+.\scripts\ops\start_qwen36_server.ps1 -Profile legacy2070
 ```
 
 Para conferir sem iniciar o runtime:

@@ -6,35 +6,32 @@ de produção é um único modelo Qwen3.6-35B-A3B em GGUF, servido por
 
 ## Estado validado
 
-Última validação local: **30 de julho de 2026**.
+Última validação de produto local: **30 de julho de 2026** (stack em outra
+máquina). Hardware e scripts de boot atualizados em **3 de agosto de 2026**.
 
-- Qwen ativo em `http://127.0.0.1:8081`;
-- API e dashboard ativos em `http://127.0.0.1:8083`;
-- modelo ativo: `Qwen3.6-35B-A3B-UD-IQ4_XS.gguf`;
-- memória SQLite + Mem0 + LightRAG saudável;
-- autonomia e governança em execução;
-- 54 skills carregadas;
-- 186 tools descobertas em 18 servidores MCP;
-- cobertura dos padrões de tools das skills: 100%;
-- Gmail, Google Calendar, Google Drive e email local validados com OAuth;
-- suíte unitária: 234 testes passando, 3 testes manuais ignorados.
+- cérebro de produção: Qwen3.6-35B-A3B GGUF via `llama-server` em `:8081`;
+- API/dashboard: FastAPI + PWA em `:8083`;
+- quant validada no projeto: `Qwen3.6-35B-A3B-UD-IQ4_XS.gguf`;
+- quant recomendada no hardware atual: `UD-Q3_K_M` (dual-GPU);
+- hardware atual: RTX 5060 Ti 16 GB + RTX 3060 12 GB + 64 GB RAM + i7-12700K.
 
-O comando oficial de readiness não estrito passa. Integrações opcionais sem
-credenciais ou serviços próprios continuam aparecendo como bloqueios no modo
-`--strict`. Veja [docs/MIKE_READINESS.md](docs/MIKE_READINESS.md).
+Neste workspace, o runtime ainda precisa de bootstrap (`.venv`,
+`llama-server.exe`, GGUF). Veja [docs/HARDWARE.md](docs/HARDWARE.md) e
+[docs/MIKE_READINESS.md](docs/MIKE_READINESS.md).
 
 ## Requisitos
 
 - Windows 10 ou 11;
 - PowerShell 5.1 ou superior;
-- Python 3.11;
+- Python 3.11+ (validado com 3.12);
 - Node.js 18 ou superior;
-- GPU NVIDIA compatível com CUDA;
-- pelo menos 24 GB de RAM disponível para o modo híbrido CPU/GPU;
-- aproximadamente 20 GB livres para o modelo e arquivos auxiliares.
+- GPU NVIDIA compatível com CUDA 12.x;
+- pelo menos 32 GB de RAM recomendados (64 GB no hardware atual);
+- aproximadamente 20–25 GB livres para o modelo e arquivos auxiliares.
 
-A máquina validada usa uma RTX 2070 de 8 GB. O modelo tem aproximadamente
-18,2 GB e usa offload híbrido: parte na GPU e os especialistas MoE na CPU.
+Hardware atual (probe 2026-08-03): **RTX 5060 Ti 16 GB + RTX 3060 12 GB**,
+driver 595.97, CUDA Toolkit 12.8, ~28 GB VRAM combinada. O launcher dual-GPU
+usa `tensor-split 16,12` e `n_cpu_moe=0` por padrão.
 
 ## Instalação
 
@@ -54,7 +51,14 @@ Configure `config\.env.runtime` sem versionar tokens ou senhas.
 Para baixar o modelo quando ele ainda não existir:
 
 ```powershell
+# recomendado no par 5060 Ti + 3060
+.\scripts\ops\download_model.ps1 -Quant UD-Q3_K_M
+
+# quant histórica validada no projeto
 .\scripts\ops\download_model.ps1 -Quant UD-IQ4_XS
+
+# listar quants e o que cabe na VRAM detectada
+.\scripts\ops\download_model.ps1 -ListOnly
 ```
 
 ## Localização do modelo
@@ -62,14 +66,18 @@ Para baixar o modelo quando ele ainda não existir:
 O launcher resolve `MIKE_MODEL_FILE` nesta ordem:
 
 1. caminho absoluto passado por `-ModelPath`;
-2. variável de ambiente `MIKE_MODEL_FILE`;
-3. valor de `MIKE_MODEL_FILE` em `config\.env.runtime`;
-4. caminho relativo à raiz do projeto;
-5. `llm_cache\`;
-6. `llama.cpp\models\`;
-7. `llama.cpp-turboquant\models\`.
+Exemplos de caminho:
 
-Na instalação validada, o arquivo está em:
+```text
+llm_cache\Qwen3.6-35B-A3B-UD-Q3_K_M.gguf
+llama.cpp\models\Qwen3.6-35B-A3B-UD-IQ4_XS.gguf
+```
+
+Não copie o arquivo grande só para satisfazer um path antigo. O resolver
+centralizado permite manter uma única cópia.
+
+Sobre Qwen 3.8-Max (2.4T): é API/cloud ou multi-node. Nesta máquina o caminho
+local realista da linha 3.8 é o futuro **Qwen3.8-27B** open weights, não o Max
 
 ```text
 llama.cpp\models\Qwen3.6-35B-A3B-UD-IQ4_XS.gguf

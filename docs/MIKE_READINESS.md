@@ -87,7 +87,11 @@ e `analytics.readonly`.
 ## Limitações conhecidas
 
 - O Qwen atual é text-only; visão permanece desabilitada.
-- O modelo usa CPU e GPU em conjunto; não cabe integralmente na RTX 2070.
+- Hardware atual: RTX 5060 Ti 16 GB + RTX 3060 12 GB (ver [HARDWARE.md](HARDWARE.md)).
+- No perfil dual, o alvo é GPU-puro (`n_cpu_moe=0` + `tensor-split`); o hybrid
+  CPU/GPU (`legacy2070`) ficou só como fallback.
+- Qwen3.8-Max 2.4T não roda local neste desktop; candidatos locais: Qwen3.6-35B
+  agora e Qwen3.8-27B quando o GGUF open weights sair.
 - O agente remoto demora até o timeout quando o computador remoto está fora.
 - Alguns servidores MCP opcionais podem estar carregados, mas exigem conta ou
   credenciais específicas para executar operações reais.

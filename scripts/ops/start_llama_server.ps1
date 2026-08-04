@@ -1,7 +1,8 @@
 # =============================================================================
 # MIKE - llama.cpp Server Launcher (GPU Puro, Zero CPU, Zero Nuvem)
 # =============================================================================
-# GPUs: RTX 2070 8GB (Turing, SM 7.5) + P106-100 6GB (Pascal, SM 6.1)
+# GPUs atuais: RTX 5060 Ti 16GB + RTX 3060 12GB (ver start_qwen36_server.ps1)
+# Legado: RTX 2070 8GB / P106
 # Modelo: Qwen3.6-35B-A3B MoE (35B total, ~3B ativos por token)
 # Arquitetura: Pipeline paralelo (layer split) - unico modo compativel com MoE
 # =============================================================================
