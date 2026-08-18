@@ -112,7 +112,9 @@ SQLite + Mem0 + LightRAG + busca híbrida com reranking. Dados em `runtime/memor
 
 ## Agentes Claude Code (`.claude/agents/`)
 
-Orquestração paralela via **`swat-lead`** (fan-out com Agent tool, max 4-6 concorrentes,
+Orquestração de topo via **`mike-orchestrator`** — lê a conversa, roteia para o subagente
+certo (mike-*, swat-*, gpu-*, mbj-*) e sintetiza resultados. Para implementação multi-ficheiro
+genérica, o orquestrador delega a **`swat-lead`** (fan-out com Agent tool, max 4-6 concorrentes,
 file-ownership único por iteração). Famílias:
 
 - **`mike-*`** (específicos do Mike): `mike-architect`, `mike-launch`, `mike-offload`,
